@@ -26,6 +26,7 @@
 (require 'eieio)
 (require 'ht)
 (require 'pcache)
+(require 'asoc)
 (eval-when-compile (require 'cl))
 
 (defvar ecloud-state--current-state (ht-create))
