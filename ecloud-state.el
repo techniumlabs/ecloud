@@ -29,11 +29,26 @@
 (require 'asoc)
 (eval-when-compile (require 'cl))
 
-(defvar ecloud-state--current-state (ht-create))
+(defvar ecloud-state--current-state nil)
 (defvar ecloud-state--errors (ht-create))
+
+(defun ecloud-state-init ()
+  (setq ecloud-state--current-state (ht-create))
+  (--map
+   (-let* ((reponame (format "%s" (string-remove-prefix (format "%s" pcache-directory) it)))
+           (cloud (nth 1 (split-string reponame "/")))
+           (rtype (nth 2 (split-string reponame "/"))))
+     (pcache-map
+      (pcache-repository reponame)
+      (lambda (key value)
+        (ecloud-state-update-resource cloud rtype key (oref value :value)))))
+   (directory-files-recursively (format "%s/ecloud/" pcache-directory)  "^[a-z]"))
+  )
 
 (defun ecloud-state()
   "Get the global state"
+  (unless ecloud-state--current-state
+    (ecloud-state-init))
   ecloud-state--current-state)
 
 (defun ecloud-errors()
