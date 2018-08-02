@@ -30,10 +30,16 @@
 (eval-when-compile (require 'cl))
 
 (defvar azure-account--list-command '("az" "account" "list"))
+(defvar azure-account-list-view-display-params '(name state))
 
-(ecloud-resource azure account)
+;; Model for Azure Account
+
+(ecloud-define-resource-model azure account)
+
+(ecloud-define-resource-state azure account)
 
 (defvar azure-account--parser-functions)
+
 
 (provide 'azure-account)
 ;;; azure-account.el ends here

@@ -49,6 +49,12 @@
 (cl-defun ecloud-parse-resource-data (data class)
   (-let ((parsed-data (--map (make-instance class :name (cdr (assoc 'name it)) :attributes it) data)))
     ;;TODO Update state with the parsed data and call hooks
+    (--map (-let ((cloud (nth 0 (split-string (format "%s" class) "-")))
+                  (rtype (nth 1 (split-string (format "%s" class) "-")))
+                  (rname (oref it :name)))
+             (message (format "%s %s %s" cloud rtype rname))
+             (ecloud-state-update cloud rtype rname it)
+             ) parsed-data)
     )
   )
 

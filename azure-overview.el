@@ -33,9 +33,22 @@
 (require 'ecloud-vars)
 (require 'azure-vars)
 
+(defcustom azure-overview-list-views
+  '(account vm)
+  "Components that are part of the azure overview view"
+  :package-version '(ecloud . "0.0.1")
+  :group 'ecloud)
+
+(magit-define-popup azure-overview-dispatch-popup
+  "Popup console for showing an overview of available popup commands."
+  :group 'ecloud
+  :actions
+  '("Popup and dwim commands"
+    (?i "virtual machines" azure-vm-popup)))
 
 (defcustom azure-overview-sections-hook
-  '(azure-insert-overview-headers)
+  '(azure-insert-overview-headers
+    azure-insert-views)
   "Hook run to insert sections into a status buffer."
   :package-version '(ecloud . "0.0.1")
   :group 'ecloud
@@ -45,21 +58,21 @@
   "Insert header sections appropriate for `magit-status-mode' buffers.
 The sections are inserted by running the functions on the hook
 `magit-status-headers-hook'."
-  (insert "In the beginning there was private cloud\n\n")
-  (magit-insert-section (azure-account)
-    (magit-insert-heading "Account:")
-    (magit-insert-section (azure-account "test")
-      (insert (propertize "Account: Test" 'face 'magit-diff-file-heading))
-      )
-    )
+  (insert "Azure Cloud\n\n")
   )
+
+(defun azure-insert-views ()
+  "Insert the defined views"
+  (ecloud-insert-list-views 'azure azure-overview-list-views))
 
 (defun azure-overview-refresh-buffer ()
   ;; Trigger Refresh data
+  (--map (let ((rtype (intern (format "azure-%s" it))))
+           (message (format "%s" rtype))
+           (ecloud-fetch-resources rtype))
+        azure-overview-list-views)
   (magit-insert-section (status)
-    (magit-run-section-hook 'azure-overview-sections-hook)
-    )
-  )
+    (magit-run-section-hook 'azure-overview-sections-hook)))
 
 (defun azure-overview-print-section (&optional intent)
   "Add the change at point to the staging area.
@@ -79,13 +92,10 @@ at point, stage the file but not its content."
     map)
   "Keymap for the `staged' section.")
 
-(defun azure-overview-set-sections ()
-  (message "Setting sections"))
-
 (defvar azure-overview-mode-map
   (let ((keymap (make-sparse-keymap)))
     ;;TODO
-    (define-key keymap (kbd "d") ')
+    (define-key keymap (kbd "h") 'azure-overview-dispatch-popup)
     keymap)
   "Keymap for `azure-overview-mode'.")
 
