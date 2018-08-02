@@ -44,7 +44,9 @@
   :group 'ecloud
   :actions
   '("Popup and dwim commands"
-    (?i "virtual machines" azure-vm-popup)))
+    (?v "virtual machines" azure-vm-popup)
+    (?a "Account" azure-account-popup)
+    (?g "Resource Group" azure-group-popup)))
 
 (defcustom azure-overview-sections-hook
   '(azure-insert-overview-headers
@@ -85,12 +87,6 @@ at point, stage the file but not its content."
     (message (format "%s" value))
     )
 )
-
-(defvar magit-azure-account-section-map
-  (let ((map (make-sparse-keymap)))
-    (define-key map "p" 'azure-overview-print-section)
-    map)
-  "Keymap for the `staged' section.")
 
 (defvar azure-overview-mode-map
   (let ((keymap (make-sparse-keymap)))

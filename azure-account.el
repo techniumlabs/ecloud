@@ -40,6 +40,13 @@
 
 (defvar azure-account--parser-functions)
 
+(defvar magit-azure-account-section-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map "p" 'azure-overview-print-section)
+    map)
+  "Keymap for the `azure-account' section.")
+
+
 
 (provide 'azure-account)
 ;;; azure-account.el ends here
