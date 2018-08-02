@@ -29,53 +29,41 @@
 (require 'ht)
 (eval-when-compile (require 'cl))
 
-(defclass ecloud-resource-list ()
+
+(defclass ecloud-base-resource ()
   ((type :initarg :type)
-   (command :type list)
-   (resources :type list)
-   )
+   (attributes :type list))
   "Container for holding all resources of a type"
   )
 
-(cl-defmethod parse ((obj ecloud-resource-list) data)
-  (message "Should be implemented by the subclass")
+(defmacro ecloud-define-resource-model (cloud name &rest body)
+  (cl-assert (symbolp cloud))
+  (cl-assert (symbolp name))
+  (let ((classname (intern (format "%s-%s" cloud name))))
+    `(progn
+       (defclass ,classname (ecloud-base-resource)
+             ((type :initform ,name)
+              (name :initarg :name)
+              (attributes :initarg :attributes))))))
+
+(cl-defun ecloud-parse-resource-data (data class)
+  (-let ((parsed-data (--map (make-instance class :name (cdr (assoc 'name it)) :attributes it) data)))
+    ;;TODO Update state with the parsed data and call hooks
+    )
   )
 
-(cl-defmethod fetch ((obj ecloud-resource-list))
-  (ecloud-run-json-command (car (oref obj command))
-                           (cdr (oref obj command))
-                           (lambda (json-output)
-                             (parse obj json-output)))
-  )
+(cl-defun ecloud-fetch-resources (class)
+  (message "Fetching all")
+  (let* ((list-cmd (intern (format "%s--list-command" class)))
+         (list-cmd (and (boundp list-cmd) (symbol-value list-cmd)))
+         (global-params (intern (format "%s--global-params" class)))
+         (global-params (and (boundp global-params) (symbol-value global-params))))
 
-(defclass ecloud-resource ()
-  ((name :initarg :name)
-   (type :initarg :type)
-   (attributes :initarg :attributes))
-  "ecloud resource"
-  )
-
-(cl-defmethod update-attribute ((obj ecloud-resource) key value)
-  ;; (ht-set! (oref obj attributes) key value)
-  (message "To be implemented")
-  )
-
-(cl-defmethod init-attributes ((obj ecloud-resource) value)
-  (oset obj attributes value)
-  )
-
-(cl-defmethod create-resource ((obj ecloud-resource))
-  (message "Create is not yet implemented"))
-
-(cl-defmethod read-resource ((obj ecloud-resource))
-  (message "Read is not yet implemented"))
-
-(cl-defmethod update-resource ((obj ecloud-resource))
-  (message "Upate is not yet implemented"))
-
-(cl-defmethod delete-resource ((obj ecloud-resource))
-  (message "Delete is not yet implemented"))
-
+    (ecloud-run-json-command list-cmd
+                             global-params
+                             (lambda (json-output)
+                               (ecloud-parse-resource-data json-output class)))
+    ))
 
 (provide 'ecloud-crud)
 ;;; ecloud-crud.el ends here

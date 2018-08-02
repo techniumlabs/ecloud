@@ -46,58 +46,60 @@
 The sections are inserted by running the functions on the hook
 `magit-status-headers-hook'."
   (insert "In the beginning there was private cloud\n\n")
-  (magit-insert-section (info)
-    (azure-commands-get-info (lambda (output) (insert output)))
+  (magit-insert-section (azure-account)
+    (magit-insert-heading "Account:")
+    (magit-insert-section (azure-account "test")
+      (insert (propertize "Account: Test" 'face 'magit-diff-file-heading))
+      )
     )
   )
 
 (defun azure-overview-refresh-buffer ()
+  ;; Trigger Refresh data
   (magit-insert-section (status)
     (magit-run-section-hook 'azure-overview-sections-hook)
     )
   )
 
-(defun azure-overview--initialize-buffer ()
-  "Setup the azure overview buffer for the first time"
-  (let ((buf (get-buffer-create azure-overview-buffer-name)))
-    (with-current-buffer buf
-      (azure-overview-mode)
-      ;; TODO
-      ;;(add-hook 'kubernetes-redraw-hook #'kubernetes-overview--redraw-buffer)
-      ;;(add-hook 'kubernetes-poll-hook #'kubernetes-overview--poll)
-      ;;(kubernetes-timers-initialize-timers)
-      ;;(kubernetes-overview--redraw-buffer)
-      ;;(add-hook 'kill-buffer-hook (kubernetes-utils-make-cleanup-fn buf) nil t)
-      ) buf)
-  )
+(defun azure-overview-print-section (&optional intent)
+  "Add the change at point to the staging area.
+With a prefix argument, INTENT, and an untracked file (or files)
+at point, stage the file but not its content."
+  (interactive "P")
+  (let* ((section (magit-current-section))
+         (type (oref section type))
+         (value (oref section value)))
+    (message (format "%s" value))
+    )
+)
+
+(defvar magit-azure-account-section-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map "p" 'azure-overview-print-section)
+    map)
+  "Keymap for the `staged' section.")
+
+(defun azure-overview-set-sections ()
+  (message "Setting sections"))
 
 (defvar azure-overview-mode-map
   (let ((keymap (make-sparse-keymap)))
     ;;TODO
-    (define-key keymap (kbd "v") 'azure-overview-set-sections)
+    (define-key keymap (kbd "d") ')
     keymap)
   "Keymap for `azure-overview-mode'.")
 
 ;;;###autoload
 ;; TODO Update
 (define-derived-mode azure-overview-mode ecloud-mode "Azure Overview"
-  "Mode for working with azure overview.
-\\<kubernetes-overview-mode-map>\
-Type \\[kubernetes-overview-set-sections] to choose which resources to display.
-Type \\[kubernetes-mark-for-delete] to mark an object for deletion, and \\[kubernetes-execute-marks] to execute.
-Type \\[kubernetes-unmark] to unmark the object at point, or \\[kubernetes-unmark-all] to unmark all objects.
-Type \\[kubernetes-navigate] to inspect the object on the current line.
-Type \\[kubernetes-copy-thing-at-point] to copy the thing at point.
-Type \\[kubernetes-refresh] to refresh the buffer.
-\\{kubernetes-overview-mode-map}"
+  "Mode for working with azure overview."
   :group 'ecloud)
 
 ;;;###autoload
 (defun azure-overview ()
   "Display an overview buffer for azure"
   (interactive)
-  (azure-overview-internal default-directory)
-  )
+  (azure-overview-internal default-directory))
 
 (defun azure-overview-internal (directory)
   (magit--tramp-asserts directory)

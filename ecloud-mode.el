@@ -29,9 +29,15 @@
 ;; TODO Add commentary
 
 ;;; Code:
+(defvar ecloud-mode-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map   [tab]     'magit-section-toggle)
+    map))
 
 (define-derived-mode ecloud-mode special-mode "ecloud"
-  "Base mode for ecloud"
+  "Base mode for ecloud.
+
+\\{ecloud-mode-map}"
 
   :group 'ecloud
   (buffer-disable-undo)

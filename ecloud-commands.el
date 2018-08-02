@@ -53,7 +53,7 @@ After callbacks are executed, the process and its buffer will be killed.
 Returns the process object for this execution of kubectl."
   (let* ((buf (generate-new-buffer " ecloud"))
          (err-buf (generate-new-buffer " ecloud-err"))
-         (command (append (list cmd) args ))
+         (command (append cmd args ))
 
          ;; `default-directory' must exist, otherwise `make-process' raises an
          ;; error.
@@ -71,13 +71,13 @@ Returns the process object for this execution of kubectl."
                         (cond
                          ;; Success Handler
                          ((zerop exit-code)
-                          (funcall on-success buf))
+                          (funcall on-success buf)
+                          )
                          ;; Failure Handler
                          (t
                           (let ((err-message (with-current-buffer err-buf (buffer-string))))
                             (unless (= 9 exit-code)
                               ;; (kubernetes-props-update-last-error props err-message (string-join command " ") (current-time))
-
                               (funcall on-success buf)
                               ))
                           (cond (on-error
@@ -86,7 +86,8 @@ Returns the process object for this execution of kubectl."
                                  ;; TODO Add default error handler
                                  (message err-message)
                                  ;; (kubernetes-kubectl--default-error-handler props status)
-                                 )))))
+                                 )))
+                         ))
                     (when cleanup-cb
                       (funcall cleanup-cb))
                     (ecloud-process-kill-quietly proc)))
