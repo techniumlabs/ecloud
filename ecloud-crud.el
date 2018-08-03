@@ -36,6 +36,11 @@
   "Container for holding all resources of a type"
   )
 
+(cl-defmethod ecloud-get-attributes ((robj ecloud-base-resource) attrib-name)
+  (if (slot-exists-p robj attrib-name)
+      (eval `(oref ,robj ,attrib-name))
+    (cdr (assoc attrib-name (oref robj attributes)))))
+
 (defmacro ecloud-define-resource-model (cloud name &rest body)
   (cl-assert (symbolp cloud))
   (cl-assert (symbolp name))
@@ -44,7 +49,8 @@
        (defclass ,classname (ecloud-base-resource)
              ((type :initform ,name)
               (name :initarg :name)
-              (attributes :initarg :attributes))))))
+              (attributes :initarg :attributes)))
+       )))
 
 (cl-defun ecloud-parse-resource-data (data class)
   (-let ((parsed-data (--map (make-instance class :name (cdr (assoc 'name it)) :attributes it) data)))
@@ -52,7 +58,6 @@
     (--map (-let ((cloud (nth 0 (split-string (format "%s" class) "-")))
                   (rtype (nth 1 (split-string (format "%s" class) "-")))
                   (rname (oref it :name)))
-             (message (format "%s %s %s" cloud rtype rname))
              (ecloud-state-update cloud rtype rname it)
              ) parsed-data)
     )

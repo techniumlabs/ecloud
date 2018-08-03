@@ -70,7 +70,6 @@ The sections are inserted by running the functions on the hook
 (defun azure-overview-refresh-buffer ()
   ;; Trigger Refresh data
   (--map (let ((rtype (intern (format "azure-%s" it))))
-           (message (format "%s" rtype))
            (ecloud-fetch-resources rtype))
         azure-overview-list-views)
   (magit-insert-section (status)

@@ -30,7 +30,7 @@
 (eval-when-compile (require 'cl))
 
 (defvar azure-vm--list-command '("az" "vm" "list"))
-(defvar azure-vm-list-view-display-params '(name state))
+(defvar azure-vm-list-view-display-params '(name location ))
 
 ;; Model for Azure Vm
 

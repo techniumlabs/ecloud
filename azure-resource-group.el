@@ -30,7 +30,7 @@
 (eval-when-compile (require 'cl))
 
 (defvar azure-group--list-command '("az" "group" "list"))
-(defvar azure-group-list-view-display-params '(name state))
+(defvar azure-group-list-view-display-params '(name location))
 
 ;; Model for Azure Group
 
