@@ -44,6 +44,9 @@
   (unless (ht-get (ht-get (ecloud-state) cloud) rtype)
     (ht-set (ht-get (ecloud-state) cloud) rtype (ht-create))))
 
+(defun ecloud-state-clear-resources (cloud rtype)
+  (ht-set! (ht-get (ecloud-state) cloud) rtype (ht-create)))
+
 (defun ecloud-state-update (cloud rtype rname robj &optional args)
   (ecloud-register-resource cloud rtype)
   (ht-set! (ht-get (ht-get ecloud-state--current-state cloud) rtype) rname robj))

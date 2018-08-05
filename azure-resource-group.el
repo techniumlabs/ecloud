@@ -40,6 +40,27 @@
 
 (defvar azure-group--parser-functions)
 
+;;; Actions
+(defun azure-group-delete-group (&optional intent)
+  (interactive "P")
+  (let* ((section (magit-current-section))
+         (type (oref section type))
+         (value (oref section value)))
+    (ecloud-run-json-command `("az" "group" "delete" "--name" ,(oref value :name) "--yes" "--output" "json")
+                             ()
+                             (lambda (json-output)
+                               (message "%s" json-output)))
+    (message "%s" (oref value :name))
+    )
+)
+
+(defvar magit-azure-group-section-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map "p" 'azure-overview-print-section)
+    (define-key map "d" 'azure-group-delete-group)
+    map)
+  "Keymap for the `azure-group' section.")
+
 
 (provide 'azure-group)
 ;;; azure-group.el ends here

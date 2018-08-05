@@ -47,14 +47,19 @@
   (let ((classname (intern (format "%s-%s" cloud name))))
     `(progn
        (defclass ,classname (ecloud-base-resource)
-             ((type :initform ,name)
-              (name :initarg :name)
-              (attributes :initarg :attributes)))
+         ((type :initform ,name)
+          (id :initarg :id)
+          (name :initarg :name)
+          (attributes :initarg :attributes)))
        )))
 
 (cl-defun ecloud-parse-resource-data (data class)
-  (-let ((parsed-data (--map (make-instance class :name (cdr (assoc 'name it)) :attributes it) data)))
+  (-let ((parsed-data (--map (make-instance class :name (cdr (assoc 'name it)) :id (cdr (assoc 'id it)) :attributes it) data)))
     ;;TODO Update state with the parsed data and call hooks
+    (-let ((cloud (nth 0 (split-string (format "%s" class) "-")))
+           (rtype (nth 1 (split-string (format "%s" class) "-"))))
+      (ecloud-state-clear-resources cloud rtype))
+
     (--map (-let ((cloud (nth 0 (split-string (format "%s" class) "-")))
                   (rtype (nth 1 (split-string (format "%s" class) "-")))
                   (rname (oref it :name)))

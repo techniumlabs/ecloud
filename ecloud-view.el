@@ -45,13 +45,12 @@
              (magit-insert-heading (format "%s %s" cloud it))
              (-map (-lambda ((name obj))
                      (-let ((strout (apply #'format flist (-map (lambda (x) (ecloud-get-attributes obj x))(symbol-value params-name)))))
-                       (eval `(magit-insert-section (,view-name ,name)
+                       (eval `(magit-insert-section (,view-name ,obj)
                                 (insert strout)
                                 (insert ?\n)))))
                    robjs)
              (insert ?\n)
              )) views))
-
 
 (provide 'ecloud-view)
 ;;; ecloud-view.el ends here
