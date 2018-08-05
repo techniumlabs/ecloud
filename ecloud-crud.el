@@ -54,8 +54,10 @@
        )))
 
 (cl-defun ecloud-parse-resource-data (data class)
-  (-let ((parsed-data (--map (make-instance class :name (cdr (assoc 'name it)) :id (cdr (assoc 'id it)) :attributes it) data)))
-    ;;TODO Update state with the parsed data and call hooks
+  (-let ((parsed-data (--map (make-instance class :name (cdr (assoc 'name it))
+                                            :id (cdr (assoc 'id it))
+                                            :attributes it) data)))
+
     (-let ((cloud (nth 0 (split-string (format "%s" class) "-")))
            (rtype (nth 1 (split-string (format "%s" class) "-"))))
       (ecloud-state-clear-resources cloud rtype))
@@ -63,6 +65,7 @@
     (--map (-let ((cloud (nth 0 (split-string (format "%s" class) "-")))
                   (rtype (nth 1 (split-string (format "%s" class) "-")))
                   (rname (oref it :name)))
+             (run-hook-with-args (intern (format "%s-%s-parser-hook" cloud rtype)) it)
              (ecloud-state-update cloud rtype rname it)
              ) parsed-data)
     )
@@ -78,6 +81,7 @@
     (ecloud-run-json-command list-cmd
                              global-params
                              (lambda (json-output)
+                               (message "%s" json-output)
                                (ecloud-parse-resource-data json-output class)))
     ))
 

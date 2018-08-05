@@ -30,7 +30,7 @@
 (eval-when-compile (require 'cl))
 
 (defvar azure-group--list-command '("az" "group" "list"))
-(defvar azure-group-list-view-display-params '(name location))
+(defvar azure-group-list-view-display-params '(name location state))
 
 ;; Model for Azure Group
 
@@ -38,7 +38,16 @@
 
 (ecloud-define-resource-state azure group)
 
-(defvar azure-group--parser-functions)
+(defcustom azure-group-parser-hook
+  '(azure-group--parse-provisioning-state)
+  "Hook to run for parsing json data."
+  :group 'ecloud-azure
+  :type 'hook)
+
+;; Parse the provisioning state
+(defun azure-group--parse-provisioning-state (robj)
+  (-let (((&alist 'properties (&alist 'provisioningState state)) (oref robj :attributes)))
+    (oset robj :attributes (append (oref robj :attributes) `((state . ,state))))))
 
 ;;; Actions
 (defun azure-group-delete-group (&optional intent)
@@ -46,7 +55,12 @@
   (let* ((section (magit-current-section))
          (type (oref section type))
          (value (oref section value)))
-    (ecloud-run-json-command `("az" "group" "delete" "--name" ,(oref value :name) "--yes" "--output" "json")
+    (if (magit-confirm t (format "Delete %s resource group" (oref value :name)))
+        (ecloud-run-json-command `("az" "group" "delete" "--name" ,(oref value :name) "--yes" "--output" "json")
+                                 ()
+                                 (lambda (json-output)
+                                   (message "%s" json-output))))))
+
                              ()
                              (lambda (json-output)
                                (message "%s" json-output)))
