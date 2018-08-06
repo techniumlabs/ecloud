@@ -32,19 +32,23 @@
 (defvar ecloud-state--current-state (ht-create))
 
 (defun ecloud-state()
+  "Get the global state"
   ecloud-state--current-state)
 
 (defun ecloud-register-cloud (cloud)
+  "Register the cloud in the global state"
   (unless (ht-get (ecloud-state) cloud)
     (ht-set (ecloud-state) cloud (ht-create)))
 )
 
 (defun ecloud-register-resource (cloud rtype)
+  "Register a cloud resource in the global state"
   (ecloud-register-cloud cloud)
   (unless (ht-get (ht-get (ecloud-state) cloud) rtype)
     (ht-set (ht-get (ecloud-state) cloud) rtype (ht-create))))
 
 (defun ecloud-state-clear-resources (cloud rtype)
+  "Clear all the resources of a particular type from the global state"
   (ht-set! (ht-get (ecloud-state) cloud) rtype (ht-create)))
 
 (defun ecloud-state-update (cloud rtype rname robj &optional args)

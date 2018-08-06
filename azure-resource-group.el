@@ -61,12 +61,13 @@
                                  (lambda (json-output)
                                    (message "%s" json-output))))))
 
+(defun azure-group-add-group (&optional intent)
+  (interactive "P")
+  (let* ((group-name (magit-read-string "Name of resource group to create" nil)))
+    (ecloud-run-json-command `("az" "group" "create" "--name" ,group-name)
                              ()
                              (lambda (json-output)
-                               (message "%s" json-output)))
-    (message "%s" (oref value :name))
-    )
-)
+                               (message "%s" json-output)))))
 
 (defvar magit-azure-group-section-map
   (let ((map (make-sparse-keymap)))

@@ -29,7 +29,7 @@
 (require 'eieio)
 (eval-when-compile (require 'cl))
 
-(defvar azure-vm--list-command '("az" "vm" "list"))
+(defvar azure-vm--list-command '("az" "vm" "list" "-d"))
 (defvar azure-vm-list-view-display-params '(name location ))
 
 ;; Model for Azure Vm
@@ -40,6 +40,13 @@
 
 (defvar azure-vm--parser-functions)
 
+(defvar magit-azure-vm-section-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map "p" 'azure-overview-print-section)
+    (define-key map "s" 'azure-vm-start)
+    (define-key map "S" 'azure-vm-stop)
+    map)
+  "Keymap for the `azure-vm' section.")
 
 (provide 'azure-vm)
 ;;; azure-vm.el ends here
