@@ -1,0 +1,14 @@
+[
+  {
+    "cloudName": "AzureCloud",
+    "id": "02ea3122-ecd3-4a0d-97ee-deadbeefed01",
+    "isDefault": true,
+    "name": "Microsoft Azure Sponsorship",
+    "state": "Enabled",
+    "tenantId": "aaaabbc7-dead-beef-aa9e-e26ab8bc6a63",
+    "user": {
+      "name": "ecloud-user@example.com",
+      "type": "user"
+    }
+  }
+]
