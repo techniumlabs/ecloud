@@ -26,6 +26,7 @@
 ;;; Code:
 
 (require 'ecloud-crud)
+(require 'ecloud-state)
 (require 'eieio)
 (eval-when-compile (require 'cl))
 
@@ -77,5 +78,5 @@
   "Keymap for the `azure-group' section.")
 
 
-(provide 'azure-group)
+(provide 'azure-resource-group)
 ;;; azure-group.el ends here

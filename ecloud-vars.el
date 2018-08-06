@@ -39,7 +39,6 @@ The function must take a single argument, which is the buffer to display."
                 (function-item display-buffer)
                 (function :tag "Function")))
 
-
 (provide 'ecloud-vars)
 
 ;;; ecloud-vars.el ends here

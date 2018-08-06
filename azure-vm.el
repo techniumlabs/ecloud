@@ -26,6 +26,7 @@
 ;;; Code:
 
 (require 'ecloud-crud)
+(require 'ecloud-state)
 (require 'eieio)
 (eval-when-compile (require 'cl))
 

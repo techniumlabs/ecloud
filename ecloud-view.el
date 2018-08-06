@@ -45,6 +45,7 @@
                                              )))
                                  (symbol-value params-name))))
                  (flist (->> align-length
+                             (--map (+ 3 it))
                              (--map (format "%%-%ds  " it))
                              (-reduce 'concat)
                              )))

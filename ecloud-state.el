@@ -49,6 +49,7 @@
 
 (defun ecloud-state-clear-resources (cloud rtype)
   "Clear all the resources of a particular type from the global state"
+  (ecloud-register-resource cloud rtype)
   (ht-set! (ht-get (ecloud-state) cloud) rtype (ht-create)))
 
 (defun ecloud-state-update (cloud rtype rname robj &optional args)
