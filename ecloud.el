@@ -25,6 +25,7 @@
 ;; TODO Add commentary
 ;;; Code:
 
+(require 'azure-overview)
 (provide 'ecloud)
 
 ;;; ecloud.el ends here
