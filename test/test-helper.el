@@ -38,4 +38,10 @@
   `(let ((ecloud-state--current-state (ht-create)))
      ,@body))
 
+(cl-defmacro has-resource (class attrib-value-list)
+  `(-let* ((robjs (apply #'ecloud-state--get-all-resource-type (split-string (symbol-name ,class) "-"))))
+     (-filter (lambda (robj)
+                (--all? (equal (ecloud-get-attributes (cadr robj) (car it)) (cadr it)) ',attrib-value-list))
+            robjs)))
+
 ;;; test-helper.el ends here

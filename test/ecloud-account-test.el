@@ -1,6 +1,6 @@
 ;;; ecloud-account-test.el --- Tests for azure account.  -*- lexical-binding: t; -*-
 ;;; Commentary:
-;;; Code:
+;;;; Code:
 
 (require 'dash)
 (require 'ecloud-state)
@@ -15,6 +15,8 @@
    (should ecloud-state--current-state)
    (should (ht-get (ecloud-state) "azure"))
    (should (ht-get (ht-get (ecloud-state) "azure") "account"))
+   (should (has-resource azure-account (("name" "Microsoft Azure Sponsorship")
+                                        ("id" "02ea3122-ecd3-4a0d-97ee-deadbeefed01"))))
    ))
 
 

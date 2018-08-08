@@ -29,6 +29,7 @@
 (require 'ht)
 (eval-when-compile (require 'cl))
 
+(require 'ecloud-commands)
 
 (defclass ecloud-base-resource ()
   ((type :initarg :type)
@@ -37,8 +38,8 @@
   )
 
 (cl-defmethod ecloud-get-attributes ((robj ecloud-base-resource) attrib-name)
-  (if (slot-exists-p robj attrib-name)
-      (eval `(oref ,robj ,attrib-name))
+  (if (slot-exists-p robj (intern attrib-name))
+      (eval `(oref ,robj ,(intern attrib-name)))
     (cdr (assoc attrib-name (oref robj attributes)))))
 
 (defmacro ecloud-define-resource-model (cloud name &rest body)
@@ -81,7 +82,7 @@
     (ecloud-run-json-command list-cmd
                              global-params
                              (lambda (json-output)
-                               (message "%s" json-output)
+                               (message "Json Output: %s" json-output)
                                (ecloud-parse-resource-data json-output class)))
     ))
 
