@@ -10,6 +10,13 @@ TARGETS = $(SRCS:.el=.elc)
 
 .PHONY: test
 
+$(TARGETS) : $(SRCS) $(CASKDIR)
+	${CASK} clean-elc
+	${CASK} build
+
 test : $(SRCS)
 	${CASK} clean-elc
-	${CASK} exec 	ert-runner
+	${CASK} exec ert-runner
+
+$(CASKDIR) :
+	${CASK} install
