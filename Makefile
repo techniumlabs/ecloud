@@ -10,6 +10,8 @@ TARGETS = $(SRCS:.el=.elc)
 
 .PHONY: test
 
+build: $(TARGETS)
+
 $(TARGETS) : $(SRCS) $(CASKDIR)
 	${CASK} clean-elc
 	${CASK} build
