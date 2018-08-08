@@ -29,7 +29,7 @@
 ;; TODO Add commentary
 
 ;;; Code:
-
+(require 'magit-popup)
 (require 'ecloud-vars)
 (require 'azure-vars)
 
