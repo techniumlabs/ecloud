@@ -1,0 +1,12 @@
+[
+  {
+    "id": "/subscriptions/dead3122-ecd3-dead-beef-aaaabbbbfacf/resourcegroups/default",
+    "location": "eastus",
+    "managedBy": null,
+    "name": "default",
+    "properties": {
+      "provisioningState": "Succeeded"
+    },
+    "tags": null
+  }
+]
