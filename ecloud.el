@@ -25,6 +25,8 @@
 ;; TODO Add commentary
 ;;; Code:
 
+(require 'ecloud-mode)
+(require 'ecloud-crud)
 (require 'azure-overview)
 (provide 'ecloud)
 
