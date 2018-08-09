@@ -31,7 +31,11 @@
 ;;; Code:
 (require 'magit-popup)
 (require 'ecloud-vars)
+(require 'ecloud-view)
 (require 'azure-vars)
+(require 'azure-account)
+(require 'azure-vm)
+(require 'azure-resource-group)
 
 (defcustom azure-overview-list-views
   '(account group)

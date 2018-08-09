@@ -38,8 +38,8 @@
   )
 
 (cl-defmethod ecloud-get-attributes ((robj ecloud-base-resource) attrib-name)
-  (if (slot-exists-p robj (intern attrib-name))
-      (eval `(oref ,robj ,(intern attrib-name)))
+  (if (slot-exists-p robj (intern (if (symbolp attrib-name) (symbol-name attrib-name) attrib-name )))
+      (eval `(oref ,robj ,(intern (if (symbolp attrib-name) (symbol-name attrib-name) attrib-name ))))
     (cdr (assoc attrib-name (oref robj attributes)))))
 
 (defmacro ecloud-define-resource-model (cloud name &rest body)
