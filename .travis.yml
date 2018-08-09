@@ -28,4 +28,5 @@ before_install:
 install:
   - cask install
 script:
+  - cask load-path
   - make test
