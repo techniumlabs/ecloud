@@ -29,4 +29,5 @@ install:
   - cask install
 script:
   - cask load-path
+  - cask files
   - make test
