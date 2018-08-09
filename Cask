@@ -2,6 +2,8 @@
 (source melpa)
 (package-file "ecloud.el")
 
+(files "*.el")
+
 (development
  (depends-on "undercover")
  (depends-on "evil")
