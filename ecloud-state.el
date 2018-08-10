@@ -62,8 +62,6 @@
 
 
 (cl-defun ecloud-define-resource-action (cloud rtype action &rest body)
-  (declare (indent 2)
-           (debug (sexp body)))
   (cl-assert (symbolp cloud))
   (cl-assert (symbolp rtype))
 
@@ -82,8 +80,6 @@
   )
 
 (defmacro ecloud-define-resource-state (cloud rname &optional actions &rest body)
-  (declare (indent 2)
-           (debug (sexp body)))
   (cl-assert (symbolp cloud))
   (cl-assert (symbolp rname))
   (cl-assert (listp actions))

@@ -18,8 +18,8 @@
    (should (ht-get (ecloud-state) "azure"))
    (should (ht-get (ht-get (ecloud-state) "azure") "account"))
    (should (has-resource azure-account (("name" "Microsoft Azure Sponsorship")
-                                        ("id" "02ea3122-ecd3-4a0d-97ee-deadbeefed01"))))
-   ))
+                                        ("id" "02ea3122-ecd3-4a0d-97ee-deadbeefed01"))))))
+
 (defconst azure-account-list-view-result
   (s-trim-left "
 azure account
