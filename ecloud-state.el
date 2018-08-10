@@ -54,12 +54,12 @@
 
 (defun ecloud-state-update (cloud rtype rname robj &optional args)
   (ecloud-register-resource cloud rtype)
-  (ht-set! (ht-get (ht-get ecloud-state--current-state cloud) rtype) rname robj))
+  (ht-set! (ht-get (ht-get ecloud-state--current-state cloud) rtype) rname robj)
+  (ecloud-refresh-all-views))
 
 
 (defun ecloud-state--get-all-resource-type (cloud rtype)
   (ht-items (ht-get (ht-get (ecloud-state) cloud) rtype)))
-
 
 (cl-defun ecloud-define-resource-action (cloud rtype action &rest body)
   (cl-assert (symbolp cloud))

@@ -75,6 +75,9 @@ The sections are inserted by running the functions on the hook
   (--map (let ((rtype (intern (format "azure-%s" it))))
            (ecloud-fetch-resources rtype))
         azure-overview-list-views)
+  (azure-overview-refresh-view))
+
+(defun azure-overview-refresh-view ()
   (magit-insert-section (status)
     (magit-run-section-hook 'azure-overview-sections-hook)))
 
@@ -110,10 +113,8 @@ at point, stage the file but not its content."
   (azure-overview-internal default-directory))
 
 (defun azure-overview-internal (directory)
-  (magit--tramp-asserts directory)
   (let ((default-directory directory))
     (magit-mode-setup #'azure-overview-mode)))
 
 (provide 'azure-overview)
-
 ;;; azure-overview.el ends here

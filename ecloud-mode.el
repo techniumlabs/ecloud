@@ -67,6 +67,12 @@
 
   )
 
+(defun ecloud-mode-get-buffers ()
+  (let ((topdir (magit-toplevel)))
+    (--filter (with-current-buffer it
+                (and (derived-mode-p 'ecloud-mode)))
+              (buffer-list))))
+
 (provide 'ecloud-mode)
 
 ;;; ecloud-mode.el ends here

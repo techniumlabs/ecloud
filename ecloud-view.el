@@ -29,6 +29,13 @@
 (require 'ht)
 (eval-when-compile (require 'cl))
 
+(defun ecloud-refresh-all-views ()
+  (dolist (buffer (ecloud-mode-get-buffers))
+    (with-current-buffer buffer
+      (let ((inhibit-read-only t))
+        (erase-buffer)
+        (funcall (intern (format "%s-refresh-view" (substring (symbol-name major-mode) 0 -5))))))))
+
 (defun ecloud-insert-list-views (cloud views)
   (--map (-let* ((view-name (format "%s-%s" cloud it))
                  (params-name (intern (format "%s-%s-list-view-display-params" cloud it)))
