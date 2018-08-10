@@ -72,7 +72,6 @@
 
 (defvar magit-azure-group-section-map
   (let ((map (make-sparse-keymap)))
-    (define-key map "p" 'azure-overview-print-section)
     (define-key map "d" 'azure-group-delete-group)
     map)
   "Keymap for the `azure-group' section.")
