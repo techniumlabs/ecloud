@@ -70,15 +70,6 @@
     `(cl-defun ,fname (data)
        (apply ',default-action-fn '(',cloud ',rtype data)))))
 
-(cl-defun ecloud-resource-default-action--add (cloud rtype robj)
-  (let ((rname (oref robj :name)))
-    (ecloud-state-update cloud rtype rname robj)
-    )
-  )
-
-(cl-defun ecloud-resource-default-action--delete (cloud rtype rname)
-  )
-
 (defmacro ecloud-define-resource-state (cloud rname &optional actions &rest body)
   (cl-assert (symbolp cloud))
   (cl-assert (symbolp rname))

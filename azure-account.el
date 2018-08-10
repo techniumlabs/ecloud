@@ -47,7 +47,5 @@
     map)
   "Keymap for the `azure-account' section.")
 
-
-
 (provide 'azure-account)
 ;;; azure-account.el ends here
