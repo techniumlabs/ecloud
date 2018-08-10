@@ -3,8 +3,6 @@
 ;;;; Code:
 
 (require 'dash)
-(require 'magit)
-(require 'magit-section)
 (require 'ecloud-state)
 (require 'ecloud-crud)
 (declare-function test-helper-json-resource "test-helper.el")

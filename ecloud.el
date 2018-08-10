@@ -25,6 +25,7 @@
 ;; TODO Add commentary
 ;;; Code:
 
+(require 'magit)
 (require 'ecloud-mode)
 (require 'ecloud-crud)
 (require 'azure-overview)

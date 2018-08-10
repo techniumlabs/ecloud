@@ -10,4 +10,5 @@
  (depends-on "noflet")
  (depends-on "ert-runner")
  (depends-on "ht")
+ (depends-on "magit")
  (depends-on "f"))
