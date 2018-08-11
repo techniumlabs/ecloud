@@ -11,4 +11,5 @@
  (depends-on "ert-runner")
  (depends-on "ht")
  (depends-on "magit")
+ (depends-on "pcache")
  (depends-on "f"))

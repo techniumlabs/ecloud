@@ -18,6 +18,16 @@
    (should (has-resource azure-account (("name" "Microsoft Azure Sponsorship")
                                         ("id" "02ea3122-ecd3-4a0d-97ee-deadbeefed01"))))))
 
+(ert-deftest ecloud-account-test--ecloud-fetch-resources-empty ()
+  (test-helper-with-empty-state
+   (ecloud-define-resource-model azure account)
+   (ecloud-parse-resource-data nil 'azure-account)
+   (should ecloud-state--current-state)
+   (should (ht-get (ecloud-state) "azure"))
+   (should (ht-get (ht-get (ecloud-state) "azure") "account"))
+   (should (equal (ecloud-resource-count azure-account) 0))
+   ))
+
 (defconst azure-account-list-view-result
   (s-trim-left "
 azure account
@@ -33,6 +43,22 @@ Microsoft Azure Sponsorship     Enabled"))
      (save-excursion
        (ecloud-insert-list-views 'azure '(account))
        (should (equal azure-account-list-view-result
+                      (s-trim (substring-no-properties (buffer-string)))))))))
+
+(defconst azure-account-list-view-empty-result
+  (s-trim-left "
+azure account
+No account found"))
+
+(ert-deftest ecloud-account-test--ecloud-insert-list-views-empty ()
+  (test-helper-with-empty-state
+   (ecloud-define-resource-model azure account)
+   (ecloud-parse-resource-data nil 'azure-account)
+   (should ecloud-state--current-state)
+   (with-temp-buffer
+     (save-excursion
+       (ecloud-insert-list-views 'azure '(account))
+       (should (equal azure-account-list-view-empty-result
                       (s-trim (substring-no-properties (buffer-string)))))))))
 
 

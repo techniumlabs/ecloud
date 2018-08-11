@@ -42,33 +42,42 @@
                  (robjs (ecloud-state--get-all-resource-type
                          (symbol-name cloud)
                          (symbol-name it)))
-                 (align-length (-flatten
-                                (--map
-                                 (-max (-flatten
-                                        (->> robjs
-                                             (-map
-                                              (-lambda (obj)
-                                                (length (ecloud-get-attributes (nth 1 obj) it))))
-                                             )))
-                                 (symbol-value params-name))))
-                 (flist (->> align-length
-                             (--map (+ 3 it))
-                             (--map (format "%%-%ds  " it))
-                             (-reduce 'concat)
-                             )))
+                 (align-length (if (> (length robjs) 0)
+                                   (-flatten
+                                    (--map
+                                     (-max (-flatten
+                                            (->> robjs
+                                                 (-map
+                                                  (-lambda (obj)
+                                                    (length (ecloud-get-attributes (nth 1 obj) it))))
+                                                 )))
+                                     (symbol-value params-name)))
+                                 0
+                                 ))
+                 (flist (if (> (length robjs) 0 )
+                            (->> align-length
+                              (--map (+ 3 it))
+                              (--map (format "%%-%ds  " it))
+                              (-reduce 'concat)
+                              )
+                          "%s")))
 
            (magit-insert-section (view-name)
              (magit-insert-heading (format "%s %s" cloud it))
              (magit-insert-section (view-name)
-               (insert (propertize (apply #'format flist (symbol-value params-name))
-                                   'face 'magit-section-heading))
+               (if (> (length robjs) 0)
+                   (insert (propertize (apply #'format flist (symbol-value params-name))
+                                       'face 'magit-section-heading))
+                 (insert (propertize (format "No %s found" it)
+                                     'face 'magit-section-heading)))
                (insert ?\n))
-             (-map (-lambda ((name obj))
-                     (-let ((strout (apply #'format flist (-map (lambda (x) (ecloud-get-attributes obj x))(symbol-value params-name)))))
-                       (eval `(magit-insert-section (,view-name ,obj)
-                                (insert ,strout)
-                                (insert ?\n)))))
-                   robjs)
+             (if (> (length robjs) 0)
+                 (-map (-lambda ((name obj))
+                         (-let ((strout (apply #'format flist (-map (lambda (x) (ecloud-get-attributes obj x))(symbol-value params-name)))))
+                           (eval `(magit-insert-section (,view-name ,obj)
+                                    (insert ,strout)
+                                    (insert ?\n)))))
+                       robjs))
              (insert ?\n)
              )) views))
 

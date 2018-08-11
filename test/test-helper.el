@@ -42,6 +42,10 @@
   `(-let* ((robjs (apply #'ecloud-state--get-all-resource-type (split-string (symbol-name ,class) "-"))))
      (-filter (lambda (robj)
                 (--all? (equal (ecloud-get-attributes (cadr robj) (car it)) (cadr it)) ',attrib-value-list))
-            robjs)))
+              robjs)))
+
+(cl-defmacro ecloud-resource-count (class)
+  `(-let* ((robjs (apply #'ecloud-state--get-all-resource-type (split-string (symbol-name ,class) "-"))))
+     (length robjs)))
 
 ;;; test-helper.el ends here
