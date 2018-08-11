@@ -27,6 +27,7 @@
 
 (require 'eieio)
 (require 'ht)
+(require 'pcache)
 (eval-when-compile (require 'cl))
 
 (defvar ecloud-state--current-state (ht-create))
@@ -54,9 +55,11 @@
 
 (defun ecloud-state-update (cloud rtype rname robj &optional args)
   (ecloud-register-resource cloud rtype)
-  (ht-set! (ht-get (ht-get ecloud-state--current-state cloud) rtype) rname robj)
+  (ht-set! (ht-get (ht-get (ecloud-state) cloud) rtype) rname robj)
+  ;; Cache the results for future use
+  (let ((repo (pcache-repository cloud)))
+    (pcache-put repo rtype (ht-get (ht-get (ecloud-state) cloud) rtype)))
   (ecloud-refresh-all-views))
-
 
 (defun ecloud-state--get-all-resource-type (cloud rtype)
   (ht-items (ht-get (ht-get (ecloud-state) cloud) rtype)))
