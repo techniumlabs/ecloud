@@ -1,0 +1,55 @@
+[
+  {
+    "aadProfile": null,
+    "addonProfiles": {
+      "omsagent": {
+        "config": {
+          "logAnalyticsWorkspaceResourceID": "/subscriptions/deadbeef-beed-bade-b70f-ee9206029c60/resourceGroups/DefaultResourceGroup-ASE/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-deadbeef-beed-bade-b70f-ee9206029c60-ASE"
+        },
+        "enabled": true
+      }
+    },
+    "agentPoolProfiles": [
+      {
+        "count": 1,
+        "maxPods": 110,
+        "name": "nodepool1",
+        "osType": "Linux",
+        "storageProfile": "ManagedDisks",
+        "vmSize": "Standard_DS1_v2"
+      }
+    ],
+    "dnsPrefix": "gnuherd-gnuherd-56b92b",
+    "enableRbac": false,
+    "fqdn": "gnuherd-gnuherd-56b92b-6c1031d5.hcp.australiaeast.azmk8s.io",
+    "id": "/subscriptions/deadbeef-beed-bade-b70f-ee9206029c60/resourcegroups/gnuherd/providers/Microsoft.ContainerService/managedClusters/gnuherd",
+    "kubernetesVersion": "1.10.6",
+    "linuxProfile": {
+      "adminUsername": "azureuser",
+      "ssh": {
+        "publicKeys": [
+          {
+            "keyData": "ssh-rsa AAAAB3ABCDEFGHIJKLMNOPQRSTUVWZYZAAAAB3ABCDEFGHIJKLMNOPQRSTUVWZYAAAAB3ABCDEFGHIJKLMNOPQRSTUVWZYAAAAB3ABCDEFGHIJKLMNOPQRSTUVWZYAAAAB3ABCDEFGHIJKLMNOPQRSTUVWZYAAAAB3ABCDEFGHIJKLMNOPQRSTUVWZYAAAAB3ABCDEFGHIJKLMNOPQRSTUVWZYZPQRSTUVWZYAAAAB3ABCDEFGHIJKLMNOPQRSTUVWZYAAAAB3ABCDEFGHIJKLMNOPQRSTUVWZYAAAAB3ABCDEFGHIJKLMNOPQRSTUVWZYAAAAB3ABCDEFGHIJKLMNOPQRSTUVWZYAAAAB3ABCDEFGHIJKLMNOPQRSTUVWZYAAAAB3ABCDEFGHIJKLMNOPQRSTUVWZYAAAAB3ABCDEFGHIJKLMNOPQRSTUVWZYAAAAB3ABCDEFGHIJKLMNOPQRSTUVWZYAAAAB3ABCDEFGHIJKLMNOPQRSTUVWZYAAAAB3ABCDEFGHIJKLMNOPQRSTUVWZYAAAAB3ABCDEFGHIJKLMNOPQRSTUVWZYAAAAB3ABCDEFGHIJKLMNOPQRSTUVWZYAAAAB3ABCDEFGHIJKLMNOPQRSTUVWZYAAAAB3ABCDEFGHIJKLMNOPQRSTUVWZYAAAAB3ABCDEFGHIJKLMNOPQRSTUVWZYZnmM3ou9r2VViKK2qj5Q==\n"
+          }
+        ]
+      }
+    },
+    "location": "australiaeast",
+    "name": "gnuherd",
+    "networkProfile": {
+      "dnsServiceIp": "10.0.0.10",
+      "dockerBridgeCidr": "172.17.0.1/16",
+      "networkPlugin": "kubenet",
+      "networkPolicy": null,
+      "podCidr": "10.244.0.0/16",
+      "serviceCidr": "10.0.0.0/16"
+    },
+    "nodeResourceGroup": "MC_gnuherd_gnuherd_australiaeast",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "gnuherd",
+    "servicePrincipalProfile": {
+      "clientId": "deadbeef-f909-4cb5-92f0-861ae04f912e"
+    },
+    "type": "Microsoft.ContainerService/ManagedClusters"
+  }
+]
