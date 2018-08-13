@@ -46,11 +46,11 @@
                                    (-flatten
                                     (--map
                                      (-max (-flatten
-                                            (->> robjs
-                                                 (-map
-                                                  (-lambda (obj)
-                                                    (length (ecloud-get-attributes (nth 1 obj) it))))
-                                                 )))
+                                            (list (->> robjs
+                                                  (-map
+                                                   (-lambda (obj)
+                                                     (length (ecloud-get-attributes (nth 1 obj) it))))
+                                                  ) (length (symbol-name it)))))
                                      (symbol-value params-name)))
                                  0
                                  ))

@@ -31,7 +31,7 @@
 (eval-when-compile (require 'cl))
 
 (defvar azure-aks--list-command '("az" "aks" "list"))
-(defvar azure-aks-list-view-display-params '(name location resourceGroup))
+(defvar azure-aks-list-view-display-params '(name kubernetesVersion location resourceGroup))
 
 ;; Model for Azure Aks
 

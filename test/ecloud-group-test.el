@@ -32,8 +32,8 @@
 (defconst azure-group-list-view-result
   (s-trim-left "
 azure group
-name        location   state         
-default     eastus     Succeeded"))
+name        location     state         
+default     eastus       Succeeded"))
 
 (ert-deftest ecloud-group-test--ecloud-insert-list-views ()
   (test-helper-with-empty-state
