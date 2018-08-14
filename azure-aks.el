@@ -41,9 +41,40 @@
 
 (defvar azure-aks--parser-functions)
 
+(cl-defun azure-aks-scale ()
+  (interactive)
+  (let* ((section (magit-current-section))
+         (type (oref section type))
+         (value (oref section value))
+         (aks-name (oref value :name))
+         (aks-group (ecloud-get-attributes value 'resourceGroup))
+         (node-count (number-to-string (magit-read-int (format "Scale the aks cluster %s to"
+                                              aks-name)))))
+    (if (magit-confirm t (format "Do you want to scale aks cluster %s to %s"
+                                 aks-name node-count))
+        (ecloud-run-json-command `("az" "aks" "scale"
+                                   "--name" ,aks-name
+                                   "--resource-group" ,aks-group
+                                   "--node-count" ,node-count)
+                                 ()
+                                 (lambda (json-output)
+                                   (message "%s" json-output)))
+        (message "Scaling Azure AKS cluster in group %s to %s" aks-group node-count))
+        )
+  )
+
+(magit-define-popup azure-aks-popup
+  "Popup console for ask commands."
+  :group 'ecloud
+  :actions
+  '((?s "Scale" azure-aks-scale)
+    )
+  :max-action-columns 2)
+
 (defvar magit-azure-aks-section-map
   (let ((map (make-sparse-keymap)))
     (define-key map "p" 'azure-overview-print-section)
+    (define-key map "h" 'azure-aks-popup)
     map)
   "Keymap for the `azure-aks' section.")
 

@@ -49,6 +49,38 @@
        (window-frame (select-window window)))))
   )
 
+(defun magit-read-int (prompt &optional initial-input history default-value
+                                 inherit-input-method no-whitespace)
+  "Read an integer from the minibuffer, prompting with string PROMPT.
+
+* empty input is not allowed
+* whitespace is not allowed and leading and trailing whitespace is
+  removed automatically,
+* \": \" is appended to PROMPT, and
+* an invalid DEFAULT-VALUE is silently ignored."
+  (when default-value
+    (when (consp default-value)
+      (setq default-value (car default-value)))
+    (unless (integerp default-value)
+      (setq default-value 1)))
+  (let* ((minibuffer-completion-table nil)
+         (val (read-from-minibuffer
+               (magit-prompt-with-default (concat prompt ": ") default-value)
+               initial-input (and no-whitespace magit-minibuffer-local-ns-map)
+               nil history default-value inherit-input-method))
+         (trim (lambda (regexp string)
+                 (save-match-data
+                   (if (string-match regexp string)
+                       (replace-match "" t t string)
+                     string)))))
+    (setq val (funcall trim "\\`\\(?:[ \t\n\r]+\\)"
+                       (funcall trim "\\(?:[ \t\n\r]+\\)\\'" val)))
+    (cond ((string= val "")
+           (user-error "Need non-empty input"))
+          ((not (integerp (string-to-number val)))
+           (user-error "Need an integer input. %s is not integer" val))
+          (t (string-to-number val)))))
+
 (provide 'ecloud-utils)
 
 ;;; ecloud-utils.el ends here
