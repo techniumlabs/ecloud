@@ -55,7 +55,8 @@
 
 (defcustom azure-overview-sections-hook
   '(azure-insert-overview-headers
-    azure-insert-views)
+    azure-insert-views
+    azure-insert-error-view)
   "Hook run to insert sections into a status buffer."
   :package-version '(ecloud . "0.0.1")
   :group 'ecloud
@@ -70,6 +71,10 @@ The sections are inserted by running the functions on the hook
 (defun azure-insert-views ()
   "Insert the defined views"
   (ecloud-insert-list-views 'azure azure-overview-list-views))
+
+(defun azure-insert-error-view ()
+  "Insert the error view"
+  (ecloud-insert-error-view 'azure))
 
 (defun azure-overview-refresh-buffer ()
   ;; Trigger Refresh data

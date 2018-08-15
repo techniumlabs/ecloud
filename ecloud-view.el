@@ -81,5 +81,16 @@
              (insert ?\n)
              )) views))
 
+(defun ecloud-insert-error-view (cloud)
+  (let ((errors (ecloud-state-get-errors cloud)))
+    (magit-insert-section (errors)
+      (if errors
+          (progn
+            (magit-insert-heading "Errors")
+            (-map (lambda (e) (insert e)) errors))
+        (magit-insert-heading "No Errors")
+        )
+      )))
+
 (provide 'ecloud-view)
 ;;; ecloud-view.el ends here

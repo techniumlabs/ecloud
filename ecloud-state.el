@@ -31,16 +31,22 @@
 (eval-when-compile (require 'cl))
 
 (defvar ecloud-state--current-state (ht-create))
+(defvar ecloud-state--errors (ht-create))
 
 (defun ecloud-state()
   "Get the global state"
   ecloud-state--current-state)
 
+(defun ecloud-errors()
+  "Get the global errors"
+  ecloud-state--errors)
+
 (defun ecloud-register-cloud (cloud)
   "Register the cloud in the global state"
   (unless (ht-get (ecloud-state) cloud)
-    (ht-set (ecloud-state) cloud (ht-create)))
-)
+    (progn
+      (ht-set (ecloud-state) cloud (ht-create))
+      (ht-set (ecloud-errors) cloud ()))))
 
 (defun ecloud-register-resource (cloud rtype)
   "Register a cloud resource in the global state"
@@ -52,6 +58,19 @@
   "Clear all the resources of a particular type from the global state"
   (ecloud-register-resource cloud rtype)
   (ht-set! (ht-get (ecloud-state) cloud) rtype (ht-create)))
+
+(defun ecloud-state-add-error (cloud error)
+  "Add the latest error to the top of the list"
+  (ecloud-register-cloud cloud)
+  (let ((err-list (ht-get (ecloud-errors) cloud)))
+    (push error err-list)
+    (message "Error list is %s" err-list)
+    (ht-set! (ecloud-errors) cloud err-list))
+  (ecloud-refresh-all-views))
+
+(defun ecloud-state-get-errors (cloud)
+  "Get the error list for the cloud"
+  (ht-get (ecloud-errors) cloud))
 
 (defun ecloud-state-update (cloud rtype rname robj &optional args)
   (ecloud-register-resource cloud rtype)
