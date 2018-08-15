@@ -31,8 +31,8 @@
 (defconst azure-aks-list-view-result
   (s-trim-left "
 azure aks
-name        kubernetesVersion     location          resourceGroup     
-gnuherd     1.10.6                australiaeast     gnuherd"))
+name        kubernetesVersion     location          size     provisioningState     
+gnuherd     1.10.6                australiaeast     1        Succeeded"))
 
 (ert-deftest ecloud-aks-test--ecloud-insert-list-views ()
   (test-helper-with-empty-state

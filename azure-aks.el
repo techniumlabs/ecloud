@@ -31,7 +31,7 @@
 (eval-when-compile (require 'cl))
 
 (defvar azure-aks--list-command '("az" "aks" "list"))
-(defvar azure-aks-list-view-display-params '(name kubernetesVersion location resourceGroup))
+(defvar azure-aks-list-view-display-params '(name kubernetesVersion location size provisioningState))
 
 ;; Model for Azure Aks
 
@@ -39,7 +39,18 @@
 
 (ecloud-define-resource-state azure aks)
 
-(defvar azure-aks--parser-functions)
+(defcustom azure-aks-parser-hook
+  '(azure-aks--parse-node-pool-size)
+  "Hook to run for parsing json data."
+  :group 'ecloud-azure
+  :type 'hook)
+
+;; Parse the provisioning state
+(defun azure-aks--parse-node-pool-size (robj)
+  (-let* (((&alist 'agentPoolProfiles [(&alist 'count nodepool-size)]) (oref robj :attributes))
+          (nodepool-size (number-to-string nodepool-size)))
+    (oset robj :attributes (append (oref robj :attributes) `((size . ,nodepool-size))))
+    ))
 
 (cl-defun azure-aks-scale ()
   (interactive)
