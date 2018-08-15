@@ -5,6 +5,8 @@
 (require 'dash)
 (require 'ecloud-state)
 (require 'ecloud-crud)
+(require 'ecloud-utils)
+
 (declare-function test-helper-json-resource "test-helper.el")
 (defconst sample-get-aks-list-response (test-helper-json-resource "azure-aks-list-response.json"))
 
@@ -61,7 +63,25 @@ No aks found"))
        (should (equal azure-aks-list-view-empty-result
                       (s-trim (substring-no-properties (buffer-string)))))))))
 
-
+;; TODO
+(ert-deftest ecloud-aks-test--azure-aks-scale ()
+  (test-helper-with-empty-state
+   (ecloud-define-resource-model azure aks)
+   (ecloud-parse-resource-data sample-get-aks-list-response 'azure-aks)
+   (should ecloud-state--current-state)
+   (with-temp-buffer
+     (save-excursion
+       (ecloud-insert-list-views 'azure '(aks))
+       (should (equal azure-aks-list-view-result
+                      (s-trim (substring-no-properties (buffer-string)))))
+       (goto-line 3)
+       (cl-letf (((symbol-function 'magit-read-int) (lambda (prompt &rest args) 10))
+                 ((symbol-function 'magit-confirm) (lambda (action &rest args) t))
+                 ((symbol-function 'ecloud-run-json-command) (lambda (&rest args) t))
+                 )
+         (message "%s" (oref (magit-current-section) type))
+         (call-interactively 'azure-aks-scale))
+       ))))
 (provide 'ecloud-aks-test)
 
 ;;; azure-aks-test.el ends here
