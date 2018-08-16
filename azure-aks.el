@@ -69,10 +69,7 @@
                                    "--node-count" ,node-count)
                                  ()
                                  (lambda (json-output)
-                                   (message "%s" json-output)))
-        (message "Scaling Azure AKS cluster in group %s to %s" aks-group node-count))
-        )
-  )
+                                   (message "%s" json-output))))))
 
 (cl-defun azure-aks-browse ()
   (interactive)

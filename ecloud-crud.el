@@ -73,7 +73,6 @@
   )
 
 (cl-defun ecloud-fetch-resources (class)
-  (message "Fetching all")
   (let* ((list-cmd (intern (format "%s--list-command" class)))
          (list-cmd (and (boundp list-cmd) (symbol-value list-cmd)))
          (global-params (intern (format "%s--global-params" class)))
