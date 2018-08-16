@@ -1,0 +1,77 @@
+[
+  {
+    "addressSpace": {
+      "addressPrefixes": [
+        "10.0.0.0/8"
+      ]
+    },
+    "ddosProtectionPlan": null,
+    "dhcpOptions": null,
+    "enableDdosProtection": false,
+    "enableVmProtection": false,
+    "etag": "W/\"deadbeef-5bb1-4562-b14b-deadbeef8e9b\"",
+    "id": "/subscriptions/deadbeef-73a9-44e3-b70f-deadbeef9c60/resourceGroups/gnuherd/providers/Microsoft.Network/virtualNetworks/aks-vnet-deadbeef",
+    "location": "australiaeast",
+    "name": "aks-vnet-deadbeef",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "gnuherd",
+    "resourceGuid": "deadbeef-d934-4cc8-9af9-deadbeef987b",
+    "subnets": [
+      {
+        "addressPrefix": "10.240.0.0/16",
+        "etag": "W/\"deadbeef-5bb1-4562-b14b-deadbeef8e9b\"",
+        "id": "/subscriptions/deadbeef-73a9-44e3-b70f-deadbeef9c60/resourceGroups/gnuherd/providers/Microsoft.Network/virtualNetworks/aks-vnet-deadbeef/subnets/aks-subnet",
+        "ipConfigurations": [
+          {
+            "etag": null,
+            "id": "/subscriptions/deadbeef-73a9-44e3-b70f-deadbeef9c60/resourceGroups/gnuherd/providers/Microsoft.Network/networkInterfaces/aks-nodepool1-deadbeef-nic-1/ipConfigurations/ipconfig1",
+            "name": null,
+            "privateIpAddress": null,
+            "privateIpAllocationMethod": null,
+            "provisioningState": null,
+            "publicIpAddress": null,
+            "resourceGroup": "gnuherd",
+            "subnet": null
+          }
+        ],
+        "name": "aks-subnet",
+        "networkSecurityGroup": {
+          "defaultSecurityRules": null,
+          "etag": null,
+          "id": "/subscriptions/deadbeef-73a9-44e3-b70f-deadbeef9c60/resourceGroups/gnuherd/providers/Microsoft.Network/networkSecurityGroups/aks-agentpool-deadbeef-nsg",
+          "location": null,
+          "name": null,
+          "networkInterfaces": null,
+          "provisioningState": null,
+          "resourceGroup": "gnuherd",
+          "resourceGuid": null,
+          "securityRules": null,
+          "subnets": null,
+          "tags": null,
+          "type": null
+        },
+        "provisioningState": "Succeeded",
+        "resourceGroup": "gnuherd",
+        "resourceNavigationLinks": null,
+        "routeTable": {
+          "disableBgpRoutePropagation": null,
+          "etag": null,
+          "id": "/subscriptions/deadbeef-73a9-44e3-b70f-ee9206029c60/resourceGroups/gnuherd/providers/Microsoft.Network/routeTables/aks-agentpool-deadbeef-routetable",
+          "location": null,
+          "name": null,
+          "provisioningState": null,
+          "resourceGroup": "gnuherd",
+          "routes": null,
+          "subnets": null,
+          "tags": null,
+          "type": null
+        },
+        "serviceEndpoints": null,
+        "type": "Microsoft.Network/virtualNetworks/subnets"
+      }
+    ],
+    "tags": null,
+    "type": "Microsoft.Network/virtualNetworks",
+    "virtualNetworkPeerings": []
+  }
+]
