@@ -15,3 +15,9 @@ For azure, run `M-x azure-overview` to get started.
 ## Contributing
 
 ## Acknowledgements
+This project would not have been possible if not for these exceptional projects 
+1. [magit](https://github.com/magit/magit)
+2. [kubernetes-el](https://github.com/chrisbarrett/kubernetes-el)
+
+Thanks to all who contributed to the above projects and countless other emacs packages, without which emacs will not be a good place to live.
+
