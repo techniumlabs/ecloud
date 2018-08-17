@@ -55,14 +55,6 @@
                                       ("az" "group" "delete" "--name" name "--yes" "--output" "json")
                                       ("Do you want to delete group %s" name ))
 
-(defun azure-group-add-group (&optional intent)
-  (interactive "P")
-  (let* ((group-name (magit-read-string "Name of resource group to create" nil)))
-    (ecloud-run-json-command `("az" "group" "create" "--name" ,group-name)
-                             ()
-                             (lambda (json-output)
-                               (message "%s" json-output)))))
-
 (defvar magit-azure-group-section-map
   (let ((map (make-sparse-keymap)))
     (define-key map "d" 'azure-group-delete-group)
