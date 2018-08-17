@@ -29,7 +29,8 @@
 (require 'ecloud-mode)
 (require 'ecloud-crud)
 (require 'azure-overview)
-
+(require 'aws-overview)
+(require 'gcp-overview)
 (provide 'ecloud)
 
 ;;; ecloud.el ends here
