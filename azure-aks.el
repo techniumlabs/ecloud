@@ -27,6 +27,7 @@
 
 (require 'ecloud-crud)
 (require 'ecloud-state)
+(require 'ecloud-utils)
 (require 'eieio)
 (eval-when-compile (require 'cl))
 
@@ -71,25 +72,14 @@
                                  (lambda (json-output)
                                    (message "%s" json-output))))))
 
-(cl-defun azure-aks-browse ()
-  (interactive)
-  (let* ((section (magit-current-section))
-         (type (oref section type))
-         (value (oref section value))
-         (aks-name (oref value :name))
-         (aks-group (ecloud-get-attributes value 'resourceGroup)))
-    (ecloud-run-json-command `("az" "aks" "browse"
-                               "--name" ,aks-name
-                               "--resource-group" ,aks-group)
-                             ()
-                             (lambda (json-output)
-                               (message "%s" json-output)))))
+(ecloud-define-simple-resource-action azure-aks-browse
+                                      ("az" "aks" "browse" "--name" name "--resource-group" resourceGroup))
 
 (magit-define-popup azure-aks-popup
   "Popup console for ask commands."
   :group 'ecloud
   :actions
-  '((?s "Scale nodepool" azure-aks-scale)
+  '((?s "Scale" azure-aks-scale)
     (?b "Browse" azure-aks-browse))
   :max-action-columns 3)
 

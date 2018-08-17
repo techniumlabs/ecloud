@@ -42,7 +42,7 @@
       (eval `(oref ,robj ,(intern (if (symbolp attrib-name) (symbol-name attrib-name) attrib-name ))))
     (cdr (assoc attrib-name (oref robj attributes)))))
 
-(defmacro ecloud-define-resource-model (cloud name &rest body)
+(cl-defmacro ecloud-define-resource-model (cloud name &rest body)
   (cl-assert (symbolp cloud))
   (cl-assert (symbolp name))
   (let ((classname (intern (format "%s-%s" cloud name))))
@@ -53,6 +53,42 @@
           (name :initarg :name)
           (attributes :initarg :attributes)))
        )))
+
+(cl-defmacro ecloud-define-simple-resource-action (name command &rest body)
+  (cl-assert (symbolp name))
+  `(cl-defun ,name ()
+     (interactive)
+     (let* ((section (magit-current-section))
+            (type (oref section type))
+            (value (oref section value)))
+
+       (ecloud-run-json-command (--map (if (stringp it)
+                                           it
+                                         (ecloud-get-attributes value it))
+                                       ',command)
+                                nil
+                                (lambda (json-output) (message "%s" json-output))))))
+
+(cl-defmacro ecloud-define-cautious-action (name command prompt &rest body)
+  (cl-assert (symbolp name))
+  `(cl-defun ,name ()
+     (interactive)
+     (let* ((section (magit-current-section))
+            (type (oref section type))
+            (value (oref section value)))
+
+       (if ',prompt
+           (-if-let* ((confirm (magit-confirm t (apply 'format (--map (if (stringp it)
+                                                                          it
+                                                                        (ecloud-get-attributes value it))
+                                                                      ',prompt)))))
+               (ecloud-run-json-command (--map (if (stringp it)
+                                                   it
+                                                 (ecloud-get-attributes value it))
+                                               ',command)
+                                        nil
+                                        (lambda (json-output) (message "%s" json-output)))
+             )))))
 
 (cl-defun ecloud-parse-resource-data (data class)
   (-let ((parsed-data (--map (make-instance class :name (cdr (assoc 'name it))
@@ -68,9 +104,7 @@
                   (rname (oref it :name)))
              (run-hook-with-args (intern (format "%s-%s-parser-hook" cloud rtype)) it)
              (ecloud-state-update cloud rtype rname it)
-             ) parsed-data)
-    )
-  )
+             ) parsed-data)))
 
 (cl-defun ecloud-fetch-resources (class)
   (let* ((list-cmd (intern (format "%s--list-command" class)))

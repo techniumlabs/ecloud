@@ -51,16 +51,9 @@
     (oset robj :attributes (append (oref robj :attributes) `((state . ,state))))))
 
 ;;; Actions
-(defun azure-group-delete-group (&optional intent)
-  (interactive "P")
-  (let* ((section (magit-current-section))
-         (type (oref section type))
-         (value (oref section value)))
-    (if (magit-confirm t (format "Delete %s resource group" (oref value :name)))
-        (ecloud-run-json-command `("az" "group" "delete" "--name" ,(oref value :name) "--yes" "--output" "json")
-                                 ()
-                                 (lambda (json-output)
-                                   (message "%s" json-output))))))
+(ecloud-define-cautious-action azure-group-delete-group
+                                      ("az" "group" "delete" "--name" name "--yes" "--output" "json")
+                                      ("Do you want to delete group %s" name ))
 
 (defun azure-group-add-group (&optional intent)
   (interactive "P")
@@ -75,7 +68,6 @@
     (define-key map "d" 'azure-group-delete-group)
     map)
   "Keymap for the `azure-group' section.")
-
 
 (provide 'azure-resource-group)
 ;;; azure-group.el ends here
