@@ -77,6 +77,7 @@ The sections are inserted by running the functions on the hook
   (ecloud-insert-error-view 'azure))
 
 (defun azure-overview-refresh-buffer ()
+  (interactive)
   ;; Trigger Refresh data
   (--map (let ((rtype (intern (format "azure-%s" it))))
            (ecloud-fetch-resources rtype))
@@ -103,6 +104,7 @@ at point, stage the file but not its content."
   (let ((keymap (make-sparse-keymap)))
     ;;TODO
     (define-key keymap (kbd "h") 'azure-overview-dispatch-popup)
+    (define-key keymap (kbd "r") 'azure-overview-refresh-buffer)
     keymap)
   "Keymap for `azure-overview-mode'.")
 
