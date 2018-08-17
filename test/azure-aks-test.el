@@ -63,7 +63,6 @@ No aks found"))
        (should (equal azure-aks-list-view-empty-result
                       (s-trim (substring-no-properties (buffer-string)))))))))
 
-;; TODO
 (ert-deftest ecloud-aks-test--azure-aks-scale ()
   (test-helper-with-empty-state
    (ecloud-define-resource-model azure aks)
@@ -83,6 +82,7 @@ No aks found"))
          (should (equal azure-aks-list-view-result
                         (s-trim (substring-no-properties (buffer-string))))))
        ))))
+
 (provide 'ecloud-aks-test)
 
 ;;; azure-aks-test.el ends here
