@@ -3,7 +3,7 @@
 ;; Author: Ramanathan Sivagurunathan
 ;; Maintainer: Ramanathan Sivagurunathan
 ;; Version: 0.0.1
-;; Package-Requires: ((emacs "25.1") (dash "2.12.0") (magit "2.8.0"))
+;; Package-Requires: ((emacs "25.1") (dash "2.14.1") (magit "2.13.0"))
 ;; Homepage: homepage
 ;; Keywords: keywords
 

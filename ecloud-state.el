@@ -6,7 +6,7 @@
 
 ;; Version: 0.0.1
 
-;; Package-Requires: ((emacs "25.1") (dash "2.12.0") (magit "2.8.0"))
+;; Package-Requires: ((emacs "25.1") (dash "2.14.1") (magit "2.13.0"))
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -82,24 +82,6 @@
 
 (defun ecloud-state--get-all-resource-type (cloud rtype)
   (ht-items (ht-get (ht-get (ecloud-state) cloud) rtype)))
-
-(cl-defun ecloud-define-resource-action (cloud rtype action &rest body)
-  (cl-assert (symbolp cloud))
-  (cl-assert (symbolp rtype))
-
-  (let ((fname (intern (format "%s-%s--%s" cloud rtype action)))
-        (default-action-fn (intern (format "ecloud-resource-default-action--%s" action))))
-    `(cl-defun ,fname (data)
-       (apply ',default-action-fn '(',cloud ',rtype data)))))
-
-(defmacro ecloud-define-resource-state (cloud rname &optional actions &rest body)
-  (cl-assert (symbolp cloud))
-  (cl-assert (symbolp rname))
-  (cl-assert (listp actions))
-
-  `(progn ,@(mapcar (lambda (x) (ecloud-define-resource-action 'azure 'account x)) actions))
-
-  )
 
 (provide 'ecloud-state)
 ;;; ecloud-state.el ends here

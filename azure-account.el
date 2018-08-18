@@ -6,7 +6,7 @@
 
 ;; Version: 0.0.1
 
-;; Package-Requires: ((emacs "25.1") (dash "2.12.0") (magit "2.8.0"))
+;; Package-Requires: ((emacs "25.1") (dash "2.14.1") (magit "2.13.0"))
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -21,8 +21,6 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-;;; Commentary:
-;; TODO Add commentary
 ;;; Code:
 
 (require 'ecloud-crud)
@@ -30,16 +28,16 @@
 (require 'eieio)
 (eval-when-compile (require 'cl))
 
-(defvar azure-account--list-command '("az" "account" "list"))
-(defvar azure-account-list-view-display-params '(name state))
+(defvar azure-account--list-command
+  '("az" "account" "list")
+  "Azure cli for getting account list")
+
+(defvar azure-account-list-view-display-params
+  '(name state)
+  "List of attributes to display in list view")
 
 ;; Model for Azure Account
-
 (ecloud-define-resource-model azure account)
-
-(ecloud-define-resource-state azure account)
-
-(defvar azure-account--parser-functions)
 
 (defvar magit-azure-account-section-map
   (let ((map (make-sparse-keymap)))

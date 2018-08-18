@@ -6,7 +6,7 @@
 
 ;; Version: 0.0.1
 
-;; Package-Requires: ((emacs "25.1") (dash "2.12.0") (magit "2.8.0"))
+;; Package-Requires: ((emacs "25.1") (dash "2.14.1") (magit "2.13.0"))
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -36,8 +36,6 @@
 ;; Model for Azure Vm
 
 (ecloud-define-resource-model azure vm)
-
-(ecloud-define-resource-state azure vm)
 
 (defvar azure-vm--parser-functions)
 
