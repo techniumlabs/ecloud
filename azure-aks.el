@@ -31,8 +31,13 @@
 (require 'eieio)
 (eval-when-compile (require 'cl))
 
-(defvar azure-aks--list-command '("az" "aks" "list"))
-(defvar azure-aks-list-view-display-params '(name kubernetesVersion location size provisioningState))
+(defvar azure-aks--list-command
+  '("az" "aks" "list")
+  "Azure cli for getting aks list")
+
+(defvar azure-aks-list-view-display-params
+  '(name kubernetesVersion location size provisioningState)
+  "List of attributes to display in list view")
 
 ;; Model for Azure Aks
 (ecloud-define-resource-model azure aks)

@@ -30,14 +30,16 @@
 (require 'eieio)
 (eval-when-compile (require 'cl))
 
-(defvar azure-vm--list-command '("az" "vm" "list" "-d"))
-(defvar azure-vm-list-view-display-params '(name location ))
+(defvar azure-vm--list-command
+  '("az" "vm" "list" "-d")
+  "Azure cli for getting vm list")
+
+(defvar azure-vm-list-view-display-params
+  '(name location )
+  "List of attributes to display in list view")
 
 ;; Model for Azure Vm
-
 (ecloud-define-resource-model azure vm)
-
-(defvar azure-vm--parser-functions)
 
 (defvar magit-azure-vm-section-map
   (let ((map (make-sparse-keymap)))
