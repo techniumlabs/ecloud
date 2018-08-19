@@ -34,6 +34,7 @@
 (require 'ecloud-view)
 (require 'azure-vars)
 (require 'azure-account)
+(require 'azure-vnet)
 (require 'azure-aks)
 (require 'azure-vm)
 (require 'azure-resource-group)
