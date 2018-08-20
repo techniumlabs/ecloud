@@ -31,8 +31,9 @@
 (defconst azure-account-list-view-result
   (s-trim-left "
 azure account
-name                            state       
-Microsoft Azure Sponsorship     Enabled"))
+name                            state       isDefault     
+Technium Labs Australia         Enabled     true          
+Microsoft Azure Sponsorship     Enabled     false"))
 
 (ert-deftest ecloud-account-test--ecloud-insert-list-views ()
   (test-helper-with-empty-state

@@ -49,7 +49,10 @@
                                             (list (->> robjs
                                                   (-map
                                                    (-lambda (obj)
-                                                     (length (ecloud-get-attributes (nth 1 obj) it))))
+                                                     (length (let ((aval (ecloud-get-attributes (nth 1 obj) it)))
+                                                               (cond ((equal :json-false aval) "false")
+                                                                     ((equal t aval) "true")
+                                                                     ((stringp aval) aval))))))
                                                   ) (length (symbol-name it)))))
                                      (symbol-value params-name)))
                                  0
@@ -73,7 +76,11 @@
                (insert ?\n))
              (if (> (length robjs) 0)
                  (-map (-lambda ((name obj))
-                         (-let ((strout (apply #'format flist (-map (lambda (x) (ecloud-get-attributes obj x))(symbol-value params-name)))))
+                         (-let ((strout (apply #'format flist (-map (lambda (x) (let ((aval (ecloud-get-attributes obj x)))
+                                                                                  (cond ((equal :json-false aval) "false")
+                                                                                        ((equal t aval) "true")
+                                                                                        ((stringp aval) aval))))
+                                                                    (symbol-value params-name)))))
                            (eval `(magit-insert-section (,view-name ,obj)
                                     (insert ,strout)
                                     (insert ?\n)))))

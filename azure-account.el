@@ -33,7 +33,7 @@
   "Azure cli for getting account list")
 
 (defvar azure-account-list-view-display-params
-  '(name state)
+  '(name state isDefault)
   "List of attributes to display in list view")
 
 ;; Model for Azure Account
