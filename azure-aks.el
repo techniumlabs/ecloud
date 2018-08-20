@@ -87,7 +87,6 @@
 
 (defvar magit-azure-aks-section-map
   (let ((map (make-sparse-keymap)))
-    (define-key map "p" 'azure-overview-print-section)
     (define-key map "h" 'azure-aks-popup)
     map)
   "Keymap for the `azure-aks' section.")

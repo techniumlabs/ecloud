@@ -41,6 +41,14 @@
 ;; Model for Azure Vm
 (ecloud-define-resource-model azure vm)
 
+(ecloud-define-simple-resource-action azure-vm-start
+                                      ("az" "vm" "start" "--name" name "--resource-group" resourceGroup "--no-wait"))
+
+(ecloud-define-cautious-action azure-vm-stop
+                               ("az" "vm" "stop" "--name" name "--resource-group" resourceGroup "--no-wait")
+                               ("Do you want to stop vm %s" name ))
+
+
 (defvar magit-azure-vm-section-map
   (let ((map (make-sparse-keymap)))
     (define-key map "p" 'azure-overview-print-section)
