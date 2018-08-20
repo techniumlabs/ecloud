@@ -40,7 +40,7 @@
 (require 'azure-resource-group)
 
 (defcustom azure-overview-list-views
-  '(account group vm aks)
+  '(account vnet vm aks)
   "Components that are part of the azure overview view"
   :package-version '(ecloud . "0.0.1")
   :group 'ecloud)

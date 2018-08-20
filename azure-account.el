@@ -39,11 +39,24 @@
 ;; Model for Azure Account
 (ecloud-define-resource-model azure account)
 
+;;;; Actions
+(ecloud-define-cautious-action azure-account-set-default
+                               ("az" "account" "set" "--subscription" id)
+                               ("Do you want to set %s to be current" name))
+
 (defvar magit-azure-account-section-map
   (let ((map (make-sparse-keymap)))
-    (define-key map "p" 'azure-overview-print-section)
+    (define-key map "h" 'azure-account-popup)
+    (define-key map "s" 'azure-account-set-default)
     map)
   "Keymap for the `azure-account' section.")
+
+(magit-define-popup azure-account-popup
+  "Popup console for azure account"
+  :group 'ecloud
+  :actions
+  '("Azure account commands"
+    (?s "Set current" azure-account-set-default)))
 
 (provide 'azure-account)
 ;;; azure-account.el ends here

@@ -48,7 +48,7 @@
   (-let (((&alist 'properties (&alist 'provisioningState state)) (oref robj :attributes)))
     (oset robj :attributes (append (oref robj :attributes) `((state . ,state))))))
 
-;;; Actions
+;;;; Actions
 (ecloud-define-cautious-action azure-group-delete-group
                                       ("az" "group" "delete" "--name" name "--yes" "--output" "json")
                                       ("Do you want to delete group %s" name ))

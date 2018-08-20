@@ -103,8 +103,10 @@ Returns the process object for this execution of kubectl."
     proc))
 
 (defun ecloud-parse-json-buffer (buf)
-  (let ((json (with-current-buffer buf (json-read-from-string (buffer-string)))))
-    json))
+  (let* ((output (with-current-buffer buf (buffer-string))))
+    (if (> (string-bytes output) 0)
+        (json-read-from-string output)
+      nil)))
 
 (defun ecloud-run-json-command (cmd args on-success &optional on-error cleanup-cb)
   (ecloud-run-command cmd args
@@ -112,7 +114,6 @@ Returns the process object for this execution of kubectl."
                         (funcall on-success (ecloud-parse-json-buffer buf)))
                       on-error
                       cleanup-cb))
-
 
 (provide 'ecloud-commands)
 ;;; ecloud-commands.el ends here
