@@ -36,11 +36,7 @@
       (ignore-errors (kill-buffer buf)))))
 
 (defun ecloud-run-command (cmd args on-success &optional on-error cleanup-cb)
-  "Run a command with ARGS.
-PROPS is an alist of functions to inject.  It should normally be passed
-`kubernetes-props'.
-STATE is the current application state, used to apply additional
-global flags to kubectl.
+  "Run a command CMD with ARGS.
 ON-SUCCESS is a function of one argument, called with the process' buffer.
 Optional ON-ERROR is a function of two arguments, called with the
 process' stderr buffer.  If omitted, it defaults to
@@ -54,7 +50,9 @@ Returns the process object for this execution of kubectl."
   (let* ((buf (generate-new-buffer " ecloud"))
          (err-buf (generate-new-buffer " ecloud-err"))
          (command (append cmd args ))
-
+         (cloud (cond ((string= "az" (car cmd)) 'azure)
+                      ((string= "gcloud" (car cmd) 'gcp))
+                      ((string= "aws" (car cmd) 'aws))))
          ;; `default-directory' must exist, otherwise `make-process' raises an
          ;; error.
          ;; (default-directory (kubernetes-utils-up-to-existing-dir default-directory))
@@ -70,23 +68,17 @@ Returns the process object for this execution of kubectl."
                       (let ((exit-code (process-exit-status proc)))
                         (cond
                          ;; Success Handler
-                         ((zerop exit-code)
-                          (funcall on-success buf)
-                          )
+                         ((zerop exit-code) (funcall on-success buf))
                          ;; Failure Handler
                          (t
                           (let ((err-message (with-current-buffer err-buf (buffer-string))))
                             (unless (= 9 exit-code)
-                              ;; (kubernetes-props-update-last-error props err-message (string-join command " ") (current-time))
-                              (funcall on-success buf)
+                              (progn
+                                (ecloud-state-add-error cloud (string-join (append (list (format "[%s]" (current-time-string))) command) " ") err-message)
+                                (cond (on-error (funcall on-error err-buf)))
+                                )
                               ))
-                          (cond (on-error
-                                 (funcall on-error err-buf))
-                                (t
-                                 ;; TODO Add default error handler
-                                 (message err-message)
-                                 ;; (kubernetes-kubectl--default-error-handler props status)
-                                 )))
+                          )
                          ))
                     (when cleanup-cb
                       (funcall cleanup-cb))

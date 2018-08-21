@@ -59,12 +59,11 @@
   (ecloud-register-resource cloud rtype)
   (ht-set! (ht-get (ecloud-state) cloud) rtype (ht-create)))
 
-(defun ecloud-state-add-error (cloud error)
+(defun ecloud-state-add-error (cloud summary error)
   "Add the latest error to the top of the list"
   (ecloud-register-cloud cloud)
   (let ((err-list (ht-get (ecloud-errors) cloud)))
-    (push error err-list)
-    (message "Error list is %s" err-list)
+    (push (cons summary error) err-list)
     (ht-set! (ecloud-errors) cloud err-list))
   (ecloud-refresh-all-views))
 

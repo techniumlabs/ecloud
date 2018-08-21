@@ -94,7 +94,10 @@
       (if errors
           (progn
             (magit-insert-heading "Errors")
-            (-map (lambda (e) (insert e)) errors))
+            (-map (lambda (e)
+                    (progn (magit-insert-section (errors e)
+                            (magit-insert-heading (car e))
+                            (insert (cdr e))))) errors))
         (magit-insert-heading "No Errors")
         )
       )))
