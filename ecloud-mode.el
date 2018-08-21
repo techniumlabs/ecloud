@@ -68,10 +68,44 @@
   )
 
 (defun ecloud-mode-get-buffers ()
-  (let ((topdir (magit-toplevel)))
-    (--filter (with-current-buffer it
-                (and (derived-mode-p 'ecloud-mode)))
-              (buffer-list))))
+  (--filter (with-current-buffer it
+              (and (derived-mode-p 'ecloud-mode)))
+            (buffer-list)))
+
+(defun ecloud-mode-get-buffer (mode &optional create frame value)
+  (or (--first (with-current-buffer it
+                 (and (eq major-mode mode)
+                      (if value
+                          (and magit-buffer-locked-p
+                               (equal (magit-buffer-lock-value) value))
+                        (not magit-buffer-locked-p))))
+               (if frame
+                   (mapcar #'window-buffer
+                           (window-list (unless (eq frame t) frame)))
+                 (buffer-list)))
+      (and create
+           (magit-generate-new-buffer mode value))))
+
+(defun ecloud-mode-setup (mode &rest args)
+  "Setup up a MODE buffer using ARGS to generate its content."
+  (ecloud-mode-setup-internal mode args))
+
+(defun ecloud-mode-setup-internal (mode args &optional locked)
+  "Setup up a MODE buffer using ARGS to generate its content.
+When optional LOCKED is non-nil, then create a buffer that is
+locked to its value, which is derived from MODE and ARGS."
+  (let ((buffer (ecloud-mode-get-buffer
+                 mode t nil
+                 (and locked (magit-buffer-lock-value mode args))))
+        (section (magit-current-section)))
+    (with-current-buffer buffer
+      (setq magit-previous-section section)
+      (setq magit-refresh-args args)
+      (funcall mode))
+    (magit-display-buffer buffer)
+    (with-current-buffer buffer
+      (run-hooks 'magit-mode-setup-hook)
+      (magit-refresh-buffer))))
 
 (provide 'ecloud-mode)
 
