@@ -122,8 +122,7 @@ at point, stage the file but not its content."
   (azure-overview-internal default-directory))
 
 (defun azure-overview-internal (directory)
-  (let ((default-directory directory))
-    (magit-mode-setup #'azure-overview-mode)))
+  (ecloud-mode-setup #'azure-overview-mode))
 
 (provide 'azure-overview)
 ;;; azure-overview.el ends here
