@@ -76,10 +76,7 @@ Returns the process object for this execution of kubectl."
                               (progn
                                 (ecloud-state-add-error cloud (string-join (append (list (format "[%s]" (current-time-string))) command) " ") err-message)
                                 (cond (on-error (funcall on-error err-buf)))
-                                )
-                              ))
-                          )
-                         ))
+                                ))))))
                     (when cleanup-cb
                       (funcall cleanup-cb))
                     (ecloud-process-kill-quietly proc)))
