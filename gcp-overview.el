@@ -55,7 +55,7 @@
   "Insert header sections appropriate for `magit-status-mode' buffers.
 The sections are inserted by running the functions on the hook
 `magit-status-headers-hook'."
-  (insert "Gcp Cloud\n\n"))
+  (insert (propertize "Gcp Cloud\n\n" 'face 'ecloud-cloud-title)))
 
 (defun gcp-insert-views ()
   "Insert the defined views"

@@ -67,7 +67,7 @@
   "Insert header sections appropriate for `magit-status-mode' buffers.
 The sections are inserted by running the functions on the hook
 `magit-status-headers-hook'."
-  (insert "Azure Cloud\n\n"))
+  (insert (propertize "Azure Cloud\n\n" 'face 'ecloud-cloud-title)))
 
 (defun azure-insert-views ()
   "Insert the defined views"

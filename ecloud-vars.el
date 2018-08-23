@@ -39,6 +39,12 @@ The function must take a single argument, which is the buffer to display."
                 (function-item display-buffer)
                 (function :tag "Function")))
 
+(defface ecloud-cloud-title
+  '((((class color) (background light)) :foreground "Goldenrod4")
+    (((class color) (background  dark)) :foreground "LightGoldenrod2"))
+  "Face for tag labels shown in log buffer."
+  :group 'ecloud-faces)
+
 (provide 'ecloud-vars)
 
 ;;; ecloud-vars.el ends here
