@@ -62,7 +62,6 @@ No account found"))
        (should (equal azure-account-list-view-empty-result
                       (s-trim (substring-no-properties (buffer-string)))))))))
 
-
 (provide 'ecloud-account-test)
 
 ;;; ecloud-account-test.el ends here

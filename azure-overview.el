@@ -105,12 +105,12 @@ at point, stage the file but not its content."
   (let ((keymap (make-sparse-keymap)))
     ;;TODO
     (define-key keymap (kbd "h") 'azure-overview-dispatch-popup)
+    (define-key keymap (kbd "H") 'azure-overview-dispatch-popup)
     (define-key keymap (kbd "r") 'azure-overview-refresh-buffer)
     keymap)
   "Keymap for `azure-overview-mode'.")
 
 ;;;###autoload
-;; TODO Update
 (define-derived-mode azure-overview-mode ecloud-mode "Azure Overview"
   "Mode for working with azure overview."
   :group 'ecloud)

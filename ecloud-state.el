@@ -71,13 +71,23 @@
   "Get the error list for the cloud"
   (ht-get (ecloud-errors) cloud))
 
+(defun ecloud-state-resource-equalp (cloud rtype rname robj)
+  (-if-let ((rorig (ht-get (ht-get (ht-get (ecloud-state) cloud) rtype) rname nil)))
+    (if (and (string-equal (oref rorig :name) (oref robj :name))
+             (string-equal (oref rorig :id) (oref robj :id))
+             (equal (oref rorig :attributes) (oref robj :attributes)))
+        t
+      nil))
+  )
+
 (defun ecloud-state-update (cloud rtype rname robj &optional args)
   (ecloud-register-resource cloud rtype)
-  (ht-set! (ht-get (ht-get (ecloud-state) cloud) rtype) rname robj)
-  ;; Cache the results for future use
-  (let ((repo (pcache-repository cloud)))
-    (pcache-put repo rtype (ht-get (ht-get (ecloud-state) cloud) rtype)))
-  (ecloud-refresh-all-views))
+  (unless (ecloud-state-resource-equalp cloud rtype rname robj)
+    (progn (ht-set! (ht-get (ht-get (ecloud-state) cloud) rtype) rname robj)
+     ;; Cache the results for future use
+     (let ((repo (pcache-repository cloud)))
+       (pcache-put repo rtype (ht-get (ht-get (ecloud-state) cloud) rtype)))
+     (ecloud-refresh-all-views))))
 
 (defun ecloud-state--get-all-resource-type (cloud rtype)
   (ht-items (ht-get (ht-get (ecloud-state) cloud) rtype)))
