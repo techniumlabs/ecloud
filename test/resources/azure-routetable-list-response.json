@@ -1,0 +1,41 @@
+[
+  {
+    "disableBgpRoutePropagation": false,
+    "etag": "W/\"c41e7002-5369-4ab4-8afc-a457b1d3df3d\"",
+    "id": "/subscriptions/deadbeef-beef-dead-b70f-ee9206029c60/resourceGroups/gnuherd/providers/Microsoft.Network/routeTables/aks-agentpool-33686480-routetable",
+    "location": "australiaeast",
+    "name": "aks-agentpool-33686480-routetable",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "gnuherd",
+    "routes": [
+      {
+        "addressPrefix": "10.244.1.0/24",
+        "etag": "W/\"c41e7002-5369-4ab4-8afc-a457b1d3df3d\"",
+        "id": "/subscriptions/deadbeef-beef-dead-b70f-ee9206029c60/resourceGroups/gnuherd/providers/Microsoft.Network/routeTables/aks-agentpool-33686480-routetable/routes/aks-nodepool1-33686480-1",
+        "name": "aks-nodepool1-33686480-1",
+        "nextHopIpAddress": "10.240.0.5",
+        "nextHopType": "VirtualAppliance",
+        "provisioningState": "Succeeded",
+        "resourceGroup": "gnuherd",
+        "type": "Microsoft.Network/routeTables/routes"
+      }
+    ],
+    "subnets": [
+      {
+        "addressPrefix": null,
+        "etag": null,
+        "id": "/subscriptions/deadbeef-beef-dead-b70f-ee9206029c60/resourceGroups/gnuherd/providers/Microsoft.Network/virtualNetworks/aks-vnet-33686480/subnets/aks-subnet",
+        "ipConfigurations": null,
+        "name": null,
+        "networkSecurityGroup": null,
+        "provisioningState": null,
+        "resourceGroup": "gnuherd",
+        "resourceNavigationLinks": null,
+        "routeTable": null,
+        "serviceEndpoints": null
+      }
+    ],
+    "tags": null,
+    "type": "Microsoft.Network/routeTables"
+  }
+]
