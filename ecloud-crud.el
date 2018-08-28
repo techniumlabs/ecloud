@@ -95,10 +95,11 @@
   (-let* ((cloud (nth 0 (split-string (format "%s" class) "-")))
          (rtype (nth 1 (split-string (format "%s" class) "-")))
          (nameAttr (intern (format "%s-%s--name-attribute" cloud rtype)))
-         (nameAttr (if (boundp nameAttr) (symbol-value nameAttr) :name ))
-         (parsed-data (--map (make-instance class :name (cdr (assoc 'name it))
+         (nameAttrVal (if (boundp nameAttr) (symbol-value nameAttr) 'name))
+         (parsed-data (--map (make-instance class :name (cdr (assoc nameAttrVal it))
                                             :id (cdr (assoc 'id it))
                                             :attributes it) data)))
+
     (ecloud-register-resource cloud rtype)
     (--map (progn
              (run-hook-with-args (intern (format "%s-%s-parser-hook" cloud rtype)) it)
@@ -106,10 +107,10 @@
            parsed-data)))
 
 (cl-defun ecloud-fetch-resources (class)
-  (let* ((list-cmd (intern (format "%s--list-command" class)))
-         (list-cmd (and (boundp list-cmd) (symbol-value list-cmd)))
-         (global-params (intern (format "%s--global-params" class)))
-         (global-params (and (boundp global-params) (symbol-value global-params))))
+  (let* ((list-cmd-var-name (intern (format "%s--list-command" class)))
+         (list-cmd (and (boundp list-cmd-var-name) (symbol-value list-cmd-var-name)))
+         (global-params-var-name (intern (format "%s--global-params" class)))
+         (global-params (and (boundp global-params-var-name) (symbol-value global-params-var-name))))
 
     (ecloud-run-json-command list-cmd
                              global-params
