@@ -1,0 +1,136 @@
+[
+  {
+    "count": {
+      "type": "Total",
+      "value": 1
+    },
+    "id": "/subscriptions/deadbeef-dead-beef-dead-deaddeaddead/tagNames/ms-resource-usage",
+    "tagName": "ms-resource-usage",
+    "values": [
+      {
+        "count": {
+          "type": "Total",
+          "value": 1
+        },
+        "id": "/subscriptions/deadbeef-dead-beef-dead-deaddeaddead/tagNames/ms-resource-usage/tagValues/azure-cloud-shell",
+        "tagValue": "azure-cloud-shell"
+      }
+    ]
+  },
+  {
+    "count": {
+      "type": "Total",
+      "value": 2
+    },
+    "id": "/subscriptions/deadbeef-dead-beef-dead-deaddeaddead/tagNames/acsengineVersion",
+    "tagName": "acsengineVersion",
+    "values": [
+      {
+        "count": {
+          "type": "Total",
+          "value": 2
+        },
+        "id": "/subscriptions/deadbeef-dead-beef-dead-deaddeaddead/tagNames/acsengineVersion/tagValues/v0.20.3-aks",
+        "tagValue": "v0.20.3-aks"
+      }
+    ]
+  },
+  {
+    "count": {
+      "type": "Total",
+      "value": 2
+    },
+    "id": "/subscriptions/deadbeef-dead-beef-dead-deaddeaddead/tagNames/creationSource",
+    "tagName": "creationSource",
+    "values": [
+      {
+        "count": {
+          "type": "Total",
+          "value": 2
+        },
+        "id": "/subscriptions/deadbeef-dead-beef-dead-deaddeaddead/tagNames/creationSource/tagValues/acsengine-aks-nodepool1-33686480-1",
+        "tagValue": "acsengine-aks-nodepool1-33686480-1"
+      }
+    ]
+  },
+  {
+    "count": {
+      "type": "Total",
+      "value": 2
+    },
+    "id": "/subscriptions/deadbeef-dead-beef-dead-deaddeaddead/tagNames/orchestrator",
+    "tagName": "orchestrator",
+    "values": [
+      {
+        "count": {
+          "type": "Total",
+          "value": 2
+        },
+        "id": "/subscriptions/deadbeef-dead-beef-dead-deaddeaddead/tagNames/orchestrator/tagValues/Kubernetes:1.10.6",
+        "tagValue": "Kubernetes:1.10.6"
+      }
+    ]
+  },
+  {
+    "count": {
+      "type": "Total",
+      "value": 2
+    },
+    "id": "/subscriptions/deadbeef-dead-beef-dead-deaddeaddead/tagNames/poolName",
+    "tagName": "poolName",
+    "values": [
+      {
+        "count": {
+          "type": "Total",
+          "value": 2
+        },
+        "id": "/subscriptions/deadbeef-dead-beef-dead-deaddeaddead/tagNames/poolName/tagValues/nodepool1",
+        "tagValue": "nodepool1"
+      }
+    ]
+  },
+  {
+    "count": {
+      "type": "Total",
+      "value": 2
+    },
+    "id": "/subscriptions/deadbeef-dead-beef-dead-deaddeaddead/tagNames/resourceNameSuffix",
+    "tagName": "resourceNameSuffix",
+    "values": [
+      {
+        "count": {
+          "type": "Total",
+          "value": 2
+        },
+        "id": "/subscriptions/deadbeef-dead-beef-dead-deaddeaddead/tagNames/resourceNameSuffix/tagValues/33686480",
+        "tagValue": "33686480"
+      }
+    ]
+  },
+  {
+    "count": {
+      "type": "Total",
+      "value": 2
+    },
+    "id": "/subscriptions/deadbeef-dead-beef-dead-deaddeaddead/tagNames/service",
+    "tagName": "service",
+    "values": [
+      {
+        "count": {
+          "type": "Total",
+          "value": 1
+        },
+        "id": "/subscriptions/deadbeef-dead-beef-dead-deaddeaddead/tagNames/service/tagValues/istio-system/istio-ingress",
+        "tagValue": "istio-system/istio-ingress"
+      },
+      {
+        "count": {
+          "type": "Total",
+          "value": 1
+        },
+        "id": "/subscriptions/deadbeef-dead-beef-dead-deaddeaddead/tagNames/service/tagValues/istio-system/istio-ingressgateway",
+        "tagValue": "istio-system/istio-ingressgateway"
+      }
+    ]
+  }
+]
