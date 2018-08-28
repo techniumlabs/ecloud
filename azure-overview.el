@@ -36,6 +36,7 @@
 (require 'azure-account)
 (require 'azure-vnet)
 (require 'azure-nsg)
+(require 'azure-routetable)
 (require 'azure-aks)
 (require 'azure-vm)
 (require 'azure-resource-group)

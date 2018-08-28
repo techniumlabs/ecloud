@@ -90,6 +90,7 @@
      (ecloud-refresh-all-views))))
 
 (defun ecloud-state--get-all-resource-type (cloud rtype)
+  (ecloud-register-resource cloud rtype)
   (ht-items (ht-get (ht-get (ecloud-state) cloud) rtype)))
 
 (provide 'ecloud-state)

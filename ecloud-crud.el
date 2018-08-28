@@ -91,20 +91,19 @@
              )))))
 
 (cl-defun ecloud-parse-resource-data (data class)
-  (-let ((parsed-data (--map (make-instance class :name (cdr (assoc 'name it))
+
+  (-let* ((cloud (nth 0 (split-string (format "%s" class) "-")))
+         (rtype (nth 1 (split-string (format "%s" class) "-")))
+         (nameAttr (intern (format "%s-%s--name-attribute" cloud rtype)))
+         (nameAttr (if (boundp nameAttr) (symbol-value nameAttr) :name ))
+         (parsed-data (--map (make-instance class :name (cdr (assoc 'name it))
                                             :id (cdr (assoc 'id it))
                                             :attributes it) data)))
-
-    (-let ((cloud (nth 0 (split-string (format "%s" class) "-")))
-           (rtype (nth 1 (split-string (format "%s" class) "-"))))
-      (ecloud-state-clear-resources cloud rtype))
-
-    (--map (-let ((cloud (nth 0 (split-string (format "%s" class) "-")))
-                  (rtype (nth 1 (split-string (format "%s" class) "-")))
-                  (rname (oref it :name)))
+    (ecloud-register-resource cloud rtype)
+    (--map (progn
              (run-hook-with-args (intern (format "%s-%s-parser-hook" cloud rtype)) it)
-             (ecloud-state-update cloud rtype rname it)
-             ) parsed-data)))
+             (ecloud-state-update cloud rtype (oref it :name) it))
+           parsed-data)))
 
 (cl-defun ecloud-fetch-resources (class)
   (let* ((list-cmd (intern (format "%s--list-command" class)))
