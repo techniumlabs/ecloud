@@ -37,8 +37,10 @@
 (require 'azure-vnet)
 (require 'azure-nsg)
 (require 'azure-routetable)
+(require 'azure-tag)
 (require 'azure-aks)
 (require 'azure-vm)
+(require 'azure-storage-account)
 (require 'azure-resource-group)
 
 (defcustom azure-overview-list-views
@@ -59,7 +61,8 @@
 (defcustom azure-overview-sections-hook
   '(azure-insert-overview-headers
     azure-insert-views
-    azure-insert-error-view)
+    azure-insert-error-view
+    )
   "Hook run to insert sections into a status buffer."
   :package-version '(ecloud . "0.0.1")
   :group 'ecloud

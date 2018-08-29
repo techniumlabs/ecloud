@@ -39,13 +39,17 @@
      ,@body))
 
 (cl-defmacro has-resource (class attrib-value-list)
-  `(-let* ((robjs (apply #'ecloud-state--get-all-resource-type (split-string (symbol-name ,class) "-"))))
+  `(-let* ((cloud (car (split-string (symbol-name ,class) "-")))
+           (rtype (string-join (cdr (split-string (symbol-name ,class) "-" "-")) "-"))
+           (robjs (ecloud-state--get-all-resource-type cloud rtype)))
      (-filter (lambda (robj)
                 (--all? (equal (ecloud-get-attributes (cadr robj) (car it)) (cadr it)) ',attrib-value-list))
               robjs)))
 
 (cl-defmacro ecloud-resource-count (class)
-  `(-let* ((robjs (apply #'ecloud-state--get-all-resource-type (split-string (symbol-name ,class) "-"))))
+  `(-let* ((cloud (car (split-string (symbol-name ,class) "-")))
+           (rtype (string-join (cdr (split-string (symbol-name ,class) "-" "-")) "-"))
+           (robjs (ecloud-state--get-all-resource-type cloud rtype)))
      (length robjs)))
 
 ;;; test-helper.el ends here

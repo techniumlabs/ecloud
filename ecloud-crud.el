@@ -93,7 +93,7 @@
 (cl-defun ecloud-parse-resource-data (data class)
 
   (-let* ((cloud (nth 0 (split-string (format "%s" class) "-")))
-         (rtype (nth 1 (split-string (format "%s" class) "-")))
+          (rtype (string-join (cdr (split-string (format "%s" class) "-")) "-"))
          (nameAttr (intern (format "%s-%s--name-attribute" cloud rtype)))
          (nameAttrVal (if (boundp nameAttr) (symbol-value nameAttr) 'name))
          (parsed-data (--map (make-instance class :name (cdr (assoc nameAttrVal it))

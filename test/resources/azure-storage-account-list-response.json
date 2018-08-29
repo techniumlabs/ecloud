@@ -1,0 +1,258 @@
+[
+  {
+    "accessTier": null,
+    "creationTime": "2018-05-25T00:15:36.495920+00:00",
+    "customDomain": null,
+    "enableHttpsTrafficOnly": false,
+    "encryption": {
+      "keySource": "Microsoft.Storage",
+      "keyVaultProperties": null,
+      "services": {
+        "blob": {
+          "enabled": true,
+          "lastEnabledTime": "2018-05-25T00:15:36.683413+00:00"
+        },
+        "file": {
+          "enabled": true,
+          "lastEnabledTime": "2018-05-25T00:15:36.683413+00:00"
+        },
+        "queue": null,
+        "table": null
+      }
+    },
+    "id": "/subscriptions/deadbeef-73a9-44e3-b70f-ee9206029c60/resourceGroups/cloud-shell-storage-eastus/providers/Microsoft.Storage/storageAccounts/cs2deadbeef73a9x44e3xb70",
+    "identity": null,
+    "isHnsEnabled": null,
+    "kind": "Storage",
+    "lastGeoFailoverTime": null,
+    "location": "eastus",
+    "name": "cs2deadbeef73a9x44e3xb70",
+    "networkRuleSet": {
+      "bypass": "AzureServices",
+      "defaultAction": "Allow",
+      "ipRules": [],
+      "virtualNetworkRules": []
+    },
+    "primaryEndpoints": {
+      "blob": "https://cs2deadbeef73a9x44e3xb70.blob.core.windows.net/",
+      "dfs": null,
+      "file": "https://cs2deadbeef73a9x44e3xb70.file.core.windows.net/",
+      "queue": "https://cs2deadbeef73a9x44e3xb70.queue.core.windows.net/",
+      "table": "https://cs2deadbeef73a9x44e3xb70.table.core.windows.net/",
+      "web": null
+    },
+    "primaryLocation": "eastus",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "cloud-shell-storage-eastus",
+    "secondaryEndpoints": null,
+    "secondaryLocation": null,
+    "sku": {
+      "capabilities": null,
+      "kind": null,
+      "locations": null,
+      "name": "Standard_LRS",
+      "resourceType": null,
+      "restrictions": null,
+      "tier": "Standard"
+    },
+    "statusOfPrimary": "available",
+    "statusOfSecondary": null,
+    "tags": {
+      "ms-resource-usage": "azure-cloud-shell"
+    },
+    "type": "Microsoft.Storage/storageAccounts"
+  },
+  {
+    "accessTier": "Hot",
+    "creationTime": "2017-11-27T11:44:31.788276+00:00",
+    "customDomain": {
+      "name": "techniumlab.com",
+      "useSubDomain": null
+    },
+    "enableHttpsTrafficOnly": false,
+    "encryption": {
+      "keySource": "Microsoft.Storage",
+      "keyVaultProperties": null,
+      "services": {
+        "blob": {
+          "enabled": true,
+          "lastEnabledTime": "2017-12-26T19:25:30.333699+00:00"
+        },
+        "file": {
+          "enabled": true,
+          "lastEnabledTime": "2017-12-26T19:25:30.333699+00:00"
+        },
+        "queue": null,
+        "table": null
+      }
+    },
+    "id": "/subscriptions/deadbeef-73a9-44e3-b70f-ee9206029c60/resourceGroups/techniumlab/providers/Microsoft.Storage/storageAccounts/techniumlab",
+    "identity": null,
+    "isHnsEnabled": null,
+    "kind": "BlobStorage",
+    "lastGeoFailoverTime": null,
+    "location": "australiaeast",
+    "name": "techniumlab",
+    "networkRuleSet": {
+      "bypass": "AzureServices",
+      "defaultAction": "Allow",
+      "ipRules": [],
+      "virtualNetworkRules": []
+    },
+    "primaryEndpoints": {
+      "blob": "https://techniumlab.blob.core.windows.net/",
+      "dfs": null,
+      "file": null,
+      "queue": null,
+      "table": "https://techniumlab.table.core.windows.net/",
+      "web": null
+    },
+    "primaryLocation": "australiaeast",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "techniumlab",
+    "secondaryEndpoints": {
+      "blob": "https://techniumlab-secondary.blob.core.windows.net/",
+      "dfs": null,
+      "file": null,
+      "queue": null,
+      "table": "https://techniumlab-secondary.table.core.windows.net/",
+      "web": null
+    },
+    "secondaryLocation": "australiasoutheast",
+    "sku": {
+      "capabilities": null,
+      "kind": null,
+      "locations": null,
+      "name": "Standard_RAGRS",
+      "resourceType": null,
+      "restrictions": null,
+      "tier": "Standard"
+    },
+    "statusOfPrimary": "available",
+    "statusOfSecondary": "available",
+    "tags": {},
+    "type": "Microsoft.Storage/storageAccounts"
+  },
+  {
+    "accessTier": null,
+    "creationTime": "2017-10-30T09:07:58.301052+00:00",
+    "customDomain": null,
+    "enableHttpsTrafficOnly": false,
+    "encryption": {
+      "keySource": "Microsoft.Storage",
+      "keyVaultProperties": null,
+      "services": {
+        "blob": {
+          "enabled": true,
+          "lastEnabledTime": "2017-12-26T19:25:30.349322+00:00"
+        },
+        "file": {
+          "enabled": true,
+          "lastEnabledTime": "2017-12-26T19:25:30.349322+00:00"
+        },
+        "queue": null,
+        "table": null
+      }
+    },
+    "id": "/subscriptions/deadbeef-73a9-44e3-b70f-ee9206029c60/resourceGroups/techniumlab/providers/Microsoft.Storage/storageAccounts/function5csq4xefxww7i",
+    "identity": null,
+    "isHnsEnabled": null,
+    "kind": "Storage",
+    "lastGeoFailoverTime": null,
+    "location": "australiaeast",
+    "name": "function5csq4xefxww7i",
+    "networkRuleSet": {
+      "bypass": "AzureServices",
+      "defaultAction": "Allow",
+      "ipRules": [],
+      "virtualNetworkRules": []
+    },
+    "primaryEndpoints": {
+      "blob": "https://function5csq4xefxww7i.blob.core.windows.net/",
+      "dfs": null,
+      "file": "https://function5csq4xefxww7i.file.core.windows.net/",
+      "queue": "https://function5csq4xefxww7i.queue.core.windows.net/",
+      "table": "https://function5csq4xefxww7i.table.core.windows.net/",
+      "web": null
+    },
+    "primaryLocation": "australiaeast",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "techniumlab",
+    "secondaryEndpoints": null,
+    "secondaryLocation": null,
+    "sku": {
+      "capabilities": null,
+      "kind": null,
+      "locations": null,
+      "name": "Standard_LRS",
+      "resourceType": null,
+      "restrictions": null,
+      "tier": "Standard"
+    },
+    "statusOfPrimary": "available",
+    "statusOfSecondary": null,
+    "tags": {},
+    "type": "Microsoft.Storage/storageAccounts"
+  },
+  {
+    "accessTier": "Hot",
+    "creationTime": "2018-08-05T12:52:41.373991+00:00",
+    "customDomain": null,
+    "enableHttpsTrafficOnly": false,
+    "encryption": {
+      "keySource": "Microsoft.Storage",
+      "keyVaultProperties": null,
+      "services": {
+        "blob": {
+          "enabled": true,
+          "lastEnabledTime": "2018-08-05T12:52:41.483370+00:00"
+        },
+        "file": {
+          "enabled": true,
+          "lastEnabledTime": "2018-08-05T12:52:41.483370+00:00"
+        },
+        "queue": null,
+        "table": null
+      }
+    },
+    "id": "/subscriptions/deadbeef-73a9-44e3-b70f-ee9206029c60/resourceGroups/techniumweb/providers/Microsoft.Storage/storageAccounts/techniumweb",
+    "identity": null,
+    "isHnsEnabled": null,
+    "kind": "StorageV2",
+    "lastGeoFailoverTime": null,
+    "location": "australiaeast",
+    "name": "techniumweb",
+    "networkRuleSet": {
+      "bypass": "AzureServices",
+      "defaultAction": "Allow",
+      "ipRules": [],
+      "virtualNetworkRules": []
+    },
+    "primaryEndpoints": {
+      "blob": "https://techniumweb.blob.core.windows.net/",
+      "dfs": null,
+      "file": "https://techniumweb.file.core.windows.net/",
+      "queue": "https://techniumweb.queue.core.windows.net/",
+      "table": "https://techniumweb.table.core.windows.net/",
+      "web": "https://techniumweb.z8.web.core.windows.net/"
+    },
+    "primaryLocation": "australiaeast",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "techniumweb",
+    "secondaryEndpoints": null,
+    "secondaryLocation": null,
+    "sku": {
+      "capabilities": null,
+      "kind": null,
+      "locations": null,
+      "name": "Standard_LRS",
+      "resourceType": null,
+      "restrictions": null,
+      "tier": "Standard"
+    },
+    "statusOfPrimary": "available",
+    "statusOfSecondary": null,
+    "tags": {},
+    "type": "Microsoft.Storage/storageAccounts"
+  }
+]
