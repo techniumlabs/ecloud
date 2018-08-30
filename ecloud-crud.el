@@ -21,8 +21,6 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-;;; Commentary:
-;; TODO Add commentary
 ;;; Code:
 
 (require 'eieio)
@@ -106,7 +104,7 @@
              (ecloud-state-update cloud rtype (oref it :name) it))
            parsed-data)))
 
-(cl-defun ecloud-fetch-resources (class)
+(cl-defun ecloud-fetch-resources (class &optional force)
   (let* ((list-cmd-var-name (intern (format "%s--list-command" class)))
          (list-cmd (and (boundp list-cmd-var-name) (symbol-value list-cmd-var-name)))
          (global-params-var-name (intern (format "%s--global-params" class)))

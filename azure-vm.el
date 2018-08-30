@@ -33,7 +33,7 @@
   "Azure cli for getting vm list")
 
 (defvar azure-vm-list-view-display-params
-  '(name location )
+  '(name location)
   "List of attributes to display in list view")
 
 ;; Model for Azure Vm
