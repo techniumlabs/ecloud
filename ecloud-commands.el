@@ -51,8 +51,8 @@ Returns the process object for this execution of kubectl."
          (err-buf (generate-new-buffer " ecloud-err"))
          (command (append cmd args ))
          (cloud (cond ((string= "az" (car cmd)) 'azure)
-                      ((string= "gcloud" (car cmd) 'gcp))
-                      ((string= "aws" (car cmd) 'aws))))
+                      ((string= "gcloud" (car cmd)) 'gcp)
+                      ((string= "aws" (car cmd)) 'aws)))
          ;; `default-directory' must exist, otherwise `make-process' raises an
          ;; error.
          ;; (default-directory (kubernetes-utils-up-to-existing-dir default-directory))
