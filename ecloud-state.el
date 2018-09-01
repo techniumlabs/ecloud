@@ -84,9 +84,10 @@
   (ecloud-register-resource cloud rtype)
   (unless (ecloud-state-resource-equalp cloud rtype rname robj)
     (progn (ht-set! (ht-get (ht-get (ecloud-state) cloud) rtype) rname robj)
+
      ;; Cache the results for future use
-     (let ((repo (pcache-repository cloud)))
-       (pcache-put repo rtype (ht-get (ht-get (ecloud-state) cloud) rtype)))
+     (let ((repo (pcache-repository (format "%s/%s" cloud rtype))))
+       (pcache-put repo rname robj))
      (ecloud-refresh-all-views))))
 
 (defun ecloud-state--get-all-resource-type (cloud rtype)
