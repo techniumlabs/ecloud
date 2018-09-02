@@ -24,10 +24,6 @@
 ;; see <http://www.gnu.org/licenses/>.
 
 
-;;; Commentary:
-
-;; TODO Add commentary
-
 ;;; Code:
 (require 'magit-popup)
 (require 'ecloud-vars)

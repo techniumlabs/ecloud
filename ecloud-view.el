@@ -102,5 +102,25 @@
         )
       )))
 
+(defmacro ecloud-setup-resource-view (cloud rtype)
+  `(progn
+     (define-derived-mode ,(intern (format "%s-%s-overview-mode" cloud rtype)) ecloud-mode
+       ,(format "%s %s resource overview" cloud rtype)
+       ,(format "Mode for working with %s %s overview mode" cloud rtype)
+       :group 'ecloud)
+
+     (defvar ,(intern (format "%s-%s-overview-mode-map" cloud rtype))
+       nil
+       (format "Keymap for %s-%s-overview-mode" ,cloud ,rtype))
+
+     (defun ,(intern (format "%s-%s-overview" cloud rtype))()
+       (interactive)
+       (ecloud-mode-setup #',(intern (format "%s-%s-overview-mode" cloud rtype))))
+
+     (defun ,(intern (format "%s-%s-overview-refresh-buffer" cloud rtype)) ()
+       (interactive)
+       (magit-insert-section (,(intern (format "%s-%s" cloud rtype))))
+       (ecloud-insert-list-views ',cloud '(,rtype)))))
+
 (provide 'ecloud-view)
 ;;; ecloud-view.el ends here
