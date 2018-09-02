@@ -39,6 +39,9 @@
 ;; Model for Azure Account
 (ecloud-define-resource-model azure account)
 
+;; View for Azure Account
+(ecloud-setup-resource-view azure account)
+
 ;;;; Actions
 (ecloud-define-cautious-action azure-account-set-default
                                ("az" "account" "set" "--subscription" id)
