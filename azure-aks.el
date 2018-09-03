@@ -42,6 +42,9 @@
 ;; Model for Azure Aks
 (ecloud-define-resource-model azure aks)
 
+;; View for Azure Aks
+(ecloud-setup-resource-view azure aks)
+
 (defcustom azure-aks-parser-hook
   '(azure-aks--parse-node-pool-size)
   "Hook to run for parsing json data."
