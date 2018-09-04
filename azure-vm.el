@@ -39,6 +39,9 @@
 ;; Model for Azure Vm
 (ecloud-define-resource-model azure vm)
 
+;; View for Azure Vm
+(ecloud-setup-resource-view azure vm)
+
 (ecloud-define-simple-resource-action azure-vm-start
                                       ("az" "vm" "start" "--name" name "--resource-group" resourceGroup "--no-wait"))
 
