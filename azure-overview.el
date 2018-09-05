@@ -90,18 +90,6 @@ The sections are inserted by running the functions on the hook
   (magit-insert-section (status)
     (magit-run-section-hook 'azure-overview-sections-hook)))
 
-(defun azure-overview-print-section (&optional intent)
-  "Add the change at point to the staging area.
-With a prefix argument, INTENT, and an untracked file (or files)
-at point, stage the file but not its content."
-  (interactive "P")
-  (let* ((section (magit-current-section))
-         (type (oref section type))
-         (value (oref section value)))
-    (message (format "%s" value))
-    )
-)
-
 (defvar azure-overview-mode-map
   (let ((keymap (make-sparse-keymap)))
     ;;TODO
