@@ -34,8 +34,10 @@
 (defvar azure-group-list-view-display-params '(name location state))
 
 ;; Model for Azure Group
-
 (ecloud-define-resource-model azure group)
+
+;; View for Azure Group
+(ecloud-setup-resource-view azure group)
 
 (defcustom azure-group-parser-hook
   '(azure-group--parse-provisioning-state)
