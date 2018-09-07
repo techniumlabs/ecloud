@@ -98,7 +98,7 @@
                                             :id (cdr (assoc 'id it))
                                             :attributes it) data)))
 
-    (ecloud-register-resource cloud rtype)
+    (ecloud-register-resource-type cloud rtype)
     (--map (progn
              (run-hook-with-args (intern (format "%s-%s-parser-hook" cloud rtype)) it)
              (ecloud-state-update cloud rtype (oref it :name) it))

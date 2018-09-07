@@ -13,9 +13,9 @@
     (should (ht-get (ecloud-state) "azure"))))
 
 
-(ert-deftest ecloud-state-test--ecloud-register-resource ()
+(ert-deftest ecloud-state-test--ecloud-register-resource-type ()
   (test-helper-with-empty-state
-    (ecloud-register-resource "azure" "account")
+    (ecloud-register-resource-type "azure" "account")
     (should ecloud-state--current-state)
     (should (ht-get (ecloud-state) "azure"))
     (should (ht-get (ht-get (ecloud-state) "azure") "account"))))

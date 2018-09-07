@@ -48,7 +48,7 @@
       (ht-set (ecloud-state) cloud (ht-create))
       (ht-set (ecloud-errors) cloud ()))))
 
-(defun ecloud-register-resource (cloud rtype)
+(defun ecloud-register-resource-type (cloud rtype)
   "Register a cloud resource in the global state"
   (ecloud-register-cloud cloud)
   (unless (ht-get (ht-get (ecloud-state) cloud) rtype)
@@ -56,8 +56,8 @@
 
 (defun ecloud-state-clear-resources (cloud rtype)
   "Clear all the resources of a particular type from the global state"
-  (ecloud-register-resource cloud rtype)
   (ht-set! (ht-get (ecloud-state) cloud) rtype (ht-create)))
+  (ecloud-register-resource-type cloud rtype)
 
 (defun ecloud-state-add-error (cloud summary error)
   "Add the latest error to the top of the list"
@@ -91,8 +91,8 @@
      (ecloud-refresh-all-views))))
 
 (defun ecloud-state--get-all-resource-type (cloud rtype)
-  (ecloud-register-resource cloud rtype)
   (ht-items (ht-get (ht-get (ecloud-state) cloud) rtype)))
+  (ecloud-register-resource-type cloud rtype)
 
 (provide 'ecloud-state)
 ;;; ecloud-state.el ends here
