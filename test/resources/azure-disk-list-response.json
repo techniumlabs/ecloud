@@ -1,0 +1,37 @@
+[
+  {
+    "creationData": {
+      "createOption": "FromImage",
+      "imageReference": {
+        "id": "/Subscriptions/deadbeef-73a9-44e3-b70f-ee9206029c60/Providers/Microsoft.Compute/Locations/australiaeast/Publishers/Canonical/ArtifactTypes/VMImage/Offers/UbuntuServer/Skus/16.04-LTS/Versions/16.04.201807240",
+        "lun": null
+      },
+      "sourceResourceId": null,
+      "sourceUri": null,
+      "storageAccountId": null
+    },
+    "diskSizeGb": 30,
+    "encryptionSettings": null,
+    "id": "/subscriptions/deadbeef-73a9-44e3-b70f-ee9206029c60/resourceGroups/gnuherd/providers/Microsoft.Compute/disks/aks-nodepool1-33686480-1_OsDisk_1_64affca963ef4165b15ce318eeefea7a",
+    "location": "australiaeast",
+    "managedBy": "/subscriptions/deadbeef-73a9-44e3-b70f-ee9206029c60/resourceGroups/MC_pegasus_pegasus_australiaeast/providers/Microsoft.Compute/virtualMachines/aks-nodepool1-33686480-1",
+    "name": "aks-nodepool1-33686480-1_OsDisk_1_64affca963ef4165b15ce318eeefea7a",
+    "osType": "Linux",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "gnuherd",
+    "sku": {
+      "name": "Premium_LRS",
+      "tier": "Premium"
+    },
+    "tags": {
+      "acsengineVersion": "v0.20.3-aks",
+      "creationSource": "acsengine-aks-nodepool1-33686480-1",
+      "orchestrator": "Kubernetes:1.10.6",
+      "poolName": "nodepool1",
+      "resourceNameSuffix": "33686480"
+    },
+    "timeCreated": "2018-08-07T12:23:22.666546+00:00",
+    "type": "Microsoft.Compute/disks",
+    "zones": null
+  }
+]
