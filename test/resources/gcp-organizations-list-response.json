@@ -1,0 +1,11 @@
+[
+  {
+    "creationTime": "2017-03-29T09:03:50.342Z",
+    "displayName": "example.com",
+    "lifecycleState": "ACTIVE",
+    "name": "organizations/123456789012",
+    "owner": {
+      "directoryCustomerId": "D0abcd12c"
+    }
+  }
+]
