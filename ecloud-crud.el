@@ -101,14 +101,17 @@
     (ecloud-register-resource-type cloud rtype)
     (--map (progn
              (run-hook-with-args (intern (format "%s-%s-parser-hook" cloud rtype)) it)
-             (ecloud-state-update cloud rtype (oref it :name) it))
-           parsed-data)))
+             )
+           parsed-data)
+    (ecloud-state-update-resource-type cloud rtype parsed-data)
+    ))
 
 (cl-defun ecloud-fetch-resources (class &optional force)
   (let* ((list-cmd-var-name (intern (format "%s--list-command" class)))
          (list-cmd (and (boundp list-cmd-var-name) (symbol-value list-cmd-var-name)))
          (global-params-var-name (intern (format "%s--global-params" class)))
-         (global-params (and (boundp global-params-var-name) (symbol-value global-params-var-name))))
+         (global-params (and (boundp global-params-var-name) (symbol-value global-params-var-name)))
+         (ts (format-time-string "%s")))
 
     (ecloud-run-json-command list-cmd
                              global-params

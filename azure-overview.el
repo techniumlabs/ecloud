@@ -50,9 +50,9 @@
   :group 'ecloud
   :actions
   '("Popup and dwim commands"
-    (?v "virtual machines" azure-vm-popup)
-    (?a "Account" azure-account-popup)
-    (?g "Resource Group" azure-group-popup)))
+    (?a "Account" azure-account-overview)
+    (?g "Resource Group" azure-group-overview)
+    (?v "virtual machines" azure-vm-overview)))
 
 (defcustom azure-overview-sections-hook
   '(azure-insert-overview-headers
@@ -81,10 +81,10 @@ The sections are inserted by running the functions on the hook
 (defun azure-overview-refresh-buffer ()
   (interactive)
   ;; Trigger Refresh data
+  (azure-overview-refresh-view)
   (--map (let ((rtype (intern (format "azure-%s" it))))
            (ecloud-fetch-resources rtype))
-        azure-overview-list-views)
-  (azure-overview-refresh-view))
+        azure-overview-list-views))
 
 (defun azure-overview-refresh-view ()
   (magit-insert-section (status)
@@ -93,8 +93,7 @@ The sections are inserted by running the functions on the hook
 (defvar azure-overview-mode-map
   (let ((keymap (make-sparse-keymap)))
     ;;TODO
-    (define-key keymap (kbd "h") 'azure-overview-dispatch-popup)
-    (define-key keymap (kbd "H") 'azure-overview-dispatch-popup)
+    (define-key keymap (kbd "?") 'azure-overview-dispatch-popup)
     (define-key keymap (kbd "r") 'azure-overview-refresh-buffer)
     keymap)
   "Keymap for `azure-overview-mode'.")
