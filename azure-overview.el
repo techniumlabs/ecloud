@@ -52,7 +52,8 @@
   '("Popup and dwim commands"
     (?a "Account" azure-account-overview)
     (?g "Resource Group" azure-group-overview)
-    (?v "virtual machines" azure-vm-overview)))
+    (?v "virtual machines" azure-vm-overview)
+    (?V "vnet" azure-vnet-overview)))
 
 (defcustom azure-overview-sections-hook
   '(azure-insert-overview-headers

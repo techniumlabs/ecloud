@@ -42,6 +42,9 @@
 ;; Model for Azure Tag
 (ecloud-define-resource-model azure tag)
 
+;; View for Azure Tag
+(ecloud-setup-resource-view azure tag)
+
 (defvar magit-azure-tag-section-map
   (let ((map (make-sparse-keymap)))
     (define-key map "p" 'azure-overview-print-section)

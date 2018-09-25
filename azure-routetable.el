@@ -39,6 +39,9 @@
 ;; Model for Azure Route-Table
 (ecloud-define-resource-model azure routetable)
 
+;; View for Azure Route Table
+(ecloud-setup-resource-view azure routetable)
+
 (defvar magit-azure-routetable-section-map
   (let ((map (make-sparse-keymap)))
     (define-key map "p" 'azure-overview-print-section)

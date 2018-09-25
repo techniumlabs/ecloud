@@ -117,6 +117,10 @@
        (interactive)
        (ecloud-mode-setup #',(intern (format "%s-%s-overview-mode" cloud rtype))))
 
+     (defun ,(intern (format "%s-%s-overview-refresh-view" cloud rtype)) ()
+       (magit-insert-section (,(intern (format "%s-%s" cloud rtype))))
+       (ecloud-insert-list-views ',cloud '(,rtype)))
+
      (defun ,(intern (format "%s-%s-overview-refresh-buffer" cloud rtype)) ()
        (interactive)
        (magit-insert-section (,(intern (format "%s-%s" cloud rtype))))

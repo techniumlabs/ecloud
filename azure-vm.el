@@ -52,7 +52,6 @@
 
 (defvar magit-azure-vm-section-map
   (let ((map (make-sparse-keymap)))
-    (define-key map "p" 'azure-overview-print-section)
     (define-key map "s" 'azure-vm-start)
     (define-key map "S" 'azure-vm-stop)
     map)

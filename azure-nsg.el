@@ -39,6 +39,9 @@
 ;; Model for Azure Nsg
 (ecloud-define-resource-model azure nsg)
 
+;; View for Azure Nsg
+(ecloud-setup-resource-view azure nsg)
+
 (defvar magit-azure-nsg-section-map
   (let ((map (make-sparse-keymap)))
     (define-key map "p" 'azure-overview-print-section)

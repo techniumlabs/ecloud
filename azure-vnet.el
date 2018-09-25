@@ -39,6 +39,9 @@
 ;; Model for Azure Vnet
 (ecloud-define-resource-model azure vnet)
 
+;; View for Azure Vnet
+(ecloud-setup-resource-view azure vnet)
+
 (defvar magit-azure-vnet-section-map
   (let ((map (make-sparse-keymap)))
     (define-key map "p" 'azure-overview-print-section)
