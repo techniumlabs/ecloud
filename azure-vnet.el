@@ -33,7 +33,7 @@
   "Azure cli for getting vnet list")
 
 (defvar azure-vnet-list-view-display-params
-  '(name location)
+  '(name address-list location)
   "List of attributes to display in list view")
 
 ;; Model for Azure Vnet
@@ -41,6 +41,20 @@
 
 ;; View for Azure Vnet
 (ecloud-setup-resource-view azure vnet)
+
+(defcustom azure-vnet-parser-hook
+  '(azure-vnet--parse-address-space)
+  "Hook to run for parsing address space"
+  :group 'ecloud-azure
+  :type 'hook)
+
+(defun azure-vnet--parse-address-space (robj)
+  (-let* (((&alist 'addressSpace (&alist 'addressPrefixes address-list)) (oref robj :attributes))
+          (address-list-str (string-join address-list ","))
+          )
+    (oset robj :attributes (append (oref robj :attributes)
+                                   `((address-list . ,address-list-str))))
+    ))
 
 (defvar magit-azure-vnet-section-map
   (let ((map (make-sparse-keymap)))

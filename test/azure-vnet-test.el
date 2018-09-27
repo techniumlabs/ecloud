@@ -31,8 +31,8 @@
 (defconst azure-vnet-list-view-result
   (s-trim-left "
 azure vnet
-name                  location          
-aks-vnet-deadbeef     australiaeast"))
+name                  address-list     location          
+aks-vnet-deadbeef     10.0.0.0/8       australiaeast"))
 
 (ert-deftest ecloud-vnet-test--ecloud-insert-list-views ()
   (test-helper-with-empty-state
