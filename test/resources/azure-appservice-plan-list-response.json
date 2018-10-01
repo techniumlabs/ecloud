@@ -8,7 +8,7 @@
     "location": "Australia East",
     "maximumNumberOfWorkers": 0,
     "name": "AustraliaEastPlan",
-    "numberOfSites": 0,
+    "numberOfSites": 5,
     "perSiteScaling": null,
     "provisioningState": null,
     "reserved": null,

@@ -38,6 +38,7 @@
 (require 'azure-vm)
 (require 'azure-storage-account)
 (require 'azure-resource-group)
+(require 'azure-appservice-plan)
 
 (defcustom azure-overview-list-views
   '(account vnet vm aks)
