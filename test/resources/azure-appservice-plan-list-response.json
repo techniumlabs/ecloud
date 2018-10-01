@@ -1,0 +1,34 @@
+[
+  {
+    "adminSiteName": null,
+    "hostingEnvironmentProfile": null,
+    "id": "/subscriptions/deadbeef-73a9-44e3-b70f-ee9206029c60/resourceGroups/techniumlabs/providers/Microsoft.Web/serverfarms/AustraliaEastPlan",
+    "isSpot": null,
+    "kind": "functionapp",
+    "location": "Australia East",
+    "maximumNumberOfWorkers": 0,
+    "name": "AustraliaEastPlan",
+    "numberOfSites": 0,
+    "perSiteScaling": null,
+    "provisioningState": null,
+    "reserved": null,
+    "resourceGroup": "techniumlabs",
+    "sku": {
+      "capabilities": null,
+      "capacity": 0,
+      "family": "Y",
+      "locations": null,
+      "name": "Y1",
+      "size": "Y1",
+      "skuCapacity": null,
+      "tier": "Dynamic"
+    },
+    "spotExpirationTime": null,
+    "status": "Ready",
+    "tags": null,
+    "targetWorkerCount": null,
+    "targetWorkerSizeId": null,
+    "type": "Microsoft.Web/serverfarms",
+    "workerTierName": null
+  }
+]
