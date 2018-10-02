@@ -1,0 +1,213 @@
+[
+  {
+    "backendAddressPools": [
+      {
+        "backendIpConfigurations": [
+          {
+            "applicationGatewayBackendAddressPools": null,
+            "applicationSecurityGroups": null,
+            "etag": null,
+            "id": "/subscriptions/deadbeef-73a9-44e3-b70f-beed06029c60/resourceGroups/technium/providers/Microsoft.Compute/virtualMachineScaleSets/sfabric-ss/virtualMachines/0/networkInterfaces/sfnetworkprofile/ipConfigurations/DevIPConfiguration",
+            "loadBalancerBackendAddressPools": null,
+            "loadBalancerInboundNatRules": null,
+            "name": null,
+            "primary": null,
+            "privateIpAddress": null,
+            "privateIpAddressVersion": null,
+            "privateIpAllocationMethod": null,
+            "provisioningState": null,
+            "publicIpAddress": null,
+            "resourceGroup": "technium",
+            "subnet": null
+          }
+        ],
+        "etag": "W/\"80008000-3b73-45a6-8c7b-7c325bf26ec0\"",
+        "id": "/subscriptions/deadbeef-73a9-44e3-b70f-beed06029c60/resourceGroups/technium/providers/Microsoft.Network/loadBalancers/sfabric-lb/backendAddressPools/backend",
+        "loadBalancingRules": [
+          {
+            "id": "/subscriptions/deadbeef-73a9-44e3-b70f-beed06029c60/resourceGroups/technium/providers/Microsoft.Network/loadBalancers/sfabric-lb/loadBalancingRules/web",
+            "resourceGroup": "technium"
+          }
+        ],
+        "name": "backend",
+        "outboundNatRule": null,
+        "provisioningState": "Succeeded",
+        "resourceGroup": "technium",
+        "type": "Microsoft.Network/loadBalancers/backendAddressPools"
+      }
+    ],
+    "etag": "W/\"80008000-3b73-45a6-8c7b-7c325bf26ec0\"",
+    "frontendIpConfigurations": [
+      {
+        "etag": "W/\"80008000-3b73-45a6-8c7b-7c325bf26ec0\"",
+        "id": "/subscriptions/deadbeef-73a9-44e3-b70f-beed06029c60/resourceGroups/technium/providers/Microsoft.Network/loadBalancers/sfabric-lb/frontendIPConfigurations/PublicIPAddress",
+        "inboundNatPools": [
+          {
+            "id": "/subscriptions/deadbeef-73a9-44e3-b70f-beed06029c60/resourceGroups/technium/providers/Microsoft.Network/loadBalancers/sfabric-lb/inboundNatPools/ssh",
+            "resourceGroup": "technium"
+          }
+        ],
+        "inboundNatRules": [
+          {
+            "id": "/subscriptions/deadbeef-73a9-44e3-b70f-beed06029c60/resourceGroups/technium/providers/Microsoft.Network/loadBalancers/sfabric-lb/inboundNatRules/ssh.0",
+            "resourceGroup": "technium"
+          }
+        ],
+        "loadBalancingRules": [
+          {
+            "id": "/subscriptions/deadbeef-73a9-44e3-b70f-beed06029c60/resourceGroups/technium/providers/Microsoft.Network/loadBalancers/sfabric-lb/loadBalancingRules/web",
+            "resourceGroup": "technium"
+          }
+        ],
+        "name": "PublicIPAddress",
+        "outboundNatRules": null,
+        "privateIpAddress": null,
+        "privateIpAllocationMethod": "Dynamic",
+        "provisioningState": "Succeeded",
+        "publicIpAddress": {
+          "dnsSettings": null,
+          "etag": null,
+          "id": "/subscriptions/deadbeef-73a9-44e3-b70f-beed06029c60/resourceGroups/technium/providers/Microsoft.Network/publicIPAddresses/sfabric-ip",
+          "idleTimeoutInMinutes": null,
+          "ipAddress": null,
+          "ipConfiguration": null,
+          "ipTags": null,
+          "location": null,
+          "name": null,
+          "provisioningState": null,
+          "publicIpAddressVersion": null,
+          "publicIpAllocationMethod": null,
+          "resourceGroup": "technium",
+          "resourceGuid": null,
+          "sku": null,
+          "tags": null,
+          "type": null,
+          "zones": null
+        },
+        "resourceGroup": "technium",
+        "subnet": null,
+        "type": "Microsoft.Network/loadBalancers/frontendIPConfigurations",
+        "zones": null
+      }
+    ],
+    "id": "/subscriptions/deadbeef-73a9-44e3-b70f-beed06029c60/resourceGroups/technium/providers/Microsoft.Network/loadBalancers/sfabric-lb",
+    "inboundNatPools": [
+      {
+        "backendPort": 22,
+        "enableFloatingIp": false,
+        "etag": "W/\"80008000-3b73-45a6-8c7b-7c325bf26ec0\"",
+        "frontendIpConfiguration": {
+          "id": "/subscriptions/deadbeef-73a9-44e3-b70f-beed06029c60/resourceGroups/technium/providers/Microsoft.Network/loadBalancers/sfabric-lb/frontendIPConfigurations/PublicIPAddress",
+          "resourceGroup": "technium"
+        },
+        "frontendPortRangeEnd": 50119,
+        "frontendPortRangeStart": 50000,
+        "id": "/subscriptions/deadbeef-73a9-44e3-b70f-beed06029c60/resourceGroups/technium/providers/Microsoft.Network/loadBalancers/sfabric-lb/inboundNatPools/ssh",
+        "idleTimeoutInMinutes": 4,
+        "name": "ssh",
+        "protocol": "Tcp",
+        "provisioningState": "Succeeded",
+        "resourceGroup": "technium",
+        "type": "Microsoft.Network/loadBalancers/inboundNatPools"
+      }
+    ],
+    "inboundNatRules": [
+      {
+        "backendIpConfiguration": {
+          "applicationGatewayBackendAddressPools": null,
+          "applicationSecurityGroups": null,
+          "etag": null,
+          "id": "/subscriptions/deadbeef-73a9-44e3-b70f-beed06029c60/resourceGroups/technium/providers/Microsoft.Compute/virtualMachineScaleSets/sfabric-ss/virtualMachines/0/networkInterfaces/sfnetworkprofile/ipConfigurations/DevIPConfiguration",
+          "loadBalancerBackendAddressPools": null,
+          "loadBalancerInboundNatRules": null,
+          "name": null,
+          "primary": null,
+          "privateIpAddress": null,
+          "privateIpAddressVersion": null,
+          "privateIpAllocationMethod": null,
+          "provisioningState": null,
+          "publicIpAddress": null,
+          "resourceGroup": "technium",
+          "subnet": null
+        },
+        "backendPort": 22,
+        "enableFloatingIp": false,
+        "etag": "W/\"80008000-3b73-45a6-8c7b-7c325bf26ec0\"",
+        "frontendIpConfiguration": {
+          "id": "/subscriptions/deadbeef-73a9-44e3-b70f-beed06029c60/resourceGroups/technium/providers/Microsoft.Network/loadBalancers/sfabric-lb/frontendIPConfigurations/PublicIPAddress",
+          "resourceGroup": "technium"
+        },
+        "frontendPort": 50000,
+        "id": "/subscriptions/deadbeef-73a9-44e3-b70f-beed06029c60/resourceGroups/technium/providers/Microsoft.Network/loadBalancers/sfabric-lb/inboundNatRules/ssh.0",
+        "idleTimeoutInMinutes": 4,
+        "name": "ssh.0",
+        "protocol": "Tcp",
+        "provisioningState": "Succeeded",
+        "resourceGroup": "technium",
+        "type": "Microsoft.Network/loadBalancers/inboundNatRules"
+      }
+    ],
+    "loadBalancingRules": [
+      {
+        "backendAddressPool": {
+          "id": "/subscriptions/deadbeef-73a9-44e3-b70f-beed06029c60/resourceGroups/technium/providers/Microsoft.Network/loadBalancers/sfabric-lb/backendAddressPools/backend",
+          "resourceGroup": "technium"
+        },
+        "backendPort": 19080,
+        "disableOutboundSnat": null,
+        "enableFloatingIp": false,
+        "etag": "W/\"80008000-3b73-45a6-8c7b-7c325bf26ec0\"",
+        "frontendIpConfiguration": {
+          "id": "/subscriptions/deadbeef-73a9-44e3-b70f-beed06029c60/resourceGroups/technium/providers/Microsoft.Network/loadBalancers/sfabric-lb/frontendIPConfigurations/PublicIPAddress",
+          "resourceGroup": "technium"
+        },
+        "frontendPort": 80,
+        "id": "/subscriptions/deadbeef-73a9-44e3-b70f-beed06029c60/resourceGroups/technium/providers/Microsoft.Network/loadBalancers/sfabric-lb/loadBalancingRules/web",
+        "idleTimeoutInMinutes": 4,
+        "loadDistribution": "Default",
+        "name": "web",
+        "probe": {
+          "id": "/subscriptions/deadbeef-73a9-44e3-b70f-beed06029c60/resourceGroups/technium/providers/Microsoft.Network/loadBalancers/sfabric-lb/probes/web",
+          "resourceGroup": "technium"
+        },
+        "protocol": "Tcp",
+        "provisioningState": "Succeeded",
+        "resourceGroup": "technium",
+        "type": "Microsoft.Network/loadBalancers/loadBalancingRules"
+      }
+    ],
+    "location": "australiaeast",
+    "name": "sfabric-lb",
+    "outboundNatRules": null,
+    "probes": [
+      {
+        "etag": "W/\"80008000-3b73-45a6-8c7b-7c325bf26ec0\"",
+        "id": "/subscriptions/deadbeef-73a9-44e3-b70f-beed06029c60/resourceGroups/technium/providers/Microsoft.Network/loadBalancers/sfabric-lb/probes/web",
+        "intervalInSeconds": 15,
+        "loadBalancingRules": [
+          {
+            "id": "/subscriptions/deadbeef-73a9-44e3-b70f-beed06029c60/resourceGroups/technium/providers/Microsoft.Network/loadBalancers/sfabric-lb/loadBalancingRules/web",
+            "resourceGroup": "technium"
+          }
+        ],
+        "name": "web",
+        "numberOfProbes": 2,
+        "port": 19080,
+        "protocol": "Tcp",
+        "provisioningState": "Succeeded",
+        "requestPath": null,
+        "resourceGroup": "technium",
+        "type": "Microsoft.Network/loadBalancers/probes"
+      }
+    ],
+    "provisioningState": "Succeeded",
+    "resourceGroup": "technium",
+    "resourceGuid": "ab1b6108-f429-475d-9402-6aa1f86a8852",
+    "sku": {
+      "name": "Basic",
+      "tier": "Regional"
+    },
+    "tags": {},
+    "type": "Microsoft.Network/loadBalancers"
+  }
+]
