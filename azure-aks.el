@@ -73,9 +73,8 @@
                                    "--name" ,aks-name
                                    "--resource-group" ,aks-group
                                    "--node-count" ,node-count)
-                                 ()
-                                 (lambda (json-output)
-                                   (message "%s" json-output))))))
+                                 nil
+                                 nil))))
 
 (ecloud-define-simple-resource-action azure-aks-browse
                                       ("az" "aks" "browse" "--name" name "--resource-group" resourceGroup))
