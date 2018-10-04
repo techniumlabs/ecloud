@@ -11,6 +11,8 @@
 
 (ert-deftest ecloud-azure-overview-test--azure-overview-buffer-created ()
   (test-helper-with-empty-state
-   (azure-overview)
-   (should (ecloud-mode-get-buffer 'azure-overview-mode))
+   (cl-letf (((symbol-function 'ecloud-fetch-resources) (lambda (class &rest args) "")))
+     (call-interactively 'azure-overview)
+     (should (ecloud-mode-get-buffer 'azure-overview-mode))
+     )
    ))
