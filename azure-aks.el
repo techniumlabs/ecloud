@@ -65,7 +65,7 @@
          (value (oref section value))
          (aks-name (oref value :name))
          (aks-group (ecloud-get-attributes value 'resourceGroup))
-         (node-count (number-to-string (magit-read-int (format "Scale the aks cluster %s to"
+         (node-count (number-to-string (ecloud-read-int (format "Scale the aks cluster %s to"
                                               aks-name)))))
     (if (magit-confirm t (format "Do you want to scale aks cluster %s to %s"
                                  aks-name node-count))

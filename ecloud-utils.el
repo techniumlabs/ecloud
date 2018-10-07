@@ -23,11 +23,6 @@
 ;; For a full copy of the GNU General Public License
 ;; see <http://www.gnu.org/licenses/>.
 
-
-;;; Commentary:
-
-;; TODO Add commentary
-
 ;;; Code:
 
 (defun ecloud-display-buffer-fullframe (buffer)
@@ -49,7 +44,7 @@
        (window-frame (select-window window)))))
   )
 
-(defun magit-read-int (prompt &optional initial-input history default-value
+(defun ecloud-read-int (prompt &optional initial-input history default-value
                                  inherit-input-method no-whitespace)
   "Read an integer from the minibuffer, prompting with string PROMPT.
 

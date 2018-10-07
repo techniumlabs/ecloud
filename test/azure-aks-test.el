@@ -74,7 +74,7 @@ No aks found"))
        (should (equal azure-aks-list-view-result
                       (s-trim (substring-no-properties (buffer-string)))))
        (goto-line 3)
-       (cl-letf (((symbol-function 'magit-read-int) (lambda (prompt &rest args) 10))
+       (cl-letf (((symbol-function 'ecloud-read-int) (lambda (prompt &rest args) 10))
                  ((symbol-function 'magit-confirm) (lambda (action &rest args) t))
                  ((symbol-function 'ecloud-run-command) (lambda (cmd args on-success &rest args) t))
                  )
