@@ -72,8 +72,8 @@
                        (funcall trim "\\(?:[ \t\n\r]+\\)\\'" val)))
     (cond ((string= val "")
            (user-error "Need non-empty input"))
-          ((not (integerp (string-to-number val)))
-           (user-error "Need an integer input. %s is not integer" val))
+          ((not (string-match "\\`[0-9]*[1-9][0-9]*\\'" val))
+           (user-error "Entered Input is not integer"))
           (t (string-to-number val)))))
 
 (provide 'ecloud-utils)

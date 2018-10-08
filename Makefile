@@ -18,7 +18,8 @@ $(TARGETS) : $(SRCS) $(CASKDIR)
 
 test : $(SRCS)
 	${CASK} clean-elc
-	${CASK} exec ert-runner
+	${CASK} exec ert-runner --debug --verbose
+	${CASK} exec buttercup -L . test/specs
 
 $(CASKDIR) :
 	${CASK} install
