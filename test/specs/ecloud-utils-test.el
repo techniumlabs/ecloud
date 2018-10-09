@@ -9,6 +9,8 @@
 (require 'ecloud-crud)
 (require 'ecloud-utils)
 
+(load-file "./test/test-helper.el")
+
 (describe "Reading Integer from minibuffer"
 
           (it "Raises a user-error on empty input"
