@@ -8,6 +8,8 @@ CASKDIR = .cask
 SRCS = $(wildcard *.el)
 TARGETS = $(SRCS:.el=.elc)
 
+LINTELS = $(filter-out ecloud-autoloads.el,$(SRCS))
+
 .PHONY: test
 
 build: $(TARGETS)
@@ -16,10 +18,18 @@ $(TARGETS) : $(SRCS) $(CASKDIR)
 	${CASK} clean-elc
 	${CASK} build
 
+lint:
+	${CASK} exec $(EMACS) -Q --batch \
+		--eval "(setq enable-local-variables :safe)" \
+		-l elisp-lint.el -f elisp-lint-files-batch \
+		--no-package-format \
+                --no-fill-column \
+		$(LINTELS)
+
 test : $(SRCS)
 	${CASK} clean-elc
-	${CASK} exec ert-runner --debug --verbose
 	${CASK} exec buttercup -L . test/specs
+	${CASK} exec ert-runner --debug --verbose
 
 $(CASKDIR) :
 	${CASK} install
