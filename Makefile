@@ -29,7 +29,6 @@ lint:
 test : $(SRCS)
 	${CASK} clean-elc
 	${CASK} exec buttercup -L . test/specs
-	${CASK} exec ert-runner --debug --verbose
 
 $(CASKDIR) :
 	${CASK} install
