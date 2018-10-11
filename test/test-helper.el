@@ -12,7 +12,7 @@
 ;; Initialize test coverage.
 (when (require 'undercover nil t)
   (with-no-warnings
-    (undercover "*.el")))
+    (undercover "*.el" (:report-file "report.json"))))
 
 ;; Load package
 (require 'ecloud (f-join project-root "ecloud.el"))
