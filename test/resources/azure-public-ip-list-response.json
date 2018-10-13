@@ -1,0 +1,41 @@
+[
+  {
+    "dnsSettings": {
+      "domainNameLabel": "technium",
+      "fqdn": "technium.australiaeast.cloudapp.azure.com",
+      "reverseFqdn": null
+    },
+    "etag": "W/\"8404d1a4-c000-41b6-b072-2b5a1e786b3d\"",
+    "id": "/subscriptions/12345678-73a9-44e3-b70f-ee9206029c60/resourceGroups/technium/providers/Microsoft.Network/publicIPAddresses/technium-ip",
+    "idleTimeoutInMinutes": 4,
+    "ipAddress": "51.100.100.10",
+    "ipConfiguration": {
+      "etag": null,
+      "id": "/subscriptions/12345678-73a9-44e3-b70f-ee9206029c60/resourceGroups/technium/providers/Microsoft.Network/loadBalancers/sfabric-lb/frontendIPConfigurations/PublicIPAddress",
+      "name": null,
+      "privateIpAddress": null,
+      "privateIpAllocationMethod": null,
+      "provisioningState": null,
+      "publicIpAddress": null,
+      "resourceGroup": "technium",
+      "subnet": null
+    },
+    "ipTags": [],
+    "location": "australiaeast",
+    "name": "technium-ip",
+    "provisioningState": "Succeeded",
+    "publicIpAddressVersion": "IPv4",
+    "publicIpAllocationMethod": "Static",
+    "resourceGroup": "technium",
+    "resourceGuid": "9fd98402-7c14-4e2b-a24b-f256637befe1",
+    "sku": {
+      "name": "Basic",
+      "tier": "Regional"
+    },
+    "tags": {
+      "environment": "dev"
+    },
+    "type": "Microsoft.Network/publicIPAddresses",
+    "zones": null
+  }
+]

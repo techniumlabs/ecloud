@@ -14,6 +14,9 @@ LINTELS = $(filter-out ecloud-autoloads.el,$(SRCS))
 
 build: $(TARGETS)
 
+clean:
+	${CASK} clean-elc
+
 $(TARGETS) : $(SRCS) $(CASKDIR)
 	${CASK} clean-elc
 	${CASK} build

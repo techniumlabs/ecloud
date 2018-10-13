@@ -39,6 +39,7 @@
 (require 'azure-storage-account)
 (require 'azure-resource-group)
 (require 'azure-appservice-plan)
+(require 'azure-public-ip)
 (require 'azure-lb)
 
 (defcustom azure-overview-list-views
