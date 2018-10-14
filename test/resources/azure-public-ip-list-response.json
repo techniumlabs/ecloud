@@ -6,7 +6,7 @@
       "reverseFqdn": null
     },
     "etag": "W/\"8404d1a4-c000-41b6-b072-2b5a1e786b3d\"",
-    "id": "/subscriptions/12345678-73a9-44e3-b70f-ee9206029c60/resourceGroups/technium/providers/Microsoft.Network/publicIPAddresses/technium-ip",
+    "id": "/subscriptions/12345678-73a9-44e3-b70f-ee9206029c60/resourcegroups/technium/providers/microsoft.network/publicipaddresses/technium-ip",
     "idleTimeoutInMinutes": 4,
     "ipAddress": "51.100.100.10",
     "ipConfiguration": {

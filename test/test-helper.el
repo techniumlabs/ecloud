@@ -3,6 +3,8 @@
 (require 'f)
 (require 'ht)
 
+(declare-function undercover "undercover")
+
 (eval-and-compile
   (defvar project-root
     (locate-dominating-file default-directory ".git"))

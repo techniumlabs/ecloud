@@ -31,7 +31,7 @@ lint:
 
 test : $(SRCS)
 	${CASK} clean-elc
-	${CASK} exec buttercup -L . test/specs
+	UNDERCOVER_FORCE=true ${CASK} exec buttercup -L . --debug
 
 $(CASKDIR) :
 	${CASK} install

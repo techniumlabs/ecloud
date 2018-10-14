@@ -25,6 +25,8 @@
 
 (require 'ecloud-crud)
 (require 'ecloud-state)
+(require 'ecloud-view)
+(require 'ecloud-mode)
 (require 'eieio)
 (eval-when-compile (require 'cl))
 
