@@ -21,8 +21,12 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+;;;; Commentary:
+;; This file contains code to parse and display public ips in azure
+
 ;;;; Code:
 
+(require 'magit)
 (require 'ecloud-crud)
 (require 'ecloud-state)
 (require 'ecloud-view)
@@ -32,11 +36,11 @@
 
 (defvar azure-public-ip--list-command
   '("az" "network" "public-ip" "list")
-  "Azure cli for getting public-ip list")
+  "Azure cli for getting public-ip list.")
 
 (defvar azure-public-ip-list-view-display-params
   '(name location)
-  "List of attributes to display in list view")
+  "List of attributes to display in list view.")
 
 ;; Model for Azure Public-Ip
 (ecloud-define-resource-model azure public-ip)
