@@ -23,6 +23,9 @@
 ;; For a full copy of the GNU General Public License
 ;; see <http://www.gnu.org/licenses/>.
 
+;;;; Commentary:
+;; Contains code to display the overview page for gcp.
+
 ;;; Code:
 (require 'magit-popup)
 (require 'ecloud-vars)
@@ -31,7 +34,7 @@
 
 (defcustom gcp-overview-list-views
   '(project)
-  "Components that are part of the gcp overview view"
+  "Components that are part of the gcp overview view."
   :package-version '(ecloud . "0.0.1")
   :group 'ecloud)
 
@@ -58,11 +61,11 @@ The sections are inserted by running the functions on the hook
   (insert (propertize "Gcp Cloud\n\n" 'face 'ecloud-cloud-title)))
 
 (defun gcp-insert-views ()
-  "Insert the defined views"
+  "Insert the defined views."
   (ecloud-insert-list-views 'gcp gcp-overview-list-views))
 
 (defun gcp-insert-error-view ()
-  "Insert the error view"
+  "Insert the error view."
   (ecloud-insert-error-view 'gcp))
 
 (defun gcp-overview-refresh-buffer ()
@@ -70,7 +73,7 @@ The sections are inserted by running the functions on the hook
   ;; Trigger Refresh data
   (--map (let ((rtype (intern (format "gcp-%s" it))))
            (ecloud-fetch-resources rtype))
-        gcp-overview-list-views)
+         gcp-overview-list-views)
   (gcp-overview-refresh-view))
 
 (defun gcp-overview-refresh-view ()

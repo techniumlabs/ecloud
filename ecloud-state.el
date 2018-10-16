@@ -34,6 +34,9 @@
 
 (defun ecloud-state-init ()
   (setq ecloud-state--current-state (ht-create))
+
+  (make-directory (format "%s/ecloud" pcache-directory) :parents)
+
   (--map
    (-let* ((reponame (format "%s" (string-remove-prefix (format "%s" pcache-directory) it)))
            (cloud (nth 1 (split-string reponame "/")))

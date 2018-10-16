@@ -23,6 +23,8 @@
 ;; For a full copy of the GNU General Public License
 ;; see <http://www.gnu.org/licenses/>.
 
+;;; Commentary:
+;; Contains code to display the overview page for azure.
 
 ;;; Code:
 (require 'magit-popup)
@@ -44,13 +46,14 @@
 
 (defcustom azure-overview-list-views
   '(account vnet vm aks)
-  "Components that are part of the azure overview view"
+  "Components that are part of the azure overview view."
   :package-version '(ecloud . "0.0.1")
-  :group 'ecloud)
+  :group 'ecloud
+  :type 'list)
 
 (magit-define-popup azure-overview-dispatch-popup
   "Popup console for showing an overview of available popup commands."
-  :group 'ecloud
+  'ecloud
   :actions
   '("Popup and dwim commands"
     (?a "Account" azure-account-overview)
@@ -75,22 +78,23 @@ The sections are inserted by running the functions on the hook
   (insert (propertize "Azure Cloud\n\n" 'face 'ecloud-cloud-title)))
 
 (defun azure-insert-views ()
-  "Insert the defined views"
+  "Insert the defined views."
   (ecloud-insert-list-views 'azure azure-overview-list-views))
 
 (defun azure-insert-error-view ()
-  "Insert the error view"
+  "Insert the error view."
   (ecloud-insert-error-view 'azure))
 
 (defun azure-overview-refresh-buffer ()
+  "Function to refresh the overview buffer."
   (interactive)
   ;; Trigger Refresh data
   (azure-overview-refresh-view)
   (--map (let ((rtype (intern (format "azure-%s" it))))
-           (ecloud-fetch-resources rtype))
-        azure-overview-list-views))
+           (ecloud-fetch-resources rtype)) azure-overview-list-views))
 
 (defun azure-overview-refresh-view ()
+  "Refresh the overview view."
   (magit-insert-section (status)
     (magit-run-section-hook 'azure-overview-sections-hook)))
 
@@ -109,11 +113,12 @@ The sections are inserted by running the functions on the hook
 
 ;;;###autoload
 (defun azure-overview ()
-  "Display an overview buffer for azure"
+  "Display an overview buffer for azure."
   (interactive)
-  (azure-overview-internal default-directory))
+  (azure-overview-internal))
 
-(defun azure-overview-internal (directory)
+(defun azure-overview-internal ()
+  "Internal function for displaying overview buffer."
   (ecloud-mode-setup #'azure-overview-mode))
 
 (provide 'azure-overview)

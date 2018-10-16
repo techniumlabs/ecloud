@@ -21,6 +21,9 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+;;;; Commentary:
+;; Contains code to parse and display gcp projects.
+
 ;;; Code:
 
 (require 'ecloud-crud)
@@ -30,11 +33,11 @@
 
 (defvar gcp-project--list-command
   '("gcloud" "projects" "list" "--format" "json")
-  "Gcp cli for getting project list")
+  "Gcp cli for getting project list.")
 
 (defvar gcp-project-list-view-display-params
   '(name lifecycleState)
-  "List of attributes to display in list view")
+  "List of attributes to display in list view.")
 
 ;; Model for Gcp Project
 (ecloud-define-resource-model gcp project)
