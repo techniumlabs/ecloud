@@ -22,22 +22,27 @@
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ;;; Commentary:
-;; TODO Add commentary
+;; Contains code to handle azure aks
+
 ;;; Code:
 
 (require 'ecloud-crud)
 (require 'ecloud-state)
+(require 'ecloud-view)
+(require 'ecloud-mode)
 (require 'ecloud-utils)
+(require 'magit)
+(require 'subr-x)
 (require 'eieio)
 (eval-when-compile (require 'cl))
 
 (defvar azure-aks--list-command
   '("az" "aks" "list")
-  "Azure cli for getting aks list")
+  "Azure cli for getting aks list.")
 
 (defvar azure-aks-list-view-display-params
   '(name kubernetesVersion location size provisioningState)
-  "List of attributes to display in list view")
+  "List of attributes to display in list view.")
 
 ;; Model for Azure Aks
 (ecloud-define-resource-model azure aks)
@@ -53,20 +58,20 @@
 
 ;; Parse the provisioning state
 (defun azure-aks--parse-node-pool-size (robj)
-  (-let* (((&alist 'agentPoolProfiles [(&alist 'count nodepool-size)]) (oref robj :attributes))
+  "Function to parse the node pool size in the response `ROBJ."
+  (-let* (((&alist 'agentPoolProfiles [(&alist 'count nodepool-size)]) (oref robj attributes))
           (nodepool-size (number-to-string nodepool-size)))
-    (oset robj :attributes (append (oref robj :attributes) `((size . ,nodepool-size))))
+    (oset robj :attributes (append (oref robj attributes) `((size . ,nodepool-size))))
     ))
 
 (cl-defun azure-aks-scale ()
   (interactive)
   (let* ((section (magit-current-section))
-         (type (oref section type))
          (value (oref section value))
-         (aks-name (oref value :name))
+         (aks-name (oref value name))
          (aks-group (ecloud-get-attributes value 'resourceGroup))
          (node-count (number-to-string (ecloud-read-int (format "Scale the aks cluster %s to"
-                                              aks-name)))))
+                                                                aks-name)))))
     (if (magit-confirm t (format "Do you want to scale aks cluster %s to %s"
                                  aks-name node-count))
         (ecloud-run-json-command `("az" "aks" "scale"
@@ -84,7 +89,7 @@
 
 (magit-define-popup azure-aks-popup
   "Popup console for ask commands."
-  :group 'ecloud
+  'ecloud
   :actions
   '((?s "Scale" azure-aks-scale)
     (?b "Browse" azure-aks-browse)

@@ -25,8 +25,7 @@
 
 
 ;;; Commentary:
-
-;; TODO Add commentary
+;; This file is starting point for all azure code
 
 ;;; Code:
 (require 'azure-overview)

@@ -57,7 +57,6 @@
   `(cl-defun ,name ()
      (interactive)
      (let* ((section (magit-current-section))
-            (type (oref section type))
             (value (oref section value)))
 
        (ecloud-run-json-command (--map (if (stringp it)
