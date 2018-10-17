@@ -21,20 +21,26 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-;;;; Code:
+;;; Commentary:
+;; Contains code to handle appservice plan
 
+;;; Code:
+
+(require 'magit)
 (require 'ecloud-crud)
 (require 'ecloud-state)
+(require 'ecloud-view)
+(require 'ecloud-mode)
 (require 'eieio)
 (eval-when-compile (require 'cl))
 
 (defvar azure-appservice-plan--list-command
   '("az" "appservice" "plan" "list")
-  "Azure cli for getting appservice-plan list")
+  "Azure cli for getting appservice-plan list.")
 
 (defvar azure-appservice-plan-list-view-display-params
   '(name kind resourceGroup)
-  "List of attributes to display in list view")
+  "List of attributes to display in list view.")
 
 ;; Model for Azure Appservice-Plan
 (ecloud-define-resource-model azure appservice-plan)
