@@ -21,20 +21,26 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-;;;; Code:
+;;; Commentary:
+;; Contains code to handle azure lb.
 
+;;; Code:
+
+(require 'magit)
 (require 'ecloud-crud)
 (require 'ecloud-state)
+(require 'ecloud-view)
+(require 'ecloud-mode)
 (require 'eieio)
 (eval-when-compile (require 'cl))
 
 (defvar azure-lb--list-command
   '("az" "network" "lb" "list")
-  "Azure cli for getting lb list")
+  "Azure cli for getting lb list.")
 
 (defvar azure-lb-list-view-display-params
   '(name location resourceGroup)
-  "List of attributes to display in list view")
+  "List of attributes to display in list view.")
 
 ;; Model for Azure Lb
 (ecloud-define-resource-model azure lb)
