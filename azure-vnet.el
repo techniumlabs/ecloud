@@ -21,20 +21,27 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-;;;; Code:
+;;; Commentary:
+;; Contains code to handle azure vnet
+
+;;; Code:
 
 (require 'ecloud-crud)
 (require 'ecloud-state)
+(require 'ecloud-view)
+(require 'ecloud-mode)
+(require 'magit)
+(require 'subr-x)
 (require 'eieio)
 (eval-when-compile (require 'cl))
 
 (defvar azure-vnet--list-command
   '("az" "network" "vnet" "list")
-  "Azure cli for getting vnet list")
+  "Azure cli for getting vnet list.")
 
 (defvar azure-vnet-list-view-display-params
   '(name address-list location)
-  "List of attributes to display in list view")
+  "List of attributes to display in list view.")
 
 ;; Model for Azure Vnet
 (ecloud-define-resource-model azure vnet)
@@ -44,15 +51,17 @@
 
 (defcustom azure-vnet-parser-hook
   '(azure-vnet--parse-address-space)
-  "Hook to run for parsing address space"
+  "Hook to run for parsing address space."
   :group 'ecloud-azure
   :type 'hook)
 
 (defun azure-vnet--parse-address-space (robj)
-  (-let* (((&alist 'addressSpace (&alist 'addressPrefixes address-list)) (oref robj :attributes))
+  "Function to parse the address space for the vnet in the response `ROBJ."
+  (-let* (((&alist 'addressSpace (&alist 'addressPrefixes address-list))
+           (oref robj attributes))
           (address-list-str (string-join address-list ","))
           )
-    (oset robj :attributes (append (oref robj :attributes)
+    (oset robj :attributes (append (oref robj attributes)
                                    `((address-list . ,address-list-str))))
     ))
 
