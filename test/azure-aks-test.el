@@ -51,7 +51,27 @@ gnuherd     1.10.6                australiaeast     1        Succeeded") :to-mat
                           (save-excursion
                             (ecloud-insert-list-views 'azure '(aks))
                             (expect (s-trim  "azure aks
-No aks found") :to-match
-(s-trim (substring-no-properties (buffer-string))))))))
+No aks found") :to-match (s-trim (substring-no-properties (buffer-string))))))))
+
+          (describe "when scaled up"
+                    (before-each (progn
+                                   (ecloud-state-init)
+                                   (ecloud-define-resource-model azure aks)
+                                   (ecloud-parse-resource-data
+                                    (test-helper-json-resource "azure-aks-list-response.json")
+                                    'azure-aks))
+
+                                 (spy-on 'ecloud-read-int :and-return-value 10)
+                                 (spy-on 'magit-confirm :and-return-value t)
+                                 (spy-on 'ecloud-run-json-command))
+
+                    (it "should call cli to scale up"
+                        (with-temp-buffer
+                          (save-excursion
+                            (ecloud-insert-list-views 'azure '(aks))
+                            (goto-line 3)
+                            (call-interactively 'azure-aks-scale)
+                            (expect 'ecloud-run-json-command :to-have-been-called-with '("az" "aks" "scale" "--name" "gnuherd" "--resource-group" "gnuherd" "--node-count" "10") nil nil)
+                            ))))
           )
 
