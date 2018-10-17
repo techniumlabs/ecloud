@@ -1,0 +1,20 @@
+[
+  {
+    "adminUserEnabled": false,
+    "creationDate": "2018-10-11T06:14:14.171367+00:00",
+    "id": "/subscriptions/12345678-73a9-44e3-b70f-ee9206029c60/resourceGroups/azure-operator/providers/Microsoft.ContainerRegistry/registries/techniumlabs",
+    "location": "westeurope",
+    "loginServer": "techniumlabs.azurecr.io",
+    "name": "techniumlabs",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "azure-operator",
+    "sku": {
+      "name": "Standard",
+      "tier": "Standard"
+    },
+    "status": null,
+    "storageAccount": null,
+    "tags": {},
+    "type": "Microsoft.ContainerRegistry/registries"
+  }
+]
