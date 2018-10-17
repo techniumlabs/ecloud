@@ -21,20 +21,26 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-;;;; Code:
+;;; Commentary:
+;; Contains code to handle azure acr.
 
+;;; Code:
+
+(require 'magit)
 (require 'ecloud-crud)
 (require 'ecloud-state)
+(require 'ecloud-view)
+(require 'ecloud-mode)
 (require 'eieio)
 (eval-when-compile (require 'cl))
 
 (defvar azure-acr--list-command
   '("az" "acr" "list")
-  "Azure cli for getting acr list")
+  "Azure cli for getting acr list.")
 
 (defvar azure-acr-list-view-display-params
   '(name loginServer location)
-  "List of attributes to display in list view")
+  "List of attributes to display in list view.")
 
 ;; Model for Azure Container Registry
 (ecloud-define-resource-model azure acr)
