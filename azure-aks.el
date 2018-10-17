@@ -79,12 +79,16 @@
 (ecloud-define-simple-resource-action azure-aks-browse
                                       ("az" "aks" "browse" "--name" name "--resource-group" resourceGroup))
 
+(ecloud-define-simple-resource-action azure-aks-get-credentials
+                                      ("az" "aks" "get-credentials" "--name" name "--resource-group" resourceGroup))
+
 (magit-define-popup azure-aks-popup
   "Popup console for ask commands."
   :group 'ecloud
   :actions
   '((?s "Scale" azure-aks-scale)
-    (?b "Browse" azure-aks-browse))
+    (?b "Browse" azure-aks-browse)
+    (?c "Get credentials" azure-aks-get-credentials))
   :max-action-columns 3)
 
 (defvar magit-azure-aks-section-map
