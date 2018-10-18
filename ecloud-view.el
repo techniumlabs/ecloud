@@ -38,6 +38,7 @@
 
 (defun ecloud-insert-list-views (cloud views)
   (--map (-let* ((view-name (format "%s-%s" cloud it))
+                 (detailed-view-hook (intern (format "%s-%s-detailed-view-hook" cloud it)))
                  (params-name (intern (format "%s-%s-list-view-display-params" cloud it)))
                  (robjs (ecloud-state--get-all-resource-type
                          (symbol-name cloud)
@@ -83,7 +84,11 @@
                                                                     (symbol-value params-name)))))
                            (eval `(magit-insert-section (,view-name ,obj)
                                     (insert ,strout)
-                                    (insert ?\n)))))
+                                    (insert ?\n)
+                                    (magit-insert-section (,view-name ,obj t)
+                                      (magit-insert-heading)
+                                      (run-hook-with-args ',detailed-view-hook ,obj))
+                                    ))))
                        robjs))
              (insert ?\n)
              )) views))

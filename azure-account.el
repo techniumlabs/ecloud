@@ -21,20 +21,28 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+;;; Commentary:
+;; Contains code to handle azure account
+
 ;;; Code:
 
 (require 'ecloud-crud)
 (require 'ecloud-state)
+(require 'ecloud-view)
+(require 'ecloud-mode)
+(require 'ecloud-utils)
+(require 'magit)
+(require 'subr-x)
 (require 'eieio)
 (eval-when-compile (require 'cl))
 
 (defvar azure-account--list-command
   '("az" "account" "list")
-  "Azure cli for getting account list")
+  "Azure cli for getting account list.")
 
 (defvar azure-account-list-view-display-params
   '(name state isDefault)
-  "List of attributes to display in list view")
+  "List of attributes to display in list view.")
 
 ;; Model for Azure Account
 (ecloud-define-resource-model azure account)
@@ -42,7 +50,26 @@
 ;; View for Azure Account
 (ecloud-setup-resource-view azure account)
 
-;;;; Actions
+;;;; Hooks
+(defcustom azure-account-detailed-view-hook
+  '(azure-account-add-detailed-view-section)
+  "Hook to run for adding a detailed view."
+  :group 'ecloud-azure
+  :type 'hook)
+
+;;;; View Functions
+(defun azure-account-add-detailed-view-section (robj)
+  "Function to add detailed view section for the account.`ROBJ is the object for the account."
+  (-let (((&alist 'cloudName cloudName 'tenantId tenantId 'user (&alist 'name username 'type usertype)) (oref robj attributes)))
+    (insert ?\n)
+
+    (ecloud-insert-kv-list `(("Cloud Name" . ,cloudName)
+                             ("Tenant Id" . ,tenantId)
+                             ("Username" . ,username)
+                             ("User Type" . ,usertype)))
+    (insert ?\n)))
+
+;;; Actions
 (ecloud-define-cautious-action azure-account-set-default
                                ("az" "account" "set" "--subscription" id)
                                ("Do you want to set %s to be current" name))
@@ -51,12 +78,13 @@
   (let ((map (make-sparse-keymap)))
     (define-key map "h" 'azure-account-popup)
     (define-key map "s" 'azure-account-set-default)
+    (define-key map [tab] 'magit-section-cycle)
     map)
   "Keymap for the `azure-account' section.")
 
 (magit-define-popup azure-account-popup
   "Popup console for azure account"
-  :group 'ecloud
+  'ecloud
   :actions
   '("Azure account commands"
     (?s "Set current" azure-account-set-default)))

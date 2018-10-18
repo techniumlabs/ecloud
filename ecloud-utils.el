@@ -44,6 +44,12 @@
        (window-frame (select-window window)))))
   )
 
+(defun ecloud-insert-kv-list (kvlist)
+  (-map (lambda (elem)
+           (insert (propertize (format "%s: " (car elem))
+                               'face 'magit-section-heading))
+           (insert (format "%s\n" (cdr elem)))) kvlist))
+
 (defun ecloud-read-int (prompt &optional initial-input history default-value
                                  inherit-input-method no-whitespace)
   "Read an integer from the minibuffer, prompting with string PROMPT.
