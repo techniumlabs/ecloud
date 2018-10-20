@@ -29,7 +29,7 @@ lint:
                 --no-fill-column \
 		$(LINTELS)
 
-test : $(SRCS)
+test : lint
 	${CASK} clean-elc
 	${CASK} exec buttercup -L . --debug
 
