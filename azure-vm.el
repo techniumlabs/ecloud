@@ -21,6 +21,9 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+;;; Commentary:
+;; Code to handle azure vm.
+
 ;;; Code:
 
 (require 'ecloud-model)
@@ -30,11 +33,11 @@
 
 (defvar azure-vm--list-command
   '("az" "vm" "list" "-d")
-  "Azure cli for getting vm list")
+  "Azure cli for getting vm list.")
 
 (defvar azure-vm-list-view-display-params
   '(name location)
-  "List of attributes to display in list view")
+  "List of attributes to display in list view.")
 
 ;; Model for Azure Vm
 (ecloud-define-resource-model azure vm)

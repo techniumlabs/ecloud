@@ -21,7 +21,10 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-;;;; Code:
+;;; Commentary:
+;; Code to handle azure tag.
+
+;;; Code:
 
 (require 'ecloud-model)
 (require 'ecloud-state)
@@ -29,15 +32,15 @@
 (eval-when-compile (require 'cl))
 
 (defvar azure-tag--name-attribute 'tagName
-  "Name of name attribute in json")
+  "Name of name attribute in json.")
 
 (defvar azure-tag--list-command
   '("az" "tag" "list")
-  "Azure cli for getting tag list")
+  "Azure cli for getting tag list.")
 
 (defvar azure-tag-list-view-display-params
   '(tagName)
-  "List of attributes to display in list view")
+  "List of attributes to display in list view.")
 
 ;; Model for Azure Tag
 (ecloud-define-resource-model azure tag)

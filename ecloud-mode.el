@@ -73,9 +73,9 @@
             (buffer-list)))
 
 (defun ecloud-mode-get-buffer (mode &optional create frame value)
-  "Function to get ecloud buffer with `MODE.  
-Optional `CREATE for creating a new buffer.  
-`FRAME to use a frame. `VALUE for buffer."
+  "Function to get ecloud buffer with `MODE.
+Optional `CREATE for creating a new buffer.
+`FRAME to use a frame.  `VALUE for buffer."
   (or (--first (with-current-buffer it
                  (and (eq major-mode mode)
                       (if value

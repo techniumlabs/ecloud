@@ -59,10 +59,11 @@
 (defun ecloud-read-int (prompt &optional initial-input history default-value
                                inherit-input-method no-whitespace)
   "Read an integer from the minibuffer, prompting with string PROMPT.
-
+`INITIAL-INPUT is the default input.  `HISTORY is the history of previous input.
+`INHERIT-INPUT-METHOD for inheriting the input method.
 * empty input is not allowed
 * whitespace is not allowed and leading and trailing whitespace is
-  removed automatically,
+  removed automatically if `NO-WHITESPACE is non-nil,
 * \": \" is appended to PROMPT, and
 * an invalid DEFAULT-VALUE is silently ignored."
   (when default-value

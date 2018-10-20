@@ -21,7 +21,10 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-;;;; Code:
+;;; Commentary:
+;; Contains code for azure nsg
+
+;;; Code:
 
 (require 'ecloud-model)
 (require 'ecloud-state)
@@ -30,11 +33,11 @@
 
 (defvar azure-nsg--list-command
   '("az" "network" "nsg" "list")
-  "Azure cli for getting nsg list")
+  "Azure cli for getting nsg list.")
 
 (defvar azure-nsg-list-view-display-params
   '(name location)
-  "List of attributes to display in list view")
+  "List of attributes to display in list view.")
 
 ;; Model for Azure Nsg
 (ecloud-define-resource-model azure nsg)

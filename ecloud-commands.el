@@ -22,10 +22,12 @@
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ;;; Commentary:
-;; TODO Add commentary
+;; Code to run an external command.
+
 ;;; Code:
 
 (defun ecloud-process-kill-quietly (proc &optional _signal)
+  "Function to kill a process quietly."
   (when proc
     (set-process-sentinel proc nil)
     (set-process-query-on-exit-flag proc nil)
@@ -92,12 +94,14 @@ Returns the process object for this execution of kubectl."
     proc))
 
 (defun ecloud-parse-json-buffer (buf)
+  "Function to parse json buffer."
   (let* ((output (with-current-buffer buf (buffer-string))))
     (if (> (string-bytes output) 0)
         (json-read-from-string output)
       nil)))
 
 (defun ecloud-run-json-command (cmd args on-success &optional on-error cleanup-cb)
+  "Function to run a external command."
   (ecloud-run-command cmd args
                       (lambda (buf)
                         (funcall on-success (ecloud-parse-json-buffer buf)))

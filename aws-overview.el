@@ -27,7 +27,7 @@
 ;;; Commentary:
 ;; Contains code to display overview page for aws
 
-;;; Code
+;;; Code:
 
 (provide 'aws-overview)
 ;;; aws-overview.el ends here
