@@ -49,7 +49,7 @@
   (let ((map (make-sparse-keymap)))
     (define-key map "p" 'azure-overview-print-section)
     map)
-  "Keymap for the `azure-nsg' section.")
+  "Keymap for the `azure-nsg-section.")
 
 (provide 'azure-nsg)
 ;;; azure-nsg.el ends here

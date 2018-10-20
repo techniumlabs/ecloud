@@ -52,7 +52,7 @@
   (let ((map (make-sparse-keymap)))
     (define-key map "p" 'azure-overview-print-section)
     map)
-  "Keymap for the `azure-lb' section.")
+  "Keymap for the `azure-lb-section.")
 
 (provide 'azure-lb)
 ;;; azure-lb.el ends here

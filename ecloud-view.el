@@ -41,7 +41,7 @@
         (funcall (intern (format "%s-refresh-view" (substring (symbol-name major-mode) 0 -5))))))))
 
 (defun ecloud-insert-list-views (cloud views)
-  "Function to insert `VIEWS for `CLOUD."
+  "Function to insert for `CLOUD the specified `VIEWS."
   (--map (-let* ((view-name (format "%s-%s" cloud it))
                  (detailed-view-hook (intern (format "%s-%s-detailed-view-hook" cloud it)))
                  (params-name (intern (format "%s-%s-list-view-display-params" cloud it)))
