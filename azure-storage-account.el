@@ -21,6 +21,9 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+;;; Commentary:
+;; Code to handle azure storage account.
+
 ;;;; Code:
 
 (require 'ecloud-model)
@@ -30,11 +33,11 @@
 
 (defvar azure-storage-account--list-command
   '("az" "storage" "account" "list")
-  "Azure cli for getting storage-account list")
+  "Azure cli for getting storage-account list.")
 
 (defvar azure-storage-account-list-view-display-params
   '(name kind location)
-  "List of attributes to display in list view")
+  "List of attributes to display in list view.")
 
 ;; Model for Azure Storage-Account
 (ecloud-define-resource-model azure storage-account)
@@ -43,7 +46,7 @@
   (let ((map (make-sparse-keymap)))
     (define-key map "p" 'azure-overview-print-section)
     map)
-  "Keymap for the `azure-storage-account' section.")
+  "Keymap for the `azure-storage-account-section.")
 
 (provide 'azure-storage-account)
 ;;; azure-storage-account.el ends here

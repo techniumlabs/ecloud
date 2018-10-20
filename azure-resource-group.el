@@ -22,7 +22,8 @@
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ;;; Commentary:
-;; TODO Add commentary
+;; Code to handle azure resource group.
+
 ;;; Code:
 
 (require 'ecloud-model)
@@ -47,19 +48,20 @@
 
 ;; Parse the provisioning state
 (defun azure-group--parse-provisioning-state (robj)
-  (-let (((&alist 'properties (&alist 'provisioningState state)) (oref robj :attributes)))
-    (oset robj :attributes (append (oref robj :attributes) `((state . ,state))))))
+  "Function to parse provisioning state for `ROBJ."
+  (-let (((&alist 'properties (&alist 'provisioningState state)) (oref robj attributes)))
+    (oset robj :attributes (append (oref robj attributes) `((state . ,state))))))
 
 ;;;; Actions
 (ecloud-define-cautious-action azure-group-delete-group
-                                      ("az" "group" "delete" "--name" name "--yes" "--output" "json")
-                                      ("Do you want to delete group %s" name ))
+                               ("az" "group" "delete" "--name" name "--yes" "--output" "json")
+                               ("Do you want to delete group %s" name ))
 
 (defvar magit-azure-group-section-map
   (let ((map (make-sparse-keymap)))
     (define-key map "d" 'azure-group-delete-group)
     map)
-  "Keymap for the `azure-group' section.")
+  "Keymap for the `azure-resource-group-section.")
 
 (provide 'azure-resource-group)
-;;; azure-group.el ends here
+;;; azure-resource-group.el ends here

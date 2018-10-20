@@ -27,7 +27,7 @@
 ;;; Code:
 
 (defun ecloud-process-kill-quietly (proc &optional _signal)
-  "Function to kill a process quietly."
+  "Function to kill a process quietly for `PROC."
   (when proc
     (set-process-sentinel proc nil)
     (set-process-query-on-exit-flag proc nil)
@@ -65,7 +65,7 @@ Returns the process object for this execution of kubectl."
                 :command command
                 :noquery t
                 :sentinel
-                (lambda (proc status)
+                (lambda (proc)
                   (unwind-protect
                       (let ((exit-code (process-exit-status proc)))
                         (cond
@@ -94,14 +94,15 @@ Returns the process object for this execution of kubectl."
     proc))
 
 (defun ecloud-parse-json-buffer (buf)
-  "Function to parse json buffer."
+  "Function to parse json buffer `BUF."
   (let* ((output (with-current-buffer buf (buffer-string))))
     (if (> (string-bytes output) 0)
         (json-read-from-string output)
       nil)))
 
 (defun ecloud-run-json-command (cmd args on-success &optional on-error cleanup-cb)
-  "Function to run a external command."
+  "Function to run a external command `CMD with `ARGS.
+Pass `ON-SUCCESS `ON-ERROR `CLEANUP-CB callbacks."
   (ecloud-run-command cmd args
                       (lambda (buf)
                         (funcall on-success (ecloud-parse-json-buffer buf)))

@@ -58,7 +58,7 @@
     (define-key map "s" 'azure-vm-start)
     (define-key map "S" 'azure-vm-stop)
     map)
-  "Keymap for the `azure-vm' section.")
+  "Keymap for the `azure-vm-section'.")
 
 (provide 'azure-vm)
 ;;; azure-vm.el ends here

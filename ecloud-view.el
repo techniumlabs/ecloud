@@ -82,6 +82,7 @@
                (insert ?\n))
              (if (> (length robjs) 0)
                  (-map (-lambda ((name obj))
+                         (message "%s" name)
                          (-let ((strout (apply #'format flist (-map (lambda (x) (let ((aval (ecloud-get-attributes obj x)))
                                                                                   (cond ((equal :json-false aval) "false")
                                                                                         ((equal t aval) "true")

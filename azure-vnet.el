@@ -74,7 +74,7 @@
   (let ((map (make-sparse-keymap)))
     (define-key map "p" 'azure-overview-print-section)
     map)
-  "Keymap for the `azure-vnet' section.")
+  "Keymap for the `azure-vnet-section'.")
 
 (provide 'azure-vnet)
 ;;; azure-vnet.el ends here

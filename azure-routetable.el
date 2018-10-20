@@ -21,6 +21,9 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+;;; Commentary:
+;; Code to handle azure route table.
+
 ;;;; Code:
 
 (require 'ecloud-model)
@@ -30,11 +33,11 @@
 
 (defvar azure-routetable--list-command
   '("az" "network" "route-table" "list")
-  "Azure cli for getting routetable list")
+  "Azure cli for getting routetable list.")
 
 (defvar azure-routetable-list-view-display-params
   '(name location)
-  "List of attributes to display in list view")
+  "List of attributes to display in list view.")
 
 ;; Model for Azure Route-Table
 (ecloud-define-resource-model azure routetable)
@@ -46,7 +49,7 @@
   (let ((map (make-sparse-keymap)))
     (define-key map "p" 'azure-overview-print-section)
     map)
-  "Keymap for the `azure-routetable' section.")
+  "Keymap for the `azure-routetable-section.")
 
 (provide 'azure-routetable)
 ;;; azure-routetable.el ends here

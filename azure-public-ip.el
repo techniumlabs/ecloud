@@ -52,7 +52,7 @@
   (let ((map (make-sparse-keymap)))
     (define-key map "p" 'azure-overview-print-section)
     map)
-  "Keymap for the `azure-public-ip' section.")
+  "Keymap for the `azure-public-ip-section.")
 
 (provide 'azure-public-ip)
 ;;; azure-public-ip.el ends here
