@@ -22,14 +22,18 @@
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ;;; Commentary:
-;; TODO Add commentary
+;; Contains code handle views
+
 ;;; Code:
 
 (require 'eieio)
 (require 'ht)
+(require 'ecloud-utils)
+(require 'ecloud-state)
 (eval-when-compile (require 'cl))
 
 (defun ecloud-refresh-all-views ()
+  "Function to refresh all views."
   (dolist (buffer (ecloud-mode-get-buffers))
     (with-current-buffer buffer
       (let ((inhibit-read-only t))
@@ -37,6 +41,7 @@
         (funcall (intern (format "%s-refresh-view" (substring (symbol-name major-mode) 0 -5))))))))
 
 (defun ecloud-insert-list-views (cloud views)
+  "Function to insert `VIEWS for `CLOUD."
   (--map (-let* ((view-name (format "%s-%s" cloud it))
                  (detailed-view-hook (intern (format "%s-%s-detailed-view-hook" cloud it)))
                  (params-name (intern (format "%s-%s-list-view-display-params" cloud it)))
@@ -48,22 +53,22 @@
                                     (--map
                                      (-max (-flatten
                                             (list (->> robjs
-                                                  (-map
-                                                   (-lambda (obj)
-                                                     (length (let ((aval (ecloud-get-attributes (nth 1 obj) it)))
-                                                               (cond ((equal :json-false aval) "false")
-                                                                     ((equal t aval) "true")
-                                                                     ((stringp aval) aval))))))
-                                                  ) (length (symbol-name it)))))
+                                                       (-map
+                                                        (-lambda (obj)
+                                                          (length (let ((aval (ecloud-get-attributes (nth 1 obj) it)))
+                                                                    (cond ((equal :json-false aval) "false")
+                                                                          ((equal t aval) "true")
+                                                                          ((stringp aval) aval))))))
+                                                       ) (length (symbol-name it)))))
                                      (symbol-value params-name)))
                                  0
                                  ))
                  (flist (if (> (length robjs) 0 )
                             (->> align-length
-                              (--map (+ 3 it))
-                              (--map (format "%%-%ds  " it))
-                              (-reduce 'concat)
-                              )
+                                 (--map (+ 3 it))
+                                 (--map (format "%%-%ds  " it))
+                                 (-reduce 'concat)
+                                 )
                           "%s")))
 
            (magit-insert-section (view-name)
@@ -94,6 +99,7 @@
              )) views))
 
 (defun ecloud-insert-error-view (cloud)
+  "Function to insert error view for `CLOUD."
   (let ((errors (ecloud-state-get-errors cloud)))
     (magit-insert-section (errors)
       (if errors
@@ -101,13 +107,14 @@
             (magit-insert-heading "Errors")
             (-map (lambda (e)
                     (progn (magit-insert-section (errors e)
-                            (magit-insert-heading (car e))
-                            (insert (cdr e))))) errors))
+                             (magit-insert-heading (car e))
+                             (insert (cdr e))))) errors))
         (magit-insert-heading "No Errors")
         )
       )))
 
 (defmacro ecloud-setup-resource-view (cloud rtype)
+  "Macro to setup resource view for `CLOUD and resource type `RTYPE."
   `(progn
      (define-derived-mode ,(intern (format "%s-%s-overview-mode" cloud rtype)) ecloud-mode
        ,(format "%s %s resource overview" cloud rtype)

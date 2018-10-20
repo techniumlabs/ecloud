@@ -26,7 +26,7 @@
 
 ;;; Code:
 
-(require 'ecloud-crud)
+(require 'ecloud-model)
 (require 'ecloud-state)
 (require 'ecloud-view)
 (require 'ecloud-mode)
@@ -43,8 +43,9 @@
   '(name address-list location)
   "List of attributes to display in list view.")
 
-;; Model for Azure Vnet
+;; Model for Azure Vnet, subnet
 (ecloud-define-resource-model azure vnet)
+(ecloud-define-resource-model azure subnet)
 
 ;; View for Azure Vnet
 (ecloud-setup-resource-view azure vnet)
@@ -64,6 +65,10 @@
     (oset robj :attributes (append (oref robj attributes)
                                    `((address-list . ,address-list-str))))
     ))
+
+(defun azure-vnet--fetch-subnets (robj)
+  "Function to fetch subnets for the vnet `ROBJ."
+  (message "%s" robj))
 
 (defvar magit-azure-vnet-section-map
   (let ((map (make-sparse-keymap)))

@@ -23,9 +23,13 @@
 ;; For a full copy of the GNU General Public License
 ;; see <http://www.gnu.org/licenses/>.
 
+;;; Commentary:
+;; Contains general utility function for ecloud
+
 ;;; Code:
 
 (defun ecloud-display-buffer-fullframe (buffer)
+  "Function to display `BUFFER 'in full frame."
   (let ((display-fn
          (lambda (buffer alist)
            (when-let (window (or (display-buffer-reuse-window buffer alist)
@@ -38,6 +42,7 @@
   )
 
 (defun ecloud-display-buffer (buffer)
+  "Function to display ecloud `BUFFER."
   (let ((window (funcall ecloud-display-buffer-function buffer)))
     (when ecloud-display-buffer-select
       (select-frame-set-input-focus
@@ -45,13 +50,14 @@
   )
 
 (defun ecloud-insert-kv-list (kvlist)
+  "Function to insert key value list `KVLIST in a buffer."
   (-map (lambda (elem)
-           (insert (propertize (format "%s: " (car elem))
-                               'face 'magit-section-heading))
-           (insert (format "%s\n" (cdr elem)))) kvlist))
+          (insert (propertize (format "%s: " (car elem))
+                              'face 'magit-section-heading))
+          (insert (format "%s\n" (cdr elem)))) kvlist))
 
 (defun ecloud-read-int (prompt &optional initial-input history default-value
-                                 inherit-input-method no-whitespace)
+                               inherit-input-method no-whitespace)
   "Read an integer from the minibuffer, prompting with string PROMPT.
 
 * empty input is not allowed

@@ -1,4 +1,4 @@
-;;; ecloud-crud.el --- Handle CRUD operations for resources.  -*- lexical-binding: t; -*-
+;;; ecloud-model.el --- Handle MODEL operations for resources.  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2018 The Ecloud Contributors
 
@@ -21,10 +21,14 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+;;; Commentary:
+;; Contains code to handle model operations for resources
+
 ;;; Code:
 
 (require 'eieio)
 (require 'ht)
+(require 'subr-x)
 (eval-when-compile (require 'cl))
 
 (require 'ecloud-commands)
@@ -32,15 +36,17 @@
 (defclass ecloud-base-resource ()
   ((type :initarg :type)
    (attributes :type list))
-  "Container for holding all resources of a type"
+  "Container for holding all resources of a type."
   )
 
 (cl-defmethod ecloud-get-attributes ((robj ecloud-base-resource) attrib-name)
+  "Get attribute `ATTRIB-NAME for `ROBJ"
   (if (slot-exists-p robj (intern (if (symbolp attrib-name) (symbol-name attrib-name) attrib-name )))
       (eval `(oref ,robj ,(intern (if (symbolp attrib-name) (symbol-name attrib-name) attrib-name ))))
     (cdr (assoc attrib-name (oref robj attributes)))))
 
-(cl-defmacro ecloud-define-resource-model (cloud name &rest body)
+(cl-defmacro ecloud-define-resource-model (cloud name)
+  "Create a resource model for `CLOUD and resource `NAME"
   (cl-assert (symbolp cloud))
   (cl-assert (symbolp name))
   (let ((classname (intern (format "%s-%s" cloud name))))
@@ -52,7 +58,8 @@
           (attributes :initarg :attributes)))
        )))
 
-(cl-defmacro ecloud-define-simple-resource-action (name command &rest body)
+(cl-defmacro ecloud-define-simple-resource-action (name command)
+  "Define a simple action `NAME and run the `COMMAND on invocation"
   (cl-assert (symbolp name))
   `(cl-defun ,name ()
      (interactive)
@@ -66,7 +73,8 @@
                                 nil
                                 (lambda (json-output) (message "%s" json-output))))))
 
-(cl-defmacro ecloud-define-cautious-action (name command prompt &rest body)
+(cl-defmacro ecloud-define-cautious-action (name command prompt)
+  "Define a cautious action `NAME and run the `COMMAND on invocation but ask for `PROMPT for confirmation"
   (cl-assert (symbolp name))
   `(cl-defun ,name ()
      (interactive)
@@ -86,37 +94,5 @@
                                         (lambda (json-output) (message "%s" json-output)))
              )))))
 
-(cl-defun ecloud-parse-resource-data (data class)
-
-  (-let* ((cloud (nth 0 (split-string (format "%s" class) "-")))
-          (rtype (string-join (cdr (split-string (format "%s" class) "-")) "-"))
-         (nameAttr (intern (format "%s-%s--name-attribute" cloud rtype)))
-         (nameAttrVal (if (boundp nameAttr) (symbol-value nameAttr) 'name))
-         (parsed-data (--map (make-instance class :name (cdr (assoc nameAttrVal it))
-                                            :id (cdr (assoc 'id it))
-                                            :attributes it) data)))
-
-    (ecloud-register-resource-type cloud rtype)
-    (--map (progn
-             (run-hook-with-args (intern (format "%s-%s-parser-hook" cloud rtype)) it)
-             )
-           parsed-data)
-    (ecloud-state-update-resource-type cloud rtype parsed-data)
-    ))
-
-(cl-defun ecloud-fetch-resources (class &optional force)
-  (let* ((list-cmd-var-name (intern (format "%s--list-command" class)))
-         (list-cmd (and (boundp list-cmd-var-name) (symbol-value list-cmd-var-name)))
-         (global-params-var-name (intern (format "%s--global-params" class)))
-         (global-params (and (boundp global-params-var-name) (symbol-value global-params-var-name)))
-         (ts (format-time-string "%s")))
-
-    (ecloud-run-json-command list-cmd
-                             global-params
-                             (lambda (json-output)
-                               (message "Json Output: %s" json-output)
-                               (ecloud-parse-resource-data json-output class)))
-    ))
-
-(provide 'ecloud-crud)
-;;; ecloud-crud.el ends here
+(provide 'ecloud-model)
+;;; ecloud-model.el ends here

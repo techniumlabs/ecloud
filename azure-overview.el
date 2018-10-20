@@ -43,9 +43,10 @@
 (require 'azure-appservice-plan)
 (require 'azure-public-ip)
 (require 'azure-lb)
+(require 'azure-acr)
 
 (defcustom azure-overview-list-views
-  '(account vnet vm aks)
+  '(account vnet vm aks acr)
   "Components that are part of the azure overview view."
   :package-version '(ecloud . "0.0.1")
   :group 'ecloud

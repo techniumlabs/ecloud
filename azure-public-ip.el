@@ -27,7 +27,7 @@
 ;;;; Code:
 
 (require 'magit)
-(require 'ecloud-crud)
+(require 'ecloud-model)
 (require 'ecloud-state)
 (require 'ecloud-view)
 (require 'ecloud-mode)

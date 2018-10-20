@@ -27,7 +27,7 @@
 
 (require 'magit)
 (require 'ecloud-mode)
-(require 'ecloud-crud)
+(require 'ecloud-model)
 (require 'azure-overview)
 (require 'aws-overview)
 (require 'gcp-overview)

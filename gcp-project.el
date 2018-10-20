@@ -26,7 +26,7 @@
 
 ;;; Code:
 
-(require 'ecloud-crud)
+(require 'ecloud-model)
 (require 'ecloud-state)
 (require 'eieio)
 (eval-when-compile (require 'cl))
@@ -48,11 +48,11 @@
   (let ((map (make-sparse-keymap)))
     (define-key map "h" 'gcp-project-popup)
     map)
-  "Keymap for the `gcp-project' section.")
+  "Keymap for the section `gcp-project.")
 
 (magit-define-popup gcp-project-popup
   "Popup console for gcp project"
-  :group 'ecloud
+  'ecloud
   :actions
   '("Gcp project commands"
     (?s "Set current" gcp-project-set-default)))

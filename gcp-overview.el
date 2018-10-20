@@ -36,11 +36,12 @@
   '(project)
   "Components that are part of the gcp overview view."
   :package-version '(ecloud . "0.0.1")
-  :group 'ecloud)
+  :group 'ecloud
+  :type 'list)
 
 (magit-define-popup gcp-overview-dispatch-popup
   "Popup console for showing an overview of available popup commands."
-  :group 'ecloud
+  'ecloud
   :actions
   '("Popup and dwim commands"
     (?a "Account" gcp-account-popup)))
@@ -69,14 +70,15 @@ The sections are inserted by running the functions on the hook
   (ecloud-insert-error-view 'gcp))
 
 (defun gcp-overview-refresh-buffer ()
+  "Function to refresh gcp overview buffer."
   (interactive)
   ;; Trigger Refresh data
-  (--map (let ((rtype (intern (format "gcp-%s" it))))
-           (ecloud-fetch-resources rtype))
-         gcp-overview-list-views)
+  (-each gcp-overview-list-views (lambda (it) (let ((rtype (intern (format "gcp-%s" it))))
+                                                (ecloud-fetch-resources rtype))))
   (gcp-overview-refresh-view))
 
 (defun gcp-overview-refresh-view ()
+  "Function to refresh the gcp overview view."
   (magit-insert-section (status)
     (magit-run-section-hook 'gcp-overview-sections-hook)))
 
@@ -96,11 +98,12 @@ The sections are inserted by running the functions on the hook
 
 ;;;###autoload
 (defun gcp-overview ()
-  "Display an overview buffer for gcp"
+  "Display an overview buffer for gcp."
   (interactive)
-  (gcp-overview-internal default-directory))
+  (gcp-overview-internal))
 
-(defun gcp-overview-internal (directory)
+(defun gcp-overview-internal ()
+  "Internal function for displaying gcp overview view."
   (ecloud-mode-setup #'gcp-overview-mode))
 
 (provide 'gcp-overview)
