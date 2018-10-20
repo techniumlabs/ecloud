@@ -29,7 +29,16 @@ lint:
                 --no-fill-column \
 		$(LINTELS)
 
-test : lint
+package-lint:
+	${CASK} exec $(EMACS) -Q --batch \
+		--eval "(require 'package)" \
+		--eval "(push '(\"melpa\" . \"http://melpa.org/packages/\") package-archives)" \
+		--eval "(package-initialize)" \
+		--eval "(package-refresh-contents)" \
+		-l package-lint.el -f package-lint-batch-and-exit \
+    ecloud.el
+
+test : lint package-lint
 	${CASK} clean-elc
 	${CASK} exec buttercup -L . --debug
 

@@ -1,4 +1,4 @@
-;;; ecloud.el --- Magit-like porcelain for accessing gcp, azure and aws.  -*- lexical-binding: t; -*-
+;;; ecloud.el --- Magit-like porcelain for gcp, azure and aws.  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2018 The Ecloud Contributors
 
@@ -7,6 +7,7 @@
 ;; Version: 0.0.1
 
 ;; Package-Requires: ((emacs "25.1") (dash "2.14.1") (magit "2.13.0") (ht "2.2") (s "1.12.0") (pcache "0.4.2"))
+;; URL: https://github.com/techniumlabs/ecloud
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by

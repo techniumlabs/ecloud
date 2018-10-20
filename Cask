@@ -18,4 +18,5 @@
  (depends-on "undercover")
  (depends-on "noflet")
  (depends-on "ert-runner")
- (depends-on "f"))
+ (depends-on "f")
+ (depends-on "package-lint"))
