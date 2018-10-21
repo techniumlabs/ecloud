@@ -170,8 +170,7 @@
 
 (cl-defun ecloud-parse-resource-data (data class &optional ts)
   "Parse the resource data `DATA for the `CLASS and update metadata with timestamp `ts"
-  (-let* ((cloud (nth 0 (split-string (format "%s" class) "-")))
-          (rtype (string-join (cdr (split-string (format "%s" class) "-")) "-"))
+  (-let* (((cloud . rtype) (ecloud-class-to-cloud-and-rtype class))
           (nameAttr (intern (format "%s-%s--name-attribute" cloud rtype)))
           (nameAttrVal (if (boundp nameAttr) (symbol-value nameAttr) 'name))
           (parsed-data (--map (make-instance class :name (cdr (assoc nameAttrVal it))
@@ -185,23 +184,20 @@
 
 (cl-defun ecloud-fetch-resources (class &optional force)
   "Fetch updated resources for `CLASS on `FORCE or if no update time is expired"
-  (let* ((cloud (nth 0 (split-string (format "%s" class) "-")))
-         (rtype (string-join (cdr (split-string (format "%s" class) "-")) "-"))
-         (list-cmd-var-name (intern (format "%s--list-command" class)))
-         (list-cmd (and (boundp list-cmd-var-name) (symbol-value list-cmd-var-name)))
-         (global-params-var-name (intern (format "%s--global-params" class)))
-         (global-params (and (boundp global-params-var-name) (symbol-value global-params-var-name)))
-         (no-update-time-var-name (intern (format "%s--no-update-time" class)))
-         (no-update-time (if (boundp no-update-time-var-name)(symbol-value no-update-time-var-name) ecloud-default-no-fetch-time))
-         (ts (format-time-string "%s"))
-         (lastts (ecloud-get-resource-type-modified-ts cloud rtype)))
+  (-let* (((cloud . rtype) (ecloud-class-to-cloud-and-rtype class))
+          (list-cmd-var-name (intern (format "%s--list-command" class)))
+          (list-cmd (and (boundp list-cmd-var-name) (symbol-value list-cmd-var-name)))
+          (global-params-var-name (intern (format "%s--global-params" class)))
+          (global-params (and (boundp global-params-var-name) (symbol-value global-params-var-name)))
+          (no-update-time-var-name (intern (format "%s--no-update-time" class)))
+          (no-update-time (if (boundp no-update-time-var-name)(symbol-value no-update-time-var-name) ecloud-default-no-fetch-time))
+          (ts (format-time-string "%s"))
+          (lastts (ecloud-get-resource-type-modified-ts cloud rtype)))
     (if (or force (> (- (string-to-number ts) (string-to-number lastts)) no-update-time))
         (ecloud-run-json-command list-cmd
                                  global-params
                                  (lambda (json-output)
-                                   (ecloud-parse-resource-data json-output class ts))))
-    )
-  )
+                                   (ecloud-parse-resource-data json-output class ts))))))
 
 (provide 'ecloud-state)
 ;;; ecloud-state.el ends here

@@ -56,6 +56,12 @@
                               'face 'magit-section-heading))
           (insert (format "%s\n" (cdr elem)))) kvlist))
 
+(defun ecloud-class-to-cloud-and-rtype (class)
+  "Function to convert `CLASS to cloud and rtype."
+  (cons (nth 0 (split-string (format "%s" class) "-"))
+        (string-join (cdr (split-string (format "%s" class) "-")) "-"))
+  )
+
 (defun ecloud-read-int (prompt &optional initial-input history default-value
                                inherit-input-method no-whitespace)
   "Read an integer from the minibuffer, prompting with string PROMPT.
