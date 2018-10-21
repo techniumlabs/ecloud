@@ -65,7 +65,7 @@ Returns the process object for this execution of kubectl."
                 :command command
                 :noquery t
                 :sentinel
-                (lambda (proc)
+                (lambda (proc status)
                   (unwind-protect
                       (let ((exit-code (process-exit-status proc)))
                         (cond
@@ -76,7 +76,7 @@ Returns the process object for this execution of kubectl."
                           (let ((err-message (with-current-buffer err-buf (buffer-string))))
                             (unless (= 9 exit-code)
                               (progn
-                                (ecloud-state-add-error cloud (string-join (append (list (format "[%s]" (current-time-string))) command) " ") err-message)
+                                (ecloud-state-add-error cloud (string-join (append (list (format "[%s]:%s" (current-time-string) status)) command) " ") err-message)
                                 (cond (on-error (funcall on-error err-buf)))
                                 ))))))
                     (when cleanup-cb
