@@ -199,5 +199,16 @@
                                  (lambda (json-output)
                                    (ecloud-parse-resource-data json-output class ts))))))
 
+(cl-defun ecloud-fetch-resources-general (class cmd params &optional on-success on-failure)
+  "Function to fetch resources given `CLASS. `CMD is the command to run to fetch the resources.
+`PARAMS is the additional params that you want to pass.
+`ON-SUCCESS is the callback function to run on success. If none provided default parser is used.
+`ON-FAILURE is the callback function to run on failure. If none provided no action is taken."
+  (-let* ((ts (format-time-string "%s")))
+    (if on-success
+        (ecloud-run-json-command cmd params on-success on-failure)
+      (ecloud-run-json-command cmd params (lambda (json-output)
+                                            (ecloud-parse-resource-data json-output class ts))))))
+
 (provide 'ecloud-state)
 ;;; ecloud-state.el ends here
