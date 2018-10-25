@@ -39,11 +39,27 @@
   "Container for holding all resources of a type."
   )
 
+(cl-defmethod ecloud-resource-name ((robj ecloud-base-resource))
+  "Returns name of the resource instance `ROBJ"
+  (oref robj name))
+
+(cl-defmethod ecloud-resource-id ((robj ecloud-base-resource))
+  "Returns id of the resource instance `ROBJ"
+  (oref robj id))
+
 (cl-defmethod ecloud-get-attributes ((robj ecloud-base-resource) attrib-name)
   "Get attribute `ATTRIB-NAME for `ROBJ"
   (if (slot-exists-p robj (intern (if (symbolp attrib-name) (symbol-name attrib-name) attrib-name )))
       (eval `(oref ,robj ,(intern (if (symbolp attrib-name) (symbol-name attrib-name) attrib-name ))))
     (cdr (assoc attrib-name (oref robj attributes)))))
+
+(cl-defmethod ecloud-resource-belongs-to-type ((robj ecloud-base-resource))
+  "Returns associated resource that `ROBJ belongs to"
+  (asoc-keys (oref robj belongs-to)))
+
+(cl-defmethod ecloud-resource-has-type ((robj ecloud-base-resource))
+  "Returns associated resource type that `ROBJ has"
+  (asoc-keys (oref robj has)))
 
 (cl-defmacro ecloud-define-resource-model (cloud name)
   "Create a resource model for `CLOUD and resource `NAME"
@@ -55,7 +71,9 @@
          ((type :initform ,name)
           (id :initarg :id)
           (name :initarg :name)
-          (attributes :initarg :attributes)))
+          (attributes :initarg :attributes)
+          (belongs-to :initarg :belongs-to)
+          (has :initarg :has)))
        )))
 
 (cl-defmacro ecloud-define-simple-resource-action (name command)
