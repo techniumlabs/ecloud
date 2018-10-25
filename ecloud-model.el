@@ -47,7 +47,7 @@
   "Returns id of the resource instance `ROBJ"
   (oref robj id))
 
-(cl-defmethod ecloud-get-attributes ((robj ecloud-base-resource) attrib-name)
+(cl-defmethod ecloud-resource-attribute ((robj ecloud-base-resource) attrib-name)
   "Get attribute `ATTRIB-NAME for `ROBJ"
   (if (slot-exists-p robj (intern (if (symbolp attrib-name) (symbol-name attrib-name) attrib-name )))
       (eval `(oref ,robj ,(intern (if (symbolp attrib-name) (symbol-name attrib-name) attrib-name ))))
@@ -86,7 +86,7 @@
 
        (ecloud-run-json-command (--map (if (stringp it)
                                            it
-                                         (ecloud-get-attributes value it))
+                                         (ecloud-resource-attribute value it))
                                        ',command)
                                 nil
                                 (lambda (json-output) (message "%s" json-output))))))
@@ -102,11 +102,11 @@
        (if ',prompt
            (-if-let* ((confirm (magit-confirm t (apply 'format (--map (if (stringp it)
                                                                           it
-                                                                        (ecloud-get-attributes value it))
+                                                                        (ecloud-resource-attribute value it))
                                                                       ',prompt)))))
                (ecloud-run-json-command (--map (if (stringp it)
                                                    it
-                                                 (ecloud-get-attributes value it))
+                                                 (ecloud-resource-attribute value it))
                                                ',command)
                                         nil
                                         (lambda (json-output) (message "%s" json-output)))

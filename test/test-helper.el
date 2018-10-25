@@ -45,7 +45,7 @@
            (rtype (string-join (cdr (split-string (symbol-name ,class) "-" "-")) "-"))
            (robjs (ecloud-state--get-all-resource-type cloud rtype)))
      (-filter (lambda (robj)
-                (--all? (equal (ecloud-get-attributes (cadr robj) (car it)) (cadr it)) ',attrib-value-list))
+                (--all? (equal (ecloud-resource-attribute (cadr robj) (car it)) (cadr it)) ',attrib-value-list))
               robjs)))
 
 (cl-defmacro ecloud-resource-count (class)

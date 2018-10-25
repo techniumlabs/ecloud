@@ -55,7 +55,7 @@
                                             (list (->> robjs
                                                        (-map
                                                         (-lambda (obj)
-                                                          (length (let ((aval (ecloud-get-attributes (nth 1 obj) it)))
+                                                          (length (let ((aval (ecloud-resource-attribute (nth 1 obj) it)))
                                                                     (cond ((equal :json-false aval) "false")
                                                                           ((equal t aval) "true")
                                                                           ((stringp aval) aval))))))
@@ -83,7 +83,7 @@
              (if (> (length robjs) 0)
                  (-map (-lambda ((name obj))
                          (message "%s" name)
-                         (-let ((strout (apply #'format flist (-map (lambda (x) (let ((aval (ecloud-get-attributes obj x)))
+                         (-let ((strout (apply #'format flist (-map (lambda (x) (let ((aval (ecloud-resource-attribute obj x)))
                                                                                   (cond ((equal :json-false aval) "false")
                                                                                         ((equal t aval) "true")
                                                                                         ((stringp aval) aval))))
