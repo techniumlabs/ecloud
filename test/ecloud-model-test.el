@@ -22,10 +22,20 @@
            (ecloud-define-resource-model azure vnet)
            (setq resource-instance (make-instance 'azure-vnet
                                                   :name "test"
-                                                  :id "test-id")))
+                                                  :id "test-id"
+                                                  :has '((azure-subnet (list "test-subnet-1")))
+                                                  :belongs-to '((azure-resource-group (list "test-rg"))))
+                 ))
 
           (it "Should have a name if defined"
               (expect (ecloud-resource-name resource-instance) :to-equal "test"))
 
           (it "Should have an id if defined"
-              (expect (ecloud-resource-id resource-instance) :to-equal "test-id")))
+              (expect (ecloud-resource-id resource-instance) :to-equal "test-id"))
+
+          (it "Should give all associated resource type it has"
+              (expect (ecloud-resource-has-type resource-instance) :to-equal '(azure-subnet)))
+
+          (it "Should give all associated resource type it belongs to"
+              (expect (ecloud-resource-belongs-to-type resource-instance) :to-equal '(azure-resource-group)))
+          )
