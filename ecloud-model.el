@@ -54,12 +54,20 @@
     (cdr (assoc attrib-name (oref robj attributes)))))
 
 (cl-defmethod ecloud-resource-belongs-to-type ((robj ecloud-base-resource))
-  "Returns associated resource that `ROBJ belongs to"
+  "Returns associated resource type that `ROBJ belongs to"
   (asoc-keys (oref robj belongs-to)))
+
+(cl-defmethod ecloud-resource-belongs-to ((robj ecloud-base-resource) &optional type)
+  "Returns associated resource that `ROBJ belongs to"
+  (asoc-get (oref robj belongs-to) type))
 
 (cl-defmethod ecloud-resource-has-type ((robj ecloud-base-resource))
   "Returns associated resource type that `ROBJ has"
   (asoc-keys (oref robj has)))
+
+(cl-defmethod ecloud-resource-has ((robj ecloud-base-resource) &optional type)
+  "Returns for `ROBJ the associated resource of `TYPE"
+  (asoc-get (oref robj has) type))
 
 (cl-defmacro ecloud-define-resource-model (cloud name)
   "Create a resource model for `CLOUD and resource `NAME"
