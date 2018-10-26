@@ -61,6 +61,22 @@
   "Returns associated resource that `ROBJ belongs to"
   (asoc-get (oref robj belongs-to) type))
 
+(cl-defmethod ecloud-resource-add-belongs-to ((robj ecloud-base-resource) type value)
+  "Add a new belongs to association for `ROBJ with `TYPE and `VALUE"
+  (-let ((res (ecloud-resource-belongs-to robj type))
+         (btolist (oref robj belongs-to)))
+    (push value res)
+    (asoc-put! btolist type res t)
+    (oset robj belongs-to btolist)))
+
+(cl-defmethod ecloud-resource-delete-belongs-to ((robj ecloud-base-resource) type value)
+  "Deletes an existing belongs to association for `ROBJ with `TYPE and `VALUE"
+  (-let* ((res (ecloud-resource-belongs-to robj type))
+          (newres (delete value res))
+          (btolist (oref robj belongs-to)))
+    (asoc-put! btolist type newres t)
+    (oset robj belongs-to btolist)))
+
 (cl-defmethod ecloud-resource-has-type ((robj ecloud-base-resource))
   "Returns associated resource type that `ROBJ has"
   (asoc-keys (oref robj has)))
@@ -68,6 +84,22 @@
 (cl-defmethod ecloud-resource-has ((robj ecloud-base-resource) &optional type)
   "Returns for `ROBJ the associated resource of `TYPE"
   (asoc-get (oref robj has) type))
+
+(cl-defmethod ecloud-resource-add-has ((robj ecloud-base-resource) type value)
+  "Add a new association for `ROBJ to `TYPE and `VALUE"
+  (-let ((res (ecloud-resource-has robj type))
+         (haslist (oref robj has)))
+    (push value res)
+    (asoc-put! haslist type res t)
+    (oset robj has haslist)))
+
+(cl-defmethod ecloud-resource-delete-has ((robj ecloud-base-resource) type value)
+  "Remove an existing association for `ROBJ to `TYPE and `VALUE"
+  (-let* ((res (ecloud-resource-has robj type))
+         (newres (delete value res))
+         (haslist (oref robj has)))
+    (asoc-put! haslist type newres t)
+    (oset robj has haslist)))
 
 (cl-defmacro ecloud-define-resource-model (cloud name)
   "Create a resource model for `CLOUD and resource `NAME"

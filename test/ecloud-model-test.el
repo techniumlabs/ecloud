@@ -23,8 +23,9 @@
            (setq resource-instance (make-instance 'azure-vnet
                                                   :name "test"
                                                   :id "test-id"
-                                                  :has (list (cons "azure-subnet" (list "test-subnet-1")))
-                                                  :belongs-to (list (cons "azure-resource-group" (list "test-rg"))))
+                                                  :has (list (cons "azure-subnet" (list "test-subnet-0"
+                                                                                        "test-subnet-1")))
+                                                  :belongs-to (list (cons "azure-resource-group" (list "test-rg-1"))))
                  ))
 
           (it "Should have a name if defined"
@@ -40,8 +41,28 @@
               (expect (ecloud-resource-belongs-to-type resource-instance) :to-equal '("azure-resource-group")))
 
           (it "Should give all associated resource of type it has"
-              (expect (ecloud-resource-has resource-instance "azure-subnet") :to-equal (list "test-subnet-1") ))
+              (expect (ecloud-resource-has resource-instance "azure-subnet") :to-equal (list "test-subnet-0"
+                                                                                             "test-subnet-1") ))
 
           (it "Should give all associated resource of type it belongs to"
-              (expect (ecloud-resource-belongs-to resource-instance "azure-resource-group") :to-equal (list "test-rg")))
+              (expect (ecloud-resource-belongs-to resource-instance "azure-resource-group") :to-equal (list "test-rg-1")))
+
+          (it "Should add new association it has"
+              (ecloud-resource-add-has resource-instance "azure-subnet" "test-subnet-2")
+              (expect (ecloud-resource-has resource-instance "azure-subnet") :to-have-same-items-as (list "test-subnet-0" "test-subnet-1" "test-subnet-2"))
+              )
+
+          (it "Should remove any existing association it has"
+              (ecloud-resource-delete-has resource-instance "azure-subnet" "test-subnet-1")
+              (expect (ecloud-resource-has resource-instance "azure-subnet") :to-equal (list "test-subnet-0"))
+              (ecloud-resource-delete-has resource-instance "azure-subnet" "test-subnet-0")
+              (expect (ecloud-resource-has resource-instance "azure-subnet") :to-equal nil))
+
+          (it "Should add new belongs to association"
+              (ecloud-resource-add-belongs-to resource-instance "azure-resource-group" "test-rg-0")
+              (expect (ecloud-resource-belongs-to resource-instance "azure-resource-group") :to-have-same-items-as (list "test-rg-0" "test-rg-1")))
+
+          (it "Should remove any existing belongs to association"
+              (ecloud-resource-delete-belongs-to resource-instance "azure-resource-group" "test-rg-1")
+              (expect (ecloud-resource-belongs-to resource-instance "azure-resource-group") :to-equal nil))
           )
