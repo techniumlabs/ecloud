@@ -96,8 +96,8 @@
 (cl-defmethod ecloud-resource-delete-has ((robj ecloud-base-resource) type value)
   "Remove an existing association for `ROBJ to `TYPE and `VALUE"
   (-let* ((res (ecloud-resource-has robj type))
-         (newres (delete value res))
-         (haslist (oref robj has)))
+          (newres (delete value res))
+          (haslist (oref robj has)))
     (asoc-put! haslist type newres t)
     (oset robj has haslist)))
 
