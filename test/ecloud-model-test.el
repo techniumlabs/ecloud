@@ -47,9 +47,15 @@
           (it "Should give all associated resource of type it belongs to"
               (expect (ecloud-resource-belongs-to resource-instance "azure-resource-group") :to-equal (list "test-rg-1")))
 
-          (it "Should add new association it has"
+          (it "Should add new association it has for existing type"
               (ecloud-resource-add-has resource-instance "azure-subnet" "test-subnet-2")
               (expect (ecloud-resource-has resource-instance "azure-subnet") :to-have-same-items-as (list "test-subnet-0" "test-subnet-1" "test-subnet-2"))
+              )
+
+          (it "Should add new association it has for new type"
+              (ecloud-resource-add-has resource-instance "azure-route-table" "test-rt-0")
+              (ecloud-resource-add-has resource-instance "azure-route-table" "test-rt-1")
+              (expect (ecloud-resource-has resource-instance "azure-route-table") :to-have-same-items-as (list "test-rt-0" "test-rt-1"))
               )
 
           (it "Should remove any existing association it has"
@@ -58,9 +64,14 @@
               (ecloud-resource-delete-has resource-instance "azure-subnet" "test-subnet-0")
               (expect (ecloud-resource-has resource-instance "azure-subnet") :to-equal nil))
 
-          (it "Should add new belongs to association"
+          (it "Should add new belongs to association for already existing type"
               (ecloud-resource-add-belongs-to resource-instance "azure-resource-group" "test-rg-0")
               (expect (ecloud-resource-belongs-to resource-instance "azure-resource-group") :to-have-same-items-as (list "test-rg-0" "test-rg-1")))
+
+          (it "Should add new belongs to association for new type"
+              (ecloud-resource-add-belongs-to resource-instance "azure-account" "test-account-0")
+              (ecloud-resource-add-belongs-to resource-instance "azure-account" "test-account-1")
+              (expect (ecloud-resource-belongs-to resource-instance "azure-account") :to-have-same-items-as (list "test-account-0" "test-account-1")))
 
           (it "Should remove any existing belongs to association"
               (ecloud-resource-delete-belongs-to resource-instance "azure-resource-group" "test-rg-1")
