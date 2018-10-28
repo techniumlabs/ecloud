@@ -47,7 +47,7 @@
           (it "Should give all associated resource of type it belongs to"
               (expect (ecloud-resource-belongs-to resource-instance "azure-resource-group") :to-equal (list "test-rg-1")))
 
-          (it "Should add new association it has for existing type"
+          (it "Should add new association for existing type"
               (ecloud-resource-add-has resource-instance "azure-subnet" "test-subnet-2")
               (expect (ecloud-resource-has resource-instance "azure-subnet") :to-have-same-items-as (list "test-subnet-0" "test-subnet-1" "test-subnet-2"))
               )

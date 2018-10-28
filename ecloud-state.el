@@ -145,6 +145,8 @@
     (if (and rorig robj
              (s-equals? (oref rorig name) (oref robj name))
              (s-equals? (oref rorig id) (oref robj id))
+             (equal (ecloud-resource-has rorig) (ecloud-resource-has robj))
+             (equal (ecloud-resource-belongs-to rorig) (ecloud-resource-belongs-to robj))
              (equal (oref rorig attributes) (oref robj attributes)))
         t
       nil)))
@@ -155,10 +157,15 @@
   (-each objs (lambda (it) (ecloud-state-update-resource cloud rtype (oref it name) it)))
   (ecloud-set-resource-type-modified-ts cloud rtype ts))
 
+(defun ecloud-state-append-resource-type (cloud rtype objs &optional ts)
+  "Add the resources to CLOUD RTYPE with list of OBJS and TS."
+  (-each objs (lambda (it) (ecloud-state-update-resource cloud rtype (oref it name) it)))
+  (ecloud-set-resource-type-modified-ts cloud rtype ts))
+
 (defun ecloud-state-update-resource (cloud rtype rname robj)
   "Update the resource for CLOUD, RTYPE and RNAME with ROBJ and optional TS."
   (unless (ecloud-state-resource-equalp cloud rtype rname robj)
-    (progn (ht-set! (ecloud-get-resource-type-data cloud rtype) rname robj)
+    (progn (ht-set! (ecloud-get-resource-type-data cloud rtype) (ecloud-resource-id robj) robj)
            ;; Cache the results for future use
            (let ((repo (pcache-repository (format "ecloud/%s/%s" cloud rtype))))
              (pcache-put repo rname robj))
@@ -168,18 +175,23 @@
   "Get all resource of a CLOUD RTYPE."
   (ht-items (cdr (assoc :data (ecloud-get-resource-type-state cloud rtype)))))
 
-(cl-defun ecloud-parse-resource-data (data class &optional ts)
-  "Parse the resource data `DATA for the `CLASS and update metadata with timestamp `ts"
+(cl-defun ecloud-parse-resource-data (data class &optional ts append)
+  "Parse the resource data `DATA for the `CLASS and update metadata with timestamp `ts and return list of parsed data"
   (-let* (((cloud . rtype) (ecloud-class-to-cloud-and-rtype class))
           (nameAttr (intern (format "%s-%s--name-attribute" cloud rtype)))
           (nameAttrVal (if (boundp nameAttr) (symbol-value nameAttr) 'name))
-          (parsed-data (--map (make-instance class :name (cdr (assoc nameAttrVal it))
-                                             :id (cdr (assoc 'id it))
-                                             :attributes it) data)))
+          (parsed-data (--map (make-instance (if (stringp class) (intern class) class) :name (cdr (assoc nameAttrVal it))
+                                             :id (if (cdr (assoc 'id it)) (cdr (assoc 'id it)) (cdr (assoc nameAttrVal it)))
+                                             :attributes it
+                                             :has nil
+                                             :belongs-to nil) data)))
 
     (ecloud-register-resource-type cloud rtype)
+    (if append
+        (ecloud-state-append-resource-type cloud rtype parsed-data ts)
+      (ecloud-state-update-resource-type cloud rtype parsed-data ts))
     (-each parsed-data (lambda (it) (run-hook-with-args (intern (format "%s-%s-parser-hook" cloud rtype)) it)))
-    (ecloud-state-update-resource-type cloud rtype parsed-data ts)
+    parsed-data
     ))
 
 (cl-defun ecloud-fetch-resources (class &optional force)
