@@ -73,6 +73,7 @@
 (defvar magit-azure-vnet-section-map
   (let ((map (make-sparse-keymap)))
     (define-key map "p" 'azure-overview-print-section)
+    (define-key map [tab] 'magit-section-cycle)
     map)
   "Keymap for the `azure-vnet-section'.")
 
