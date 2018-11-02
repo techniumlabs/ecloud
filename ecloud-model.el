@@ -89,6 +89,7 @@
   "Add a new association for `ROBJ to `TYPE and `VALUE"
   (let ((res (ecloud-resource-has robj type))
         (haslist (oref robj has)))
+    (message "%s" value)
     (asoc-put! haslist type res t)
     (oset robj has haslist)))
 
