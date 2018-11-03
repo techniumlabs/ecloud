@@ -29,6 +29,7 @@
 (require 'eieio)
 (require 'ht)
 (require 'subr-x)
+(require 'asoc)
 (eval-when-compile (require 'cl))
 
 (require 'ecloud-commands)
