@@ -11,6 +11,7 @@
 (depends-on "ht")
 (depends-on "magit")
 (depends-on "pcache")
+(depends-on "s")
 
 (development
  (depends-on "elisp-lint")
