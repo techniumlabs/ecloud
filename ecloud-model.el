@@ -89,9 +89,12 @@
   "Add a new association for `ROBJ to `TYPE and `VALUE"
   (let ((res (ecloud-resource-has robj type))
         (haslist (oref robj has)))
-    (message "%s" value)
+    (push value res)
+    (message "After push")
     (asoc-put! haslist type res t)
-    (oset robj has haslist)))
+    (message "After asoc")
+    (oset robj has haslist)
+    (message "After oset")))
 
 (cl-defmethod ecloud-resource-delete-has ((robj ecloud-base-resource) type value)
   "Remove an existing association for `ROBJ to `TYPE and `VALUE"
