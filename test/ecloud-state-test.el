@@ -27,7 +27,7 @@
               (expect (ht-size (ecloud-state)) :to-equal 1)
               (expect (ecloud-get-cloud-state "azure") :not :to-equal nil)))
 
-(describe "Wen registering resource type"
+(describe "When registering resource type"
           (before-each
            (ecloud-register-resource-type "azure" "vnet"))
 
@@ -37,3 +37,13 @@
 
           (it "Resource type for the cloud should be initialized"
               (expect (ecloud-get-resource-type-state "azure" "vnet") :not :to-equal nil)))
+
+(describe "On Fetching"
+          (before-each
+           (ecloud-register-resource-type "azure" "vnet")
+           (ecloud-define-resource-model azure vnet)
+           (ecloud-parse-resource-data (test-helper-json-resource "azure-vnet-list-response.json") 'azure-vnet))
+
+          (it "A resource type should give all resources for the type"
+              (expect (length (ecloud-state--get-all-resource-type "azure" "vnet")) :to-equal 1))
+          )
