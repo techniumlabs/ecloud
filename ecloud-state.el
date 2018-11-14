@@ -171,9 +171,23 @@
              (pcache-put repo rname robj))
            (ecloud-refresh-all-views))))
 
-(defun ecloud-state--get-all-resource-type (cloud rtype)
-  "Get all resource of a CLOUD RTYPE."
-  (ht-items (cdr (assoc :data (ecloud-get-resource-type-state cloud rtype)))))
+(defun ecloud-state--get-all-resource-type (cloud rtype &optional belongs-to)
+  "Get all resource of a CLOUD RTYPE.
+Optional `BELONGS-TO if present include only resources that belongs to the resource."
+  (if belongs-to
+      (ecloud-state--get-all-resource-belonging-to cloud rtype belongs-to)
+    (--map (nth 1 it) (ht-items (cdr (assoc :data (ecloud-get-resource-type-state cloud rtype)))))))
+
+(defun ecloud-state--get-resource-by-name (cloud rtype name)
+  "Get resources of a CLOUD RTYPE with NAME."
+  (--filter (equal (ecloud-resource-name it) name)
+            (ecloud-state--get-all-resource-type cloud rtype)))
+
+(defun ecloud-state--get-all-resource-belonging-to (cloud rtype robj)
+  "Get all resource for `CLOUD `RTYPE that belongs to `ROBJ."
+  (--filter (member (ecloud-resource-id robj) (ecloud-resource-belongs-to it (ecloud-resource-type robj)))
+            (ecloud-state--get-all-resource-type cloud rtype))
+  )
 
 (cl-defun ecloud-parse-resource-data (data class &optional ts append)
   "Parse the resource data `DATA for the `CLASS and update metadata with timestamp `ts and return list of parsed data"

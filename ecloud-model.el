@@ -48,6 +48,10 @@
   "Returns id of the resource instance `ROBJ"
   (oref robj id))
 
+(cl-defmethod ecloud-resource-type ((robj ecloud-base-resource))
+  "Returns type of the resource instance `ROBJ"
+  (symbol-name (eieio-object-class-name robj)))
+
 (cl-defmethod ecloud-resource-attribute ((robj ecloud-base-resource) attrib-name)
   "Get attribute `ATTRIB-NAME for `ROBJ"
   (if (slot-exists-p robj (intern (if (symbolp attrib-name) (symbol-name attrib-name) attrib-name )))

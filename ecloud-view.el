@@ -40,14 +40,16 @@
         (erase-buffer)
         (funcall (intern (format "%s-refresh-view" (substring (symbol-name major-mode) 0 -5))))))))
 
-(defun ecloud-insert-list-views (cloud views)
-  "Function to insert for `CLOUD the specified `VIEWS."
+(defun ecloud-insert-list-views (cloud views &optional belongs-to)
+  "Function to insert for `CLOUD the specified `VIEWS.
+If `BELONGS-TO is specified then only resources that belongs to resource should be used."
   (--map (-let* ((view-name (format "%s-%s" cloud it))
                  (detailed-view-hook (intern (format "%s-%s-detailed-view-hook" cloud it)))
                  (params-name (intern (format "%s-%s-list-view-display-params" cloud it)))
                  (robjs (ecloud-state--get-all-resource-type
                          (symbol-name cloud)
-                         (symbol-name it)))
+                         (symbol-name it)
+                         belongs-to))
                  (align-length (if (> (length robjs) 0)
                                    (-flatten
                                     (--map
@@ -55,7 +57,7 @@
                                             (list (->> robjs
                                                        (-map
                                                         (-lambda (obj)
-                                                          (length (let ((aval (ecloud-resource-attribute (nth 1 obj) it)))
+                                                          (length (let ((aval (ecloud-resource-attribute obj it)))
                                                                     (cond ((equal :json-false aval) "false")
                                                                           ((equal t aval) "true")
                                                                           ((stringp aval) aval))))))
@@ -81,8 +83,7 @@
                                      'face 'magit-section-heading)))
                (insert ?\n))
              (if (> (length robjs) 0)
-                 (-map (-lambda ((name obj))
-                         (message "%s" name)
+                 (-map (-lambda (obj)
                          (-let ((strout (apply #'format flist (-map (lambda (x) (let ((aval (ecloud-resource-attribute obj x)))
                                                                                   (cond ((equal :json-false aval) "false")
                                                                                         ((equal t aval) "true")

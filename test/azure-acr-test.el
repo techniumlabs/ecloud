@@ -8,13 +8,14 @@
 (require 'dash)
 (require 'magit)
 (require 'azure-acr)
+(require 'eieio-opt)
+(eval-when-compile (require 'cl))
 
 
 (describe "Azure Acr"
           (describe "When Parsing a valid response"
                     (before-each (progn
                                    (ecloud-state-init)
-                                   (ecloud-define-resource-model azure acr)
                                    (ecloud-parse-resource-data
                                     (test-helper-json-resource "azure-acr-list-response.json")
                                     'azure-acr)))
@@ -23,7 +24,10 @@
                         (expect (has-resource azure-acr (("name" "techniumlabs")
                                                          ("id" "/subscriptions/12345678-73a9-44e3-b70f-ee9206029c60/resourceGroups/azure-operator/providers/Microsoft.ContainerRegistry/registries/techniumlabs")))
                                 :not :to-be nil)
-                        (expect (ecloud-resource-count azure-acr) :to-be 1))
+                        (expect (ecloud-resource-count azure-acr) :to-be 1)
+                        (-let ((obj (first (ecloud-state--get-all-resource-type "azure" "acr"))))
+                          (expect (ecloud-resource-name  obj) :to-match "techniumlabs"))
+                        )
 
                     (it "Should correctly display view"
                         (with-temp-buffer

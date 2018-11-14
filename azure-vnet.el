@@ -43,6 +43,11 @@
   '(name address-list location)
   "List of attributes to display in list view.")
 
+
+(defvar azure-subnet-list-view-display-params
+  '(name addressPrefix)
+  "List of attributes to display in list view.")
+
 ;; Model for Azure Vnet, subnet
 (ecloud-define-resource-model azure vnet)
 (ecloud-define-resource-model azure subnet)
@@ -50,12 +55,21 @@
 ;; View for Azure Vnet
 (ecloud-setup-resource-view azure vnet)
 
+;;;; Hooks
 (defcustom azure-vnet-parser-hook
-  '(azure-vnet--parse-address-space)
+  '(azure-vnet--parse-address-space
+    azure-vnet--parse-subnets)
   "Hook to run for parsing address space."
   :group 'ecloud-azure
   :type 'hook)
 
+(defcustom azure-vnet-detailed-view-hook
+  '(azure-vnet-add-detailed-view-section)
+  "Hook to run for adding a detailed view."
+  :group 'ecloud-azure
+  :type 'hook)
+
+;;;; Parsing
 (defun azure-vnet--parse-address-space (robj)
   "Function to parse the address space for the vnet in the response `ROBJ."
   (-let* (((&alist 'addressSpace (&alist 'addressPrefixes address-list))
@@ -66,13 +80,30 @@
                                    `((address-list . ,address-list-str))))
     ))
 
-(defun azure-vnet--fetch-subnets (robj)
-  "Function to fetch subnets for the vnet `ROBJ."
-  (message "%s" robj))
+(defun azure-vnet--parse-subnets (robj)
+  "Function to parse subnets for the vnet `ROBJ."
+  (-let* (((&alist 'subnets subnets) (oref robj attributes))
+          (ts (ecloud-get-resource-type-modified-ts "azure" "vnet"))
+          (parsed-data (ecloud-parse-resource-data subnets "azure-subnet" ts t)))
+    (--map (progn
+             (ecloud-resource-add-has robj "azure-subnet" (ecloud-resource-id it))
+             (ecloud-resource-add-belongs-to it "azure-vnet" (ecloud-resource-id robj)))
+           parsed-data)))
+
+;;;; Detailed View
+(defun azure-vnet-add-detailed-view-section (robj)
+  "Function to add detailed view section for the vnet.`ROBJ is the object for the vnet."
+  (ecloud-insert-list-views 'azure '(subnet) robj))
+
+;;;; Actions
+(ecloud-define-cautious-action azure-vnet-delete-vnet
+                               ("az" "network" "vnet" "delete" "--ids" id "--output" "json")
+                               ("Do you want to delete vnet %s" name ))
 
 (defvar magit-azure-vnet-section-map
   (let ((map (make-sparse-keymap)))
     (define-key map "p" 'azure-overview-print-section)
+    (define-key map "d" 'azure-vnet-delete-vnet)
     (define-key map [tab] 'magit-section-cycle)
     map)
   "Keymap for the `azure-vnet-section'.")

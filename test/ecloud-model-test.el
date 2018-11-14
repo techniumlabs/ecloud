@@ -34,6 +34,9 @@
           (it "Should have an id if defined"
               (expect (ecloud-resource-id resource-instance) :to-equal "test-id"))
 
+          (it "Should have a type if defined"
+              (expect (ecloud-resource-type resource-instance) :to-equal "azure-vnet"))
+
           (it "Should give all associated resource type it has"
               (expect (ecloud-resource-has-type resource-instance) :to-equal '("azure-subnet")))
 

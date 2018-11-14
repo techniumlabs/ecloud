@@ -73,5 +73,485 @@
     "tags": null,
     "type": "Microsoft.Network/virtualNetworks",
     "virtualNetworkPeerings": []
+  },
+  {
+    "addressSpace": {
+      "addressPrefixes": [
+        "10.0.0.0/16"
+      ]
+    },
+    "ddosProtectionPlan": null,
+    "dhcpOptions": null,
+    "enableDdosProtection": false,
+    "enableVmProtection": false,
+    "etag": "W/\"8118c8eb-a819-4d60-a6e9-ad83f359b49a\"",
+    "id": "/subscriptions/56b92b41-73a9-44e3-b70f-ee9206029c60/resourceGroups/aci-test-rg/providers/Microsoft.Network/virtualNetworks/aci-test",
+    "location": "westeurope",
+    "name": "aci-test",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "aci-test-rg",
+    "resourceGuid": "18f8c8d5-3c0e-4451-9edd-e875043919eb",
+    "subnets": [
+      {
+        "addressPrefix": "10.0.0.0/24",
+        "addressPrefixes": null,
+        "delegations": [
+          {
+            "actions": [
+              "Microsoft.Network/virtualNetworks/subnets/action"
+            ],
+            "etag": "W/\"8118c8eb-a819-4d60-a6e9-ad83f359b49a\"",
+            "id": "/subscriptions/56b92b41-73a9-44e3-b70f-ee9206029c60/resourceGroups/aci-test-rg/providers/Microsoft.Network/virtualNetworks/aci-test/subnets/app-subnet/delegations/Microsoft.ContainerInstance/containerGroups",
+            "name": "Microsoft.ContainerInstance/containerGroups",
+            "provisioningState": "Succeeded",
+            "resourceGroup": "aci-test-rg",
+            "serviceName": "Microsoft.ContainerInstance/containerGroups",
+            "type": "Microsoft.Network/virtualNetworks/subnets/delegations"
+          }
+        ],
+        "etag": "W/\"8118c8eb-a819-4d60-a6e9-ad83f359b49a\"",
+        "id": "/subscriptions/56b92b41-73a9-44e3-b70f-ee9206029c60/resourceGroups/aci-test-rg/providers/Microsoft.Network/virtualNetworks/aci-test/subnets/app-subnet",
+        "interfaceEndpoints": null,
+        "ipConfigurationProfiles": null,
+        "ipConfigurations": null,
+        "name": "app-subnet",
+        "networkSecurityGroup": null,
+        "provisioningState": "Succeeded",
+        "purpose": null,
+        "resourceGroup": "aci-test-rg",
+        "resourceNavigationLinks": null,
+        "routeTable": null,
+        "serviceAssociationLinks": [
+          {
+            "etag": "W/\"8118c8eb-a819-4d60-a6e9-ad83f359b49a\"",
+            "id": "/subscriptions/56b92b41-73a9-44e3-b70f-ee9206029c60/resourceGroups/aci-test-rg/providers/Microsoft.Network/virtualNetworks/aci-test/subnets/app-subnet/serviceAssociationLinks/acisal",
+            "link": null,
+            "linkedResourceType": "Microsoft.ContainerInstance/containerGroups",
+            "name": "acisal",
+            "provisioningState": "Succeeded",
+            "resourceGroup": "aci-test-rg",
+            "type": "Microsoft.Network/virtualNetworks/subnets/serviceAssociationLinks"
+          }
+        ],
+        "serviceEndpointPolicies": null,
+        "serviceEndpoints": null,
+        "type": "Microsoft.Network/virtualNetworks/subnets"
+      }
+    ],
+    "tags": null,
+    "type": "Microsoft.Network/virtualNetworks",
+    "virtualNetworkPeerings": []
+  },
+  {
+    "addressSpace": {
+      "addressPrefixes": [
+        "10.0.0.0/8"
+      ]
+    },
+    "ddosProtectionPlan": null,
+    "dhcpOptions": null,
+    "enableDdosProtection": false,
+    "enableVmProtection": false,
+    "etag": "W/\"23c00ae0-7343-44c1-9d9a-5bb6bba11c52\"",
+    "id": "/subscriptions/56b92b41-73a9-44e3-b70f-ee9206029c60/resourceGroups/pegasus2/providers/Microsoft.Network/virtualNetworks/pegasus2-vnet",
+    "location": "westeurope",
+    "name": "pegasus2-vnet",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "pegasus2",
+    "resourceGuid": "5819aeb4-29c0-4228-b263-0b51d79b1464",
+    "subnets": [
+      {
+        "addressPrefix": "10.240.0.0/16",
+        "addressPrefixes": null,
+        "delegations": [],
+        "etag": "W/\"23c00ae0-7343-44c1-9d9a-5bb6bba11c52\"",
+        "id": "/subscriptions/56b92b41-73a9-44e3-b70f-ee9206029c60/resourceGroups/pegasus2/providers/Microsoft.Network/virtualNetworks/pegasus2-vnet/subnets/default",
+        "interfaceEndpoints": null,
+        "ipConfigurationProfiles": null,
+        "ipConfigurations": null,
+        "name": "default",
+        "networkSecurityGroup": null,
+        "provisioningState": "Succeeded",
+        "purpose": null,
+        "resourceGroup": "pegasus2",
+        "resourceNavigationLinks": null,
+        "routeTable": null,
+        "serviceAssociationLinks": null,
+        "serviceEndpointPolicies": null,
+        "serviceEndpoints": null,
+        "type": "Microsoft.Network/virtualNetworks/subnets"
+      },
+      {
+        "addressPrefix": "10.241.0.0/16",
+        "addressPrefixes": null,
+        "delegations": [
+          {
+            "actions": [
+              "Microsoft.Network/virtualNetworks/subnets/action"
+            ],
+            "etag": "W/\"23c00ae0-7343-44c1-9d9a-5bb6bba11c52\"",
+            "id": "/subscriptions/56b92b41-73a9-44e3-b70f-ee9206029c60/resourceGroups/pegasus2/providers/Microsoft.Network/virtualNetworks/pegasus2-vnet/subnets/virtual-node-aci/delegations/aciDelegation",
+            "name": "aciDelegation",
+            "provisioningState": "Succeeded",
+            "resourceGroup": "pegasus2",
+            "serviceName": "Microsoft.ContainerInstance/containerGroups",
+            "type": "Microsoft.Network/virtualNetworks/subnets/delegations"
+          }
+        ],
+        "etag": "W/\"23c00ae0-7343-44c1-9d9a-5bb6bba11c52\"",
+        "id": "/subscriptions/56b92b41-73a9-44e3-b70f-ee9206029c60/resourceGroups/pegasus2/providers/Microsoft.Network/virtualNetworks/pegasus2-vnet/subnets/virtual-node-aci",
+        "interfaceEndpoints": null,
+        "ipConfigurationProfiles": null,
+        "ipConfigurations": null,
+        "name": "virtual-node-aci",
+        "networkSecurityGroup": null,
+        "provisioningState": "Succeeded",
+        "purpose": null,
+        "resourceGroup": "pegasus2",
+        "resourceNavigationLinks": null,
+        "routeTable": null,
+        "serviceAssociationLinks": [
+          {
+            "etag": "W/\"23c00ae0-7343-44c1-9d9a-5bb6bba11c52\"",
+            "id": "/subscriptions/56b92b41-73a9-44e3-b70f-ee9206029c60/resourceGroups/pegasus2/providers/Microsoft.Network/virtualNetworks/pegasus2-vnet/subnets/virtual-node-aci/serviceAssociationLinks/acisal",
+            "link": null,
+            "linkedResourceType": "Microsoft.ContainerInstance/containerGroups",
+            "name": "acisal",
+            "provisioningState": "Succeeded",
+            "resourceGroup": "pegasus2",
+            "type": "Microsoft.Network/virtualNetworks/subnets/serviceAssociationLinks"
+          }
+        ],
+        "serviceEndpointPolicies": null,
+        "serviceEndpoints": null,
+        "type": "Microsoft.Network/virtualNetworks/subnets"
+      }
+    ],
+    "tags": {},
+    "type": "Microsoft.Network/virtualNetworks",
+    "virtualNetworkPeerings": []
+  },
+  {
+    "addressSpace": {
+      "addressPrefixes": [
+        "10.0.0.0/8"
+      ]
+    },
+    "ddosProtectionPlan": null,
+    "dhcpOptions": null,
+    "enableDdosProtection": false,
+    "enableVmProtection": false,
+    "etag": "W/\"9b9256c3-80ec-4ee2-8350-80d023317b66\"",
+    "id": "/subscriptions/56b92b41-73a9-44e3-b70f-ee9206029c60/resourceGroups/vnode-preview/providers/Microsoft.Network/virtualNetworks/vnode-preview-vnet",
+    "location": "westeurope",
+    "name": "vnode-preview-vnet",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "vnode-preview",
+    "resourceGuid": "73135c3e-d390-4e43-b8d4-11c48cfab4a6",
+    "subnets": [
+      {
+        "addressPrefix": "10.240.0.0/16",
+        "addressPrefixes": null,
+        "delegations": [],
+        "etag": "W/\"9b9256c3-80ec-4ee2-8350-80d023317b66\"",
+        "id": "/subscriptions/56b92b41-73a9-44e3-b70f-ee9206029c60/resourceGroups/vnode-preview/providers/Microsoft.Network/virtualNetworks/vnode-preview-vnet/subnets/default",
+        "interfaceEndpoints": null,
+        "ipConfigurationProfiles": null,
+        "ipConfigurations": null,
+        "name": "default",
+        "networkSecurityGroup": null,
+        "provisioningState": "Succeeded",
+        "purpose": null,
+        "resourceGroup": "vnode-preview",
+        "resourceNavigationLinks": null,
+        "routeTable": null,
+        "serviceAssociationLinks": null,
+        "serviceEndpointPolicies": null,
+        "serviceEndpoints": null,
+        "type": "Microsoft.Network/virtualNetworks/subnets"
+      },
+      {
+        "addressPrefix": "10.241.0.0/16",
+        "addressPrefixes": null,
+        "delegations": [
+          {
+            "actions": [
+              "Microsoft.Network/virtualNetworks/subnets/action"
+            ],
+            "etag": "W/\"9b9256c3-80ec-4ee2-8350-80d023317b66\"",
+            "id": "/subscriptions/56b92b41-73a9-44e3-b70f-ee9206029c60/resourceGroups/vnode-preview/providers/Microsoft.Network/virtualNetworks/vnode-preview-vnet/subnets/virtual-node-aci/delegations/aciDelegation",
+            "name": "aciDelegation",
+            "provisioningState": "Succeeded",
+            "resourceGroup": "vnode-preview",
+            "serviceName": "Microsoft.ContainerInstance/containerGroups",
+            "type": "Microsoft.Network/virtualNetworks/subnets/delegations"
+          }
+        ],
+        "etag": "W/\"9b9256c3-80ec-4ee2-8350-80d023317b66\"",
+        "id": "/subscriptions/56b92b41-73a9-44e3-b70f-ee9206029c60/resourceGroups/vnode-preview/providers/Microsoft.Network/virtualNetworks/vnode-preview-vnet/subnets/virtual-node-aci",
+        "interfaceEndpoints": null,
+        "ipConfigurationProfiles": null,
+        "ipConfigurations": null,
+        "name": "virtual-node-aci",
+        "networkSecurityGroup": null,
+        "provisioningState": "Succeeded",
+        "purpose": null,
+        "resourceGroup": "vnode-preview",
+        "resourceNavigationLinks": null,
+        "routeTable": null,
+        "serviceAssociationLinks": [
+          {
+            "etag": "W/\"9b9256c3-80ec-4ee2-8350-80d023317b66\"",
+            "id": "/subscriptions/56b92b41-73a9-44e3-b70f-ee9206029c60/resourceGroups/vnode-preview/providers/Microsoft.Network/virtualNetworks/vnode-preview-vnet/subnets/virtual-node-aci/serviceAssociationLinks/acisal",
+            "link": null,
+            "linkedResourceType": "Microsoft.ContainerInstance/containerGroups",
+            "name": "acisal",
+            "provisioningState": "Succeeded",
+            "resourceGroup": "vnode-preview",
+            "type": "Microsoft.Network/virtualNetworks/subnets/serviceAssociationLinks"
+          }
+        ],
+        "serviceEndpointPolicies": null,
+        "serviceEndpoints": null,
+        "type": "Microsoft.Network/virtualNetworks/subnets"
+      }
+    ],
+    "tags": {},
+    "type": "Microsoft.Network/virtualNetworks",
+    "virtualNetworkPeerings": []
+  },
+  {
+    "addressSpace": {
+      "addressPrefixes": [
+        "10.0.0.0/8"
+      ]
+    },
+    "ddosProtectionPlan": null,
+    "dhcpOptions": null,
+    "enableDdosProtection": false,
+    "enableVmProtection": false,
+    "etag": "W/\"7d24078c-fbbd-43c7-8a1c-ec99fbc1aa83\"",
+    "id": "/subscriptions/56b92b41-73a9-44e3-b70f-ee9206029c60/resourceGroups/vnode2/providers/Microsoft.Network/virtualNetworks/vnode2-vnet",
+    "location": "westeurope",
+    "name": "vnode2-vnet",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "vnode2",
+    "resourceGuid": "4e4c294f-5829-4a55-984c-c315972f74c9",
+    "subnets": [
+      {
+        "addressPrefix": "10.240.0.0/16",
+        "addressPrefixes": null,
+        "delegations": [],
+        "etag": "W/\"7d24078c-fbbd-43c7-8a1c-ec99fbc1aa83\"",
+        "id": "/subscriptions/56b92b41-73a9-44e3-b70f-ee9206029c60/resourceGroups/vnode2/providers/Microsoft.Network/virtualNetworks/vnode2-vnet/subnets/default",
+        "interfaceEndpoints": null,
+        "ipConfigurationProfiles": null,
+        "ipConfigurations": null,
+        "name": "default",
+        "networkSecurityGroup": null,
+        "provisioningState": "Succeeded",
+        "purpose": null,
+        "resourceGroup": "vnode2",
+        "resourceNavigationLinks": null,
+        "routeTable": null,
+        "serviceAssociationLinks": null,
+        "serviceEndpointPolicies": null,
+        "serviceEndpoints": null,
+        "type": "Microsoft.Network/virtualNetworks/subnets"
+      },
+      {
+        "addressPrefix": "10.241.0.0/16",
+        "addressPrefixes": null,
+        "delegations": [
+          {
+            "actions": [
+              "Microsoft.Network/virtualNetworks/subnets/action"
+            ],
+            "etag": "W/\"7d24078c-fbbd-43c7-8a1c-ec99fbc1aa83\"",
+            "id": "/subscriptions/56b92b41-73a9-44e3-b70f-ee9206029c60/resourceGroups/vnode2/providers/Microsoft.Network/virtualNetworks/vnode2-vnet/subnets/virtual-node-aci/delegations/aciDelegation",
+            "name": "aciDelegation",
+            "provisioningState": "Succeeded",
+            "resourceGroup": "vnode2",
+            "serviceName": "Microsoft.ContainerInstance/containerGroups",
+            "type": "Microsoft.Network/virtualNetworks/subnets/delegations"
+          }
+        ],
+        "etag": "W/\"7d24078c-fbbd-43c7-8a1c-ec99fbc1aa83\"",
+        "id": "/subscriptions/56b92b41-73a9-44e3-b70f-ee9206029c60/resourceGroups/vnode2/providers/Microsoft.Network/virtualNetworks/vnode2-vnet/subnets/virtual-node-aci",
+        "interfaceEndpoints": null,
+        "ipConfigurationProfiles": null,
+        "ipConfigurations": null,
+        "name": "virtual-node-aci",
+        "networkSecurityGroup": null,
+        "provisioningState": "Succeeded",
+        "purpose": null,
+        "resourceGroup": "vnode2",
+        "resourceNavigationLinks": null,
+        "routeTable": null,
+        "serviceAssociationLinks": [
+          {
+            "etag": "W/\"7d24078c-fbbd-43c7-8a1c-ec99fbc1aa83\"",
+            "id": "/subscriptions/56b92b41-73a9-44e3-b70f-ee9206029c60/resourceGroups/vnode2/providers/Microsoft.Network/virtualNetworks/vnode2-vnet/subnets/virtual-node-aci/serviceAssociationLinks/acisal",
+            "link": null,
+            "linkedResourceType": "Microsoft.ContainerInstance/containerGroups",
+            "name": "acisal",
+            "provisioningState": "Succeeded",
+            "resourceGroup": "vnode2",
+            "type": "Microsoft.Network/virtualNetworks/subnets/serviceAssociationLinks"
+          }
+        ],
+        "serviceEndpointPolicies": null,
+        "serviceEndpoints": null,
+        "type": "Microsoft.Network/virtualNetworks/subnets"
+      }
+    ],
+    "tags": {},
+    "type": "Microsoft.Network/virtualNetworks",
+    "virtualNetworkPeerings": []
+  },
+  {
+    "addressSpace": {
+      "addressPrefixes": [
+        "10.0.0.0/8"
+      ]
+    },
+    "ddosProtectionPlan": null,
+    "dhcpOptions": null,
+    "enableDdosProtection": false,
+    "enableVmProtection": false,
+    "etag": "W/\"c82853bc-8379-4e07-ace8-30315813952f\"",
+    "id": "/subscriptions/56b92b41-73a9-44e3-b70f-ee9206029c60/resourceGroups/vnodes/providers/Microsoft.Network/virtualNetworks/vnodes-vnet",
+    "location": "westeurope",
+    "name": "vnodes-vnet",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "vnodes",
+    "resourceGuid": "0ee22f04-11c5-4a58-8608-e5ea64db6d27",
+    "subnets": [
+      {
+        "addressPrefix": "10.240.0.0/16",
+        "addressPrefixes": null,
+        "delegations": [],
+        "etag": "W/\"c82853bc-8379-4e07-ace8-30315813952f\"",
+        "id": "/subscriptions/56b92b41-73a9-44e3-b70f-ee9206029c60/resourceGroups/vnodes/providers/Microsoft.Network/virtualNetworks/vnodes-vnet/subnets/default",
+        "interfaceEndpoints": null,
+        "ipConfigurationProfiles": null,
+        "ipConfigurations": null,
+        "name": "default",
+        "networkSecurityGroup": null,
+        "provisioningState": "Succeeded",
+        "purpose": null,
+        "resourceGroup": "vnodes",
+        "resourceNavigationLinks": null,
+        "routeTable": null,
+        "serviceAssociationLinks": null,
+        "serviceEndpointPolicies": null,
+        "serviceEndpoints": null,
+        "type": "Microsoft.Network/virtualNetworks/subnets"
+      },
+      {
+        "addressPrefix": "10.241.0.0/16",
+        "addressPrefixes": null,
+        "delegations": [
+          {
+            "actions": [
+              "Microsoft.Network/virtualNetworks/subnets/action"
+            ],
+            "etag": "W/\"c82853bc-8379-4e07-ace8-30315813952f\"",
+            "id": "/subscriptions/56b92b41-73a9-44e3-b70f-ee9206029c60/resourceGroups/vnodes/providers/Microsoft.Network/virtualNetworks/vnodes-vnet/subnets/virtual-node-aci/delegations/aciDelegation",
+            "name": "aciDelegation",
+            "provisioningState": "Succeeded",
+            "resourceGroup": "vnodes",
+            "serviceName": "Microsoft.ContainerInstance/containerGroups",
+            "type": "Microsoft.Network/virtualNetworks/subnets/delegations"
+          }
+        ],
+        "etag": "W/\"c82853bc-8379-4e07-ace8-30315813952f\"",
+        "id": "/subscriptions/56b92b41-73a9-44e3-b70f-ee9206029c60/resourceGroups/vnodes/providers/Microsoft.Network/virtualNetworks/vnodes-vnet/subnets/virtual-node-aci",
+        "interfaceEndpoints": null,
+        "ipConfigurationProfiles": null,
+        "ipConfigurations": null,
+        "name": "virtual-node-aci",
+        "networkSecurityGroup": null,
+        "provisioningState": "Succeeded",
+        "purpose": null,
+        "resourceGroup": "vnodes",
+        "resourceNavigationLinks": null,
+        "routeTable": null,
+        "serviceAssociationLinks": [
+          {
+            "etag": "W/\"c82853bc-8379-4e07-ace8-30315813952f\"",
+            "id": "/subscriptions/56b92b41-73a9-44e3-b70f-ee9206029c60/resourceGroups/vnodes/providers/Microsoft.Network/virtualNetworks/vnodes-vnet/subnets/virtual-node-aci/serviceAssociationLinks/acisal",
+            "link": null,
+            "linkedResourceType": "Microsoft.ContainerInstance/containerGroups",
+            "name": "acisal",
+            "provisioningState": "Succeeded",
+            "resourceGroup": "vnodes",
+            "type": "Microsoft.Network/virtualNetworks/subnets/serviceAssociationLinks"
+          }
+        ],
+        "serviceEndpointPolicies": null,
+        "serviceEndpoints": null,
+        "type": "Microsoft.Network/virtualNetworks/subnets"
+      }
+    ],
+    "tags": {},
+    "type": "Microsoft.Network/virtualNetworks",
+    "virtualNetworkPeerings": []
+  },
+  {
+    "addressSpace": {
+      "addressPrefixes": [
+        "10.0.0.0/16"
+      ]
+    },
+    "ddosProtectionPlan": null,
+    "dhcpOptions": null,
+    "enableDdosProtection": false,
+    "enableVmProtection": false,
+    "etag": "W/\"8b711e8c-e513-4757-9e78-056b191200d0\"",
+    "id": "/subscriptions/56b92b41-73a9-44e3-b70f-ee9206029c60/resourceGroups/hiberapp/providers/Microsoft.Network/virtualNetworks/myVMVNET",
+    "location": "australiaeast",
+    "name": "myVMVNET",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "hiberapp",
+    "resourceGuid": "67e192c1-21e0-487b-a2c7-f4109527ebc3",
+    "subnets": [
+      {
+        "addressPrefix": "10.0.0.0/24",
+        "addressPrefixes": null,
+        "delegations": [],
+        "etag": "W/\"8b711e8c-e513-4757-9e78-056b191200d0\"",
+        "id": "/subscriptions/56b92b41-73a9-44e3-b70f-ee9206029c60/resourceGroups/hiberapp/providers/Microsoft.Network/virtualNetworks/myVMVNET/subnets/myVMSubnet",
+        "interfaceEndpoints": null,
+        "ipConfigurationProfiles": null,
+        "ipConfigurations": [
+          {
+            "etag": null,
+            "id": "/subscriptions/56b92b41-73a9-44e3-b70f-ee9206029c60/resourceGroups/hiberapp/providers/Microsoft.Network/networkInterfaces/myVMVMNic/ipConfigurations/ipconfigmyVM",
+            "name": null,
+            "privateIpAddress": null,
+            "privateIpAllocationMethod": null,
+            "provisioningState": null,
+            "publicIpAddress": null,
+            "resourceGroup": "hiberapp",
+            "subnet": null
+          }
+        ],
+        "name": "myVMSubnet",
+        "networkSecurityGroup": null,
+        "provisioningState": "Succeeded",
+        "purpose": null,
+        "resourceGroup": "hiberapp",
+        "resourceNavigationLinks": null,
+        "routeTable": null,
+        "serviceAssociationLinks": null,
+        "serviceEndpointPolicies": null,
+        "serviceEndpoints": null,
+        "type": "Microsoft.Network/virtualNetworks/subnets"
+      }
+    ],
+    "tags": {},
+    "type": "Microsoft.Network/virtualNetworks",
+    "virtualNetworkPeerings": []
   }
 ]

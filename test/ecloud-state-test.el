@@ -7,6 +7,8 @@
 (require 'dash)
 (require 'magit)
 (require 'ecloud-state)
+(require 'ecloud-model)
+(require 'azure-vnet)
 (require 'buttercup)
 
 (describe "State on initialization"
@@ -40,10 +42,27 @@
 
 (describe "On Fetching"
           (before-each
-           (ecloud-register-resource-type "azure" "vnet")
-           (ecloud-define-resource-model azure vnet)
+           (ecloud-state-init)
            (ecloud-parse-resource-data (test-helper-json-resource "azure-vnet-list-response.json") 'azure-vnet))
 
-          (it "A resource type should give all resources for the type"
-              (expect (length (ecloud-state--get-all-resource-type "azure" "vnet")) :to-equal 1))
+          (it "For a resource type should give all resources for the type"
+              (expect (length (ecloud-state--get-all-resource-type "azure" "vnet")) :to-equal 7)
+              (expect (--map  (ecloud-resource-attribute it "name")
+                              (ecloud-state--get-all-resource-type "azure" "vnet"))
+                      :to-have-same-items-as
+                      (list "myVMVNET"
+                            "vnodes-vnet"
+                            "vnode2-vnet"
+                            "vnode-preview-vnet"
+                            "pegasus2-vnet"
+                            "aci-test"
+                            "aks-vnet-deadbeef")))
+
+          (it "For a resource name should give all resource for that type and name"
+              (expect (length (ecloud-state--get-resource-by-name "azure" "vnet" "aci-test")) :to-equal 1))
+
+          (it "For a resource type that belongs to a parent should give all the resources that it belongs to"
+              (expect (length (ecloud-state--get-all-resource-belonging-to "azure" "subnet" (first (ecloud-state--get-resource-by-name "azure" "vnet" "aci-test")))) :to-equal 1)
+              (expect (length (ecloud-state--get-all-resource-belonging-to "azure" "subnet" (first (ecloud-state--get-resource-by-name "azure" "vnet" "pegasus2-vnet")))) :to-equal 2))
+
           )
