@@ -88,7 +88,7 @@
                                       ("az" "aks" "get-credentials" "--name" name "--resource-group" resourceGroup))
 
 (magit-define-popup azure-aks-popup
-  "Popup console for ask commands."
+  "Popup console for aks commands."
   'ecloud
   :actions
   '((?s "Scale" azure-aks-scale)

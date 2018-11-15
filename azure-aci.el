@@ -48,9 +48,20 @@
 ;; View for Azure Container Registry
 (ecloud-setup-resource-view azure aci)
 
+(ecloud-define-cautious-action azure-aci-delete
+                               ("az" "container" "delete" "--name" name "--resource-group" resourceGroup "--yes")
+                               ("Do you want to delete the container group %s" name ))
+
+(magit-define-popup azure-aci-popup
+  "Popup console for aci commands."
+  'ecloud
+  :actions
+  '((?d "Delete" azure-aci-delete))
+  :max-action-columns 3)
+
 (defvar magit-azure-aci-section-map
   (let ((map (make-sparse-keymap)))
-    (define-key map "p" 'azure-overview-print-section)
+    (define-key map "h" 'azure-aci-popup)
     map)
   "Keymap for the `azure-aci' section.")
 
