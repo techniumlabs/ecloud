@@ -1,0 +1,62 @@
+[
+  {
+    "id": "/subscriptions/deadbeef-5c15-4b08-b31e-0abaf2f2b924/resourceGroups/aci-example",
+    "location": "eastus",
+    "managedBy": null,
+    "name": "aci-example",
+    "properties": {
+      "provisioningState": "Succeeded"
+    },
+    "tags": null
+  },
+  {
+    "id": "/subscriptions/deadbeef-5c15-4b08-b31e-0abaf2f2b924/resourceGroups/cloud-shell-storage-eastus",
+    "location": "eastus",
+    "managedBy": null,
+    "name": "cloud-shell-storage-eastus",
+    "properties": {
+      "provisioningState": "Succeeded"
+    },
+    "tags": null
+  },
+  {
+    "id": "/subscriptions/deadbeef-5c15-4b08-b31e-0abaf2f2b924/resourceGroups/cloud-shell-storage-southeastasia",
+    "location": "southeastasia",
+    "managedBy": null,
+    "name": "cloud-shell-storage-southeastasia",
+    "properties": {
+      "provisioningState": "Succeeded"
+    },
+    "tags": null
+  },
+  {
+    "id": "/subscriptions/deadbeef-5c15-4b08-b31e-0abaf2f2b924/resourceGroups/techniumlabs",
+    "location": "australiaeast",
+    "managedBy": null,
+    "name": "techniumlabs",
+    "properties": {
+      "provisioningState": "Succeeded"
+    },
+    "tags": null
+  },
+  {
+    "id": "/subscriptions/deadbeef-5c15-4b08-b31e-0abaf2f2b924/resourceGroups/hiberapp",
+    "location": "australiaeast",
+    "managedBy": null,
+    "name": "hiberapp",
+    "properties": {
+      "provisioningState": "Succeeded"
+    },
+    "tags": null
+  },
+  {
+    "id": "/subscriptions/deadbeef-5c15-4b08-b31e-0abaf2f2b924/resourceGroups/myapp",
+    "location": "australiaeast",
+    "managedBy": null,
+    "name": "myapp",
+    "properties": {
+      "provisioningState": "Succeeded"
+    },
+    "tags": null
+  }
+]
