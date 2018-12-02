@@ -39,7 +39,7 @@
 (require 'azure-aks)
 (require 'azure-vm)
 (require 'azure-storage-account)
-(require 'azure-resource-group)
+(require 'azure-group)
 (require 'azure-appservice-plan)
 (require 'azure-public-ip)
 (require 'azure-lb)

@@ -63,5 +63,5 @@
     map)
   "Keymap for the `azure-resource-group-section.")
 
-(provide 'azure-resource-group)
+(provide 'azure-group)
 ;;; azure-resource-group.el ends here
