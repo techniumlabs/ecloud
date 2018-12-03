@@ -40,7 +40,20 @@
           (it "Resource type for the cloud should be initialized"
               (expect (ecloud-get-resource-type-state "azure" "vnet") :not :to-equal nil)))
 
-(describe "On Fetching"
+(describe "When retrieving resource details from server"
+          (before-each
+           (ecloud-state-init)
+           )
+
+          (spy-on 'ecloud-run-json-command)
+          
+          (it "Should be able to call external process with right arguments"
+              (ecloud-fetch-resources "azure-account")
+              (expect (nth 0 (spy-calls-args-for 'ecloud-run-json-command 0)) :to-equal '("az" "account" "list"))
+              (expect (nth 1 (spy-calls-args-for 'ecloud-run-json-command 0)) :to-equal nil))
+          )
+
+(describe "When querying for resource details"
           (before-each
            (ecloud-state-init)
            (ecloud-parse-resource-data (test-helper-json-resource "azure-vnet-list-response.json") 'azure-vnet))
