@@ -42,8 +42,7 @@
 
 (describe "When retrieving resource details from server"
           (before-each
-           (ecloud-state-init)
-           )
+           (ecloud-state-init))
 
           (spy-on 'ecloud-run-json-command)
           
