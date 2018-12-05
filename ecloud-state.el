@@ -33,6 +33,7 @@
 (require 'dash)
 (require 'eieio)
 (require 'ecloud-model)
+(require 'f)
 (eval-when-compile (require 'cl))
 
 (defvar ecloud-state--current-state nil)
