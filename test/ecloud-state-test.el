@@ -13,13 +13,27 @@
 
 (describe "State on initialization"
           (before-each
+           (delete-directory (format "%s/ecloud" pcache-directory) t)
            (ecloud-state-init))
           
           (it "should be empty"
               (expect (ht-size (ecloud-state)) :to-equal 0))
 
           (it "Should have a cache directory created"
-              (expect (f-dir? (format "%s/ecloud" pcache-directory)))))
+              (expect (f-dir? (format "%s/ecloud" pcache-directory))))
+
+          (it "Should retrieve from cache"
+              (ecloud-define-resource-model azure account)
+              (ecloud-parse-resource-data
+               (test-helper-json-resource "azure-account-list-response.json")
+               'azure-account)
+              (expect (ecloud-resource-count azure-account) :to-be 2)
+              (make-directory (format "%s/ecloud/azure" pcache-directory))
+              (pcache-save (pcache-repository "ecloud/azure/account") t)
+              (ecloud-state-init)
+              (ecloud-define-resource-model azure account)
+              (expect (ecloud-resource-count azure-account) :to-be 2)
+              ))
 
 (describe "When registering cloud"
           (before-each

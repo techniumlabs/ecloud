@@ -45,9 +45,9 @@
   (make-directory (format "%s/ecloud" pcache-directory) :parents)
 
   (--map
-   (-let* ((reponame (format "%s" (string-remove-prefix (format "%s" pcache-directory) it)))
-           (cloud (nth 1 (split-string reponame "/")))
-           (rtype (nth 2 (split-string reponame "/"))))
+   (-let* ((reponame (format "%s" (string-remove-prefix (f-expand (format "%s" pcache-directory)) it)))
+           (cloud (-last-item (-butlast (split-string reponame "/"))))
+           (rtype (-last-item (split-string reponame "/"))))
      (pcache-map
       (pcache-repository reponame)
       (lambda (key value)
