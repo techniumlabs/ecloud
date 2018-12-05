@@ -1,0 +1,235 @@
+[
+  {
+    "containers": [
+      {
+        "command": [
+          "az",
+          "storage",
+          "share",
+          "create",
+          "--name",
+          "wordpress-share"
+        ],
+        "environmentVariables": [
+          {
+            "name": "AZURE_STORAGE_KEY",
+            "secureValue": null,
+            "value": "some-very-secret-key"
+          },
+          {
+            "name": "AZURE_STORAGE_ACCOUNT",
+            "secureValue": null,
+            "value": "acistoragetest1"
+          }
+        ],
+        "image": "microsoft/azure-cli",
+        "instanceView": null,
+        "livenessProbe": null,
+        "name": "wordpress-share",
+        "ports": [],
+        "readinessProbe": null,
+        "resources": {
+          "limits": null,
+          "requests": {
+            "cpu": 0.5,
+            "memoryInGb": 0.7
+          }
+        },
+        "volumeMounts": null
+      },
+      {
+        "command": [
+          "az",
+          "storage",
+          "share",
+          "create",
+          "--name",
+          "mysql-share"
+        ],
+        "environmentVariables": [
+          {
+            "name": "AZURE_STORAGE_KEY",
+            "secureValue": null,
+            "value": "some-very-secret-key"
+          },
+          {
+            "name": "AZURE_STORAGE_ACCOUNT",
+            "secureValue": null,
+            "value": "acistoragetest1"
+          }
+        ],
+        "image": "microsoft/azure-cli",
+        "instanceView": null,
+        "livenessProbe": null,
+        "name": "mysql-share",
+        "ports": [],
+        "readinessProbe": null,
+        "resources": {
+          "limits": null,
+          "requests": {
+            "cpu": 0.5,
+            "memoryInGb": 0.7
+          }
+        },
+        "volumeMounts": null
+      }
+    ],
+    "diagnostics": null,
+    "id": "/subscriptions/deadbeef-73a9-44e3-b70f-ee9206029c60/resourceGroups/aci-test-rg/providers/Microsoft.ContainerInstance/containerGroups/createshare-containerinstance",
+    "identity": {
+      "principalId": null,
+      "tenantId": null,
+      "type": "None",
+      "userAssignedIdentities": null
+    },
+    "imageRegistryCredentials": null,
+    "instanceView": null,
+    "ipAddress": null,
+    "location": "West Europe",
+    "name": "createshare-containerinstance",
+    "networkProfile": null,
+    "osType": "Linux",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "aci-test-rg",
+    "restartPolicy": "OnFailure",
+    "tags": null,
+    "type": "Microsoft.ContainerInstance/containerGroups",
+    "volumes": null
+  },
+  {
+    "containers": [
+      {
+        "command": null,
+        "environmentVariables": [
+          {
+            "name": "WORDPRESS_DB_HOST",
+            "secureValue": null,
+            "value": "127.0.0.1:3306"
+          },
+          {
+            "name": "WORDPRESS_DB_PASSWORD",
+            "secureValue": null,
+            "value": "password"
+          }
+        ],
+        "image": "wordpress:4.9-apache",
+        "instanceView": null,
+        "livenessProbe": null,
+        "name": "wordpress",
+        "ports": [
+          {
+            "port": 80,
+            "protocol": "TCP"
+          }
+        ],
+        "readinessProbe": null,
+        "resources": {
+          "limits": null,
+          "requests": {
+            "cpu": 0.5,
+            "memoryInGb": 0.7
+          }
+        },
+        "volumeMounts": [
+          {
+            "mountPath": "/var/www/html",
+            "name": "wordpressfile",
+            "readOnly": null
+          }
+        ]
+      },
+      {
+        "command": null,
+        "environmentVariables": [
+          {
+            "name": "MYSQL_ROOT_PASSWORD",
+            "secureValue": null,
+            "value": "password"
+          }
+        ],
+        "image": "mysql:5.6",
+        "instanceView": null,
+        "livenessProbe": null,
+        "name": "mysql",
+        "ports": [
+          {
+            "port": 3306,
+            "protocol": "TCP"
+          }
+        ],
+        "readinessProbe": null,
+        "resources": {
+          "limits": null,
+          "requests": {
+            "cpu": 0.5,
+            "memoryInGb": 0.7
+          }
+        },
+        "volumeMounts": [
+          {
+            "mountPath": "/var/lib/mysql",
+            "name": "mysqlfile",
+            "readOnly": null
+          }
+        ]
+      }
+    ],
+    "diagnostics": null,
+    "id": "/subscriptions/deadbeef-73a9-44e3-b70f-ee9206029c60/resourceGroups/aci-test-rg/providers/Microsoft.ContainerInstance/containerGroups/wordpress-containerinstance",
+    "identity": {
+      "principalId": null,
+      "tenantId": null,
+      "type": "None",
+      "userAssignedIdentities": null
+    },
+    "imageRegistryCredentials": null,
+    "instanceView": null,
+    "ipAddress": {
+      "dnsNameLabel": "aciwordpresstest",
+      "fqdn": "aciwordpresstest.westeurope.azurecontainer.io",
+      "ip": "23.100.14.161",
+      "ports": [
+        {
+          "port": 80,
+          "protocol": "TCP"
+        }
+      ],
+      "type": "Public"
+    },
+    "location": "West Europe",
+    "name": "wordpress-containerinstance",
+    "networkProfile": null,
+    "osType": "Linux",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "aci-test-rg",
+    "restartPolicy": null,
+    "tags": null,
+    "type": "Microsoft.ContainerInstance/containerGroups",
+    "volumes": [
+      {
+        "azureFile": {
+          "readOnly": null,
+          "shareName": "wordpress-share",
+          "storageAccountKey": null,
+          "storageAccountName": "acistoragetest1"
+        },
+        "emptyDir": null,
+        "gitRepo": null,
+        "name": "wordpressfile",
+        "secret": null
+      },
+      {
+        "azureFile": {
+          "readOnly": null,
+          "shareName": "mysql-share",
+          "storageAccountKey": null,
+          "storageAccountName": "acistoragetest1"
+        },
+        "emptyDir": null,
+        "gitRepo": null,
+        "name": "mysqlfile",
+        "secret": null
+      }
+    ]
+  }
+]
