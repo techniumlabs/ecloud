@@ -42,11 +42,5 @@
 ;; Model for Azure Storage-Account
 (ecloud-define-resource-model azure storage-account)
 
-(defvar magit-azure-storage-account-section-map
-  (let ((map (make-sparse-keymap)))
-    (define-key map "p" 'azure-overview-print-section)
-    map)
-  "Keymap for the `azure-storage-account-section.")
-
 (provide 'azure-storage-account)
 ;;; azure-storage-account.el ends here
