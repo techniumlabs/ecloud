@@ -11,8 +11,17 @@
 (require 'azure-vnet)
 (require 'buttercup)
 
+(describe "State"
+          (before-each
+           (setq ecloud-state--current-state nil)
+           (delete-directory (format "%s/ecloud" pcache-directory) t))
+
+          (it "should be initialized on first access"
+              (expect (ht-size (ecloud-state)) :to-equal 0)))
+
 (describe "State on initialization"
           (before-each
+           (setq ecloud-state--current-state nil)
            (delete-directory (format "%s/ecloud" pcache-directory) t)
            (ecloud-state-init))
           
@@ -54,6 +63,11 @@
           (it "Resource type for the cloud should be initialized"
               (expect (ecloud-get-resource-type-state "azure" "vnet") :not :to-equal nil)))
 
+(describe "Errors"
+          (it "should be able to added by cloud"
+              (ecloud-state-add-error "azure" "Failed" "More Details")
+              (expect (ecloud-state-get-errors "azure") :to-equal '(("Failed" . "More Details")))))
+
 (describe "When retrieving resource details from server"
           (before-each
            (ecloud-state-init))
@@ -83,6 +97,21 @@
                             "pegasus2-vnet"
                             "aci-test"
                             "aks-vnet-deadbeef")))
+
+          (it "when updated twice Should be added once"
+              (ecloud-parse-resource-data (test-helper-json-resource "azure-vnet-list-response.json") 'azure-vnet)
+              (expect (length (ecloud-state--get-all-resource-type "azure" "vnet")) :to-equal 7)
+              (expect (--map  (ecloud-resource-attribute it "name")
+                              (ecloud-state--get-all-resource-type "azure" "vnet"))
+                      :to-have-same-items-as
+                      (list "myVMVNET"
+                            "vnodes-vnet"
+                            "vnode2-vnet"
+                            "vnode-preview-vnet"
+                            "pegasus2-vnet"
+                            "aci-test"
+                            "aks-vnet-deadbeef"))
+              )
 
           (it "For a resource name should give all resource for that type and name"
               (expect (length (ecloud-state--get-resource-by-name "azure" "vnet" "aci-test")) :to-equal 1))
