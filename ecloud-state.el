@@ -142,7 +142,7 @@
 
 (defun ecloud-state-resource-equalp (cloud rtype rname robj)
   "Check if there is an existing resource for CLOUD RTYPE with RNAME and ROBJ."
-  (let ((rorig (ht-get (ecloud-get-resource-type-data cloud rtype) rname nil)))
+  (let ((rorig (ht-get (ecloud-get-resource-type-data cloud rtype) (oref robj id) nil)))
     (if (and rorig robj
              (s-equals? (oref rorig name) (oref robj name))
              (s-equals? (oref rorig id) (oref robj id))
