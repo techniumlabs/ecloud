@@ -82,14 +82,15 @@
 
 (describe "When querying for resource type details"
           (before-each
-           (ecloud-state-init)
-           (ecloud-parse-resource-data (test-helper-json-resource "azure-vnet-list-response.json") 'azure-vnet "1000"))
+           (ecloud-state-init))
 
           (it "For a resource type should give its updated timestamp"
+              (ecloud-parse-resource-data (test-helper-json-resource "azure-vnet-list-response.json") 'azure-vnet "1000")
               (expect (ecloud-get-resource-type-modified-ts "azure" "vnet") :to-equal "1000"))
 
-          (it "For a resource type if not updated the updated timestamp should be zero")
-          (expect (ecloud-get-resource-type-modified-ts "azure" "vnet") :to-equal "0"))
+          (it "For a resource type if not updated the updated timestamp should be zero"
+              (ecloud-parse-resource-data (test-helper-json-resource "azure-vnet-list-response.json") 'azure-vnet)
+              (expect (ecloud-get-resource-type-modified-ts "azure" "vnet") :to-equal "0")))
 
 (describe "When querying for resource details"
           (before-each
