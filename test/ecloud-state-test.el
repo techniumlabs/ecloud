@@ -80,6 +80,17 @@
               (expect (nth 1 (spy-calls-args-for 'ecloud-run-json-command 0)) :to-equal nil))
           )
 
+(describe "When querying for resource type details"
+          (before-each
+           (ecloud-state-init)
+           (ecloud-parse-resource-data (test-helper-json-resource "azure-vnet-list-response.json") 'azure-vnet "1000"))
+
+          (it "For a resource type should give its updated timestamp"
+              (expect (ecloud-get-resource-type-modified-ts "azure" "vnet") :to-equal "1000"))
+
+          (it "For a resource type if not updated the updated timestamp should be zero")
+          (expect (ecloud-get-resource-type-modified-ts "azure" "vnet") :to-equal "0"))
+
 (describe "When querying for resource details"
           (before-each
            (ecloud-state-init)
