@@ -70,9 +70,8 @@
 
 (describe "When retrieving resource details from server"
           (before-each
-           (ecloud-state-init))
-
-          (spy-on 'ecloud-run-json-command)
+           (ecloud-state-init)
+           (spy-on 'ecloud-run-json-command))
           
           (it "Should be able to call external process with right arguments"
               (ecloud-fetch-resources "azure-account")
