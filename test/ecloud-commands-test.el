@@ -22,7 +22,15 @@
                 (expect (ecloud-parse-json-buffer (current-buffer)) :to-equal nil))))
 
 (describe "Calling Run json command"
-          (spy-on 'ecloud-run-command)
+          (before-each (spy-on 'ecloud-run-command))
           (it "Should call run command"
               (ecloud-run-json-command '("az" "account" "list") nil nil)
               (expect 'ecloud-run-command :to-have-been-called)))
+
+(describe "Calling run command"
+          (before-each (spy-on 'make-process)
+                       (spy-on 'generate-new-buffer :and-call-through))
+          (it "Should create process"
+              (ecloud-run-command '("az" "account" "list") '("") (lambda (buf) (ecloud-parse-json-buffer buf)))
+              (expect 'generate-new-buffer :to-have-been-called)
+              (expect 'make-process :to-have-been-called)))
