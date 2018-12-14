@@ -33,7 +33,13 @@
                                     'azure-acr)
                                    (ecloud-parse-resource-data
                                     (test-helper-json-resource "azure-aci-list-response.json")
-                                    'azure-aci)))
+                                    'azure-aci))
+                                 (spy-on 'ecloud-fetch-resources)
+                                 )
+
+                    (it "should call fetch resources"
+                        (azure-overview)
+                        (expect 'ecloud-fetch-resources :to-have-been-called))
 
                     (it "Should correctly display view"
                         (with-temp-buffer
@@ -118,6 +124,7 @@ createshare-containerinstance     Linux      aci-test-rg       West Europe
 
 No Errors") :to-match
 (s-trim (substring-no-properties (buffer-string)))))))
+
                     )
           )
 
