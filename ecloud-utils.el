@@ -27,6 +27,7 @@
 ;; Contains general utility function for ecloud
 
 ;;; Code:
+(require 'asoc)
 
 (defun ecloud-display-buffer-fullframe (buffer)
   "Function to display `BUFFER 'in full frame."
@@ -94,6 +95,11 @@
           ((not (string-match "\\`[0-9]*[1-9][0-9]*\\'" val))
            (user-error "Entered Input is not integer"))
           (t (string-to-number val)))))
+
+(cl-defun ecloud-map-tags-to-kv (tags)
+  "Convert AWS `TAGS to key value alist"
+  (--map
+   (cons (asoc-get it 'Key) (asoc-get it 'Value)) tags))
 
 (provide 'ecloud-utils)
 
