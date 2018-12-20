@@ -193,7 +193,7 @@ Optional `BELONGS-TO if present include only resources that belongs to the resou
 (cl-defun ecloud-parse-name (cloud rtype data)
   "Parse the resource name for `CLOUD `RTYPE from `DATA"
   (cond ((boundp (intern (format "%s-%s--name-attribute" cloud rtype)))
-         (asoc-get data (intern (format "%s-%s--name-attribute" cloud rtype))))
+         (asoc-get data (symbol-value (intern (format "%s-%s--name-attribute" cloud rtype)))))
 
         ((functionp (intern (format "%s-%s--parse-name" cloud rtype)))
          (funcall (intern (format "%s-%s--parse-name" cloud rtype)) data))

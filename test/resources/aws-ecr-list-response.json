@@ -1,0 +1,11 @@
+{
+  "repositories": [
+    {
+      "repositoryArn": "arn:aws:ecr:ap-southeast-2:123456787909:repository/testrepo",
+      "registryId": "123456787909",
+      "repositoryName": "testrepo",
+      "repositoryUri": "123456787909.dkr.ecr.ap-southeast-2.amazonaws.com/testrepo",
+      "createdAt": 1545341275.0
+    }
+  ]
+}
