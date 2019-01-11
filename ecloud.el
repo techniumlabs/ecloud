@@ -23,7 +23,8 @@
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ;;; Commentary:
-;; TODO Add commentary
+;; Magit-like porcelain for gcp, azure and aws.
+
 ;;; Code:
 
 (require 'magit)

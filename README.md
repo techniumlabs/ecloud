@@ -16,6 +16,13 @@ To manually install ecloud, clone ecloud to a directory. Then add the following 
 (require 'ecloud)
 ```
 
+If you are using spacemacs add the line to you .spacemacs file.
+
+```
+(setq dotspacemacs/additional/packages '(
+    (ecloud :location (recipe :repo techniumlabs/ecloud :fetcher github))))
+```
+
 ## Usage
 Right now azure is what mainly supported. Other cloud is also worked on. For azure, run `M-x azure-overview` to get started.
 
@@ -25,7 +32,6 @@ You can contribute to this project in several ways.
 1. Raising Issues in github
 2. Contributing code to fix an issue, implement any feature, improve tests
 3. Reviewing the code and suggesting possible way to improve the elisp code. 
-
 
 ## Acknowledgements
 This project would not have been possible if not for these exceptional projects 
