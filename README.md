@@ -27,7 +27,7 @@ If you are using spacemacs add the line to you .spacemacs file.
 ```
 
 ## Dependencies
-ecloud depends upon the cli version of the azure, aws, gcp tools. 
+ecloud depends upon the cli version of the azure, aws, gcp tools. It also needs you to configure it and logged in before you can use. 
 
 ### Azure
 ecloud depends for azure upon the azure cli. Make sure you have installed azure cli in the path. 
