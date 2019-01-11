@@ -26,6 +26,18 @@ If you are using spacemacs add the line to you .spacemacs file.
     (ecloud :location (recipe :repo techniumlabs/ecloud :fetcher github))))
 ```
 
+## Dependencies
+ecloud depends upon the cli version of the azure, aws, gcp tools. 
+
+### Azure
+ecloud depends for azure upon the azure cli. Make sure you have installed azure cli in the path. 
+
+In Mac, to install azure cli
+
+```
+brew update && brew install azure-cli
+```
+
 ## Usage
 Right now azure is what mainly supported. Other cloud is also worked on. For azure, run `M-x azure-overview` to get started.
 
