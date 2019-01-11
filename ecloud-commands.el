@@ -25,6 +25,7 @@
 ;; Code to run an external command.
 
 ;;; Code:
+(require 'json)
 
 (defun ecloud-process-kill-quietly (proc &optional _signal)
   "Function to kill a process quietly for `PROC."
