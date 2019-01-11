@@ -5,6 +5,9 @@
 
 A magit-style interface to access Azure, AWS and GCP. This project is in its infancy. 
 
+![ecloud-azure](https://raw.githubusercontent.com/techniumlabs/ecloud/master/docs/screenshots/ecloud-azure.png)
+
+
 ## Installation
 Right now only manual installation is supported. Will add the package to melpa soon.
 
